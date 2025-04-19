@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {catchError, map, Observable, switchMap, take, tap} from 'rxjs';
+import {catchError, map, Observable, of, switchMap, take, tap} from 'rxjs';
 import {DEFAULT_ANKI_HOST} from '../consts/anki.const';
 import {InfoService} from './info.service';
 import {ICardInfo, ICardInfoResponse, IFindItemsResponse} from '../interfaces/anki-connect.interface';
@@ -56,6 +56,16 @@ export class AnkiConnectService {
   }
 
   public answerCardsByIds(cardIds: number[], ease: EasyFactorEnum ): Observable<boolean> {
+    if (!cardIds.length) {
+      return of(false).pipe(
+        tap(() => {
+          const easeKey = ease === EasyFactorEnum.Again ? 'Again' : 'Easy';
+          const message = 'AnswerCards(' + cardIds.length + ') : ' + easeKey;
+          console.log(message, cardIds);
+        }),
+      );
+    }
+
     return this.http
       .post<boolean>(DEFAULT_ANKI_HOST, {
         action: 'forgetCards',
