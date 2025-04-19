@@ -125,7 +125,7 @@ export class ViewerComponent implements OnInit {
       .pipe(take(1))
       .subscribe((notes) => {
         const notesToDisplay = notes.slice(0, MAX_ANKI_RESULT_NUMBER);
-        // console.log(notesToDisplay);
+        console.log(notesToDisplay);
         this.ankiCards.set(notesToDisplay);
         this.cardsNumber.set(notes.length);
         this.isLoading.set(false);

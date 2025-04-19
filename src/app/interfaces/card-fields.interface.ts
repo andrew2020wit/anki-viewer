@@ -8,13 +8,12 @@ export interface ICardFields {
   exampleText?: IStringValue;
   freq2?: IStringValue;
   freq?: IStringValue;
+  lexunit?: IStringValue;
+  phVerb?: IStringValue;
   pos?: IStringValue;
+  registerlab?: IStringValue;
   sensenum?: IStringValue;
   term?: IStringValue;
   transcription?: IStringValue;
-
-  lexunit?: IStringValue;
-  phVerb?: IStringValue;
-  registerlab?: IStringValue;
   translation?: IStringValue;
 }

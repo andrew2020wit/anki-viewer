@@ -107,18 +107,22 @@
 
       </div>
 
-      <div class="example">
-        {{ ankiItem.fields.exampleText?.value }}
-      </div>
+      <div class="example"
+        [innerHTML]="ankiItem.fields.exampleText?.value"
+      >
+       </div>
 
       @if (!compactMode() || ankiItem.selected) {
-        <div class="def">
-          {{ ankiItem.fields.def?.value }}
+        <div class="def"
+             [innerHTML]="ankiItem.fields.def?.value"
+        >
+
         </div>
 
         @if (ankiItem.fields.translation?.value) {
-          <div class="translation">
-            {{ ankiItem.fields.translation?.value }}
+          <div class="translation"
+               [innerHTML]="ankiItem.fields.translation?.value"
+          >
           </div>
         }
       }
