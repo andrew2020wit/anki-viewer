@@ -1,0 +1,130 @@
+<div class="settings">
+  <div class="anki-result-sum">
+    Anki-connect, resultNumber: {{ cardsNumber() }}, max:
+    {{ MAX_ANKI_RESULT_NUMBER }}
+  </div>
+
+  <mat-checkbox
+    [(ngModel)]="compactMode"
+  >
+    Compact
+  </mat-checkbox>
+</div>
+
+<div class="anki-request">
+  <mat-form-field class="request-mat-form-field" appearance="outline">
+    <mat-label>Anki request text</mat-label>
+    <input
+      matInput
+      class="flag-input"
+      (keydown.enter)="getAnkiCards()"
+      [(ngModel)]="ankiRequestText"
+    />
+  </mat-form-field>
+
+  <button
+    mat-button
+    color="primary"
+    [disabled]="!ankiRequestText()"
+    (click)="getAnkiCards()"
+  >
+    Go!
+  </button>
+</div>
+
+@if (ankiCards().length) {
+  <app-tools
+    (selectAll)="selectAll()"
+    (deselectAll)="deselectAll()"
+    (answerCards)="answerCards($event)"
+    (mixedAnswer)="mixedAnswer()"
+  />
+}
+
+<div class="result-items">
+  @for (ankiItem of ankiCards(); let index = $index; track ankiItem) {
+
+    @if (!index || (
+      ankiItem.fields.term?.value &&
+      ankiItem.fields.term?.value !== ankiCards()[index - 1].fields.term?.value
+    )) {
+      <div class="term-header">
+        {{ ankiItem.fields.term?.value }}
+      </div>
+    }
+    <div
+      class="result-item"
+      [class.selected]="ankiItem.selected"
+      (click)="ankiItem.selected = !ankiItem.selected"
+    >
+      <div class="top">
+        <span class="index">
+          {{index + 1}}.
+        </span>
+        <span class="term">
+          {{ ankiItem.fields.term?.value }}
+        </span>
+
+        <span class="transcription">
+          {{ ankiItem.fields.transcription?.value }}
+        </span>
+        ({{ ankiItem.fields.pos?.value }})
+
+        <span class="card-type">
+          [{{ types[ankiItem.type] }}]
+        </span>
+
+        @if (ankiItem.interval) {
+          <span class="interval">
+          [int: {{ ankiItem.interval }}]
+        </span>
+        }
+
+        {{ ankiItem.fields.freq?.value }} {{ ankiItem.fields.freq2?.value }}
+
+        <span class="register-lab">
+          {{ ankiItem.fields.registerlab?.value }}
+        </span>
+
+        @if (!compactMode()) {
+          [
+          {{ ankiItem.modelName }} {{ ankiItem.fields.sensenum?.value }}
+          {{ ankiItem.fields.exampleId?.value }}
+          ]
+        }
+
+        @if (ankiItem.fields.phVerb?.value || ankiItem.fields.lexunit?.value) {
+          <div class="lex-unit">
+            {{ ankiItem.fields.phVerb?.value }} {{ ankiItem.fields.lexunit?.value }}
+          </div>
+        }
+
+      </div>
+
+      <div class="example">
+        {{ ankiItem.fields.exampleText?.value }}
+      </div>
+
+      @if (!compactMode() || ankiItem.selected) {
+        <div class="def">
+          {{ ankiItem.fields.def?.value }}
+        </div>
+
+        @if (ankiItem.fields.translation?.value) {
+          <div class="translation">
+            {{ ankiItem.fields.translation?.value }}
+          </div>
+        }
+      }
+    </div>
+  }
+</div>
+
+@if (ankiCards().length > 10) {
+  <app-tools
+    (selectAll)="selectAll()"
+    (deselectAll)="deselectAll()"
+    (answerCards)="answerCards($event)"
+    (mixedAnswer)="mixedAnswer()"
+  />
+}

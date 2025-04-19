@@ -1,1 +1,22 @@
-/* You can add global styles to this file, and also import other style files */
+@use '@angular/material' as mat;
+
+html, body { height: 100%; }
+body {
+  margin: 0;
+
+  font-family: "Segoe UI", roboto, verdana, sans-serif;
+
+  .error-snack {
+    --mdc-snackbar-container-color: hsl(11, 79%, 57%);
+  }
+
+  .info-snack {
+    --mdc-snackbar-container-color: hsl(148, 77%, 47%);
+  }
+
+  .warn {
+    @include mat.button-overrides((
+      text-label-text-color: red,
+    ));
+  }
+}

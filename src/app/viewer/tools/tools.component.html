@@ -1,0 +1,41 @@
+<div class="tools">
+  <button
+    mat-button
+    color="primary"
+    (click)="selectAll.emit()"
+  >
+    Select All
+  </button>
+
+  <button
+    mat-button
+    color="primary"
+    (click)="deselectAll.emit()"
+  >
+    Deselect
+  </button>
+
+  <button
+    mat-button
+    color="primary"
+    (click)="answerCards.emit(EasyFactorEnum.Again)"
+  >
+    AnswerCards: Again
+  </button>
+
+  <button
+    mat-button
+    class="warn"
+    (click)="answerCards.emit(EasyFactorEnum.Easy)"
+  >
+    AnswerCards: Easy
+  </button>
+
+  <button
+    mat-button
+    class="warn"
+    (click)="mixedAnswer.emit()"
+  >
+    AnswerCards: Mixed
+  </button>
+</div>

@@ -1,0 +1,101 @@
+:host {
+  display: block;
+  padding: 24px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.settings {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.anki-request {
+  width: 100%;
+  display: flex;
+  gap: 8px;
+
+  .request-mat-form-field {
+    flex: 1;
+  }
+}
+
+.anki-result-sum {
+  color: blue;
+}
+
+.tools {
+  display: flex;
+  gap: 8px;
+}
+
+.result-items {
+  .term-header {
+    font-weight: bold;
+    font-size: 16px;
+    margin: 8px 0;
+    background-color: antiquewhite;
+    padding: 4px;
+  }
+
+  .result-item {
+    border: 1px solid lightgray;
+    margin: 16px 0;
+    padding: 4px 8px;
+    cursor: pointer;
+
+    &.selected {
+      outline: 1px solid green;
+      border: 1px solid green;
+    }
+
+    .top {
+      color: gray;
+      font-size: 14px;
+
+      .term {
+        color: black;
+        font-size: 16px;
+      }
+
+      .card-type {
+        color: blue;
+      }
+
+      .transcription {
+        color: green;
+      }
+
+      .register-lab {
+        color: darkblue;
+      }
+
+      .lex-unit {
+        color: blue;
+        margin: 8px 0;
+        font-size: 16px;
+      }
+    }
+
+    .example {
+      margin: 8px 0;
+      font-size: 24px;
+    }
+
+    .def {
+      color: gray;
+      font-size: 16px;
+    }
+
+    .translation {
+      color: gray;
+      font-size: 14px;
+      margin-top: 16px;
+    }
+  }
+}
+
+
