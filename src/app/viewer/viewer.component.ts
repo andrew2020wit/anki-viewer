@@ -129,6 +129,7 @@ export class ViewerComponent implements OnInit {
         this.ankiCards.set(notesToDisplay);
         this.cardsNumber.set(notes.length);
         this.isLoading.set(false);
+        window.scrollTo(0, 0);
       });
   }
 }
