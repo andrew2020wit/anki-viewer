@@ -33,6 +33,7 @@ export class ViewerComponent implements OnInit {
   protected cardsNumber = signal(0);
   protected readonly MAX_ANKI_RESULT_NUMBER = MAX_ANKI_RESULT_NUMBER;
   protected compactMode = signal(true);
+  protected isLoading = signal(false);
 
   protected readonly types: Record<number, string> = {
     0: 'new',
@@ -75,7 +76,10 @@ export class ViewerComponent implements OnInit {
     const againObs$ = this.ankiConnectService.answerCardsByIds(againIds, EasyFactorEnum.Again);
     const easyObs$ = this.ankiConnectService.answerCardsByIds(easyIds, EasyFactorEnum.Easy);
 
+    this.isLoading.set(true);
+
     forkJoin([againObs$, easyObs$]).subscribe(() => {
+        this.isLoading.set(false);
         this.getAnkiCards();
       }
     )
@@ -92,9 +96,12 @@ export class ViewerComponent implements OnInit {
       return;
     }
 
+    this.isLoading.set(true);
+
     this.ankiConnectService.answerCardsByIds(ids, easyFactor)
       .pipe(take(1))
       .subscribe(() => {
+        this.isLoading.set(false);
         this.getAnkiCards();
       });
   }
@@ -111,6 +118,8 @@ export class ViewerComponent implements OnInit {
       ankiRequestText
     );
 
+    this.isLoading.set(true);
+
     this.ankiConnectService
       .findCards(ankiRequestText)
       .pipe(take(1))
@@ -119,6 +128,7 @@ export class ViewerComponent implements OnInit {
         // console.log(notesToDisplay);
         this.ankiCards.set(notesToDisplay);
         this.cardsNumber.set(notes.length);
+        this.isLoading.set(false);
       });
   }
 }
