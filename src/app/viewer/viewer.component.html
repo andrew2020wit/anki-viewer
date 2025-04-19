@@ -59,7 +59,7 @@
     >
       <div class="top">
         <span class="index">
-          {{index + 1}}.
+          {{ index + 1 }}.
         </span>
         <span class="term">
           {{ ankiItem.fields.term?.value }}
@@ -95,7 +95,13 @@
 
         @if (ankiItem.fields.phVerb?.value || ankiItem.fields.lexunit?.value) {
           <div class="lex-unit">
-            {{ ankiItem.fields.phVerb?.value }} {{ ankiItem.fields.lexunit?.value }}
+            @if (ankiItem.fields.phVerb?.value) {
+              <span class="ph-verb"> {{ ankiItem.fields.phVerb?.value }} </span>
+            }
+
+            @if (ankiItem.fields.lexunit?.value) {
+              <span class="lex-unit"> {{ ankiItem.fields.lexunit?.value }} </span>
+            }
           </div>
         }
 

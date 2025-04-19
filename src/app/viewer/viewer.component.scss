@@ -73,10 +73,14 @@
         color: darkblue;
       }
 
-      .lex-unit {
+      .lex-unit, .ph-verb {
         color: blue;
         margin: 8px 0;
         font-size: 16px;
+      }
+
+      .ph-verb {
+        color: darkorchid;
       }
     }
 
