@@ -2,7 +2,7 @@ import {Component, OnInit, signal} from '@angular/core';
 import {ICardInfo} from '../interfaces/anki-connect.interface';
 import {AnkiConnectService} from '../services/anki-connect.service';
 import {InfoService} from '../services/info.service';
-import {forkJoin, take} from 'rxjs';
+import {finalize, forkJoin, take} from 'rxjs';
 import {ANKI_REQUEST_TEXT_LOCAL_STORAGE_KEY, MAX_ANKI_RESULT_NUMBER,} from '../consts/anki.const';
 import {FormsModule} from '@angular/forms';
 import {MatButton} from '@angular/material/button';
@@ -105,9 +105,13 @@ export class ViewerComponent implements OnInit {
     this.isLoading.set(true);
 
     this.ankiConnectService.answerCardsByIds(ids, easyFactor)
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.isLoading.set(false)
+        })
+      )
       .subscribe(() => {
-        this.isLoading.set(false);
         this.getAnkiCards();
       });
   }
@@ -128,13 +132,17 @@ export class ViewerComponent implements OnInit {
 
     this.ankiConnectService
       .findCards(ankiRequestText)
-      .pipe(take(1))
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.isLoading.set(false)
+        })
+      )
       .subscribe((notes) => {
         const notesToDisplay = notes.slice(0, MAX_ANKI_RESULT_NUMBER);
         console.log(notesToDisplay);
         this.ankiCards.set(notesToDisplay);
         this.cardsNumber.set(notes.length);
-        this.isLoading.set(false);
         window.scrollTo(0, 0);
       });
   }
