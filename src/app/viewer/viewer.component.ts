@@ -129,6 +129,7 @@ export class ViewerComponent implements OnInit {
     );
 
     this.isLoading.set(true);
+    this.selectedCardNumber.set(0);
 
     this.ankiConnectService
       .findCards(ankiRequestText)
