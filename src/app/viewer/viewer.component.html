@@ -34,6 +34,7 @@
 
 @if (ankiCards().length) {
   <app-tools
+    [selectedCardNumber]="selectedCardNumber()"
     (selectAll)="selectAll()"
     (deselectAll)="deselectAll()"
     (answerCards)="answerCards($event)"
@@ -55,7 +56,7 @@
     <div
       class="result-item"
       [class.selected]="ankiItem.selected"
-      (click)="ankiItem.selected = !ankiItem.selected"
+      (click)="ankiItem.selected = !ankiItem.selected; computeSelectedCardNumber()"
     >
       <div class="top">
         <span class="index">
@@ -132,6 +133,7 @@
 
 @if (ankiCards().length > 10) {
   <app-tools
+    [selectedCardNumber]="selectedCardNumber()"
     (selectAll)="selectAll()"
     (deselectAll)="deselectAll()"
     (answerCards)="answerCards($event)"

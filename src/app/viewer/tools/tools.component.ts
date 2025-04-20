@@ -1,4 +1,4 @@
-import {Component, output} from '@angular/core';
+import {Component, input, output} from '@angular/core';
 import {MatButton} from '@angular/material/button';
 import {EasyFactorEnum} from '../../easy-factor.enum';
 
@@ -11,6 +11,7 @@ import {EasyFactorEnum} from '../../easy-factor.enum';
   styleUrl: './tools.component.scss'
 })
 export class ToolsComponent {
+  public selectedCardNumber = input.required();
   public selectAll = output();
   public deselectAll = output();
   public mixedAnswer = output();

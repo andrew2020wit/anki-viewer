@@ -35,6 +35,8 @@ export class ViewerComponent implements OnInit {
   protected compactMode = signal(true);
   protected isLoading = signal(false);
 
+  protected selectedCardNumber = signal(0);
+
   protected readonly types: Record<number, string> = {
     0: 'new',
     1: 'learning',
@@ -54,10 +56,14 @@ export class ViewerComponent implements OnInit {
 
   protected selectAll(): void {
     this.ankiCards.set(this.ankiCards().map(item => ({...item, selected: true})));
+
+    this.selectedCardNumber.set(this.ankiCards().length);
   }
 
   protected deselectAll(): void {
     this.ankiCards.set(this.ankiCards().map(item => ({...item, selected: false})));
+
+    this.selectedCardNumber.set(0);
   }
 
   protected mixedAnswer(): void {
@@ -131,5 +137,17 @@ export class ViewerComponent implements OnInit {
         this.isLoading.set(false);
         window.scrollTo(0, 0);
       });
+  }
+
+  protected computeSelectedCardNumber(): void {
+    let cardNumber = 0;
+
+    this.ankiCards().forEach((card) => {
+      if (card.selected) {
+        cardNumber++;
+      }
+    })
+
+    this.selectedCardNumber.set(cardNumber);
   }
 }
