@@ -49,8 +49,9 @@
       ankiItem.fields.term?.value &&
       ankiItem.fields.term?.value !== ankiCards()[index - 1].fields.term?.value
     )) {
-      <div class="term-header">
-        {{ ankiItem.fields.term?.value }}
+      <div class="term-header"
+        [innerHTML]="ankiItem.fields.term?.value"
+      >
       </div>
     }
     <div
@@ -62,12 +63,14 @@
         <span class="index">
           {{ index + 1 }}.
         </span>
-        <span class="term">
-          {{ ankiItem.fields.term?.value }}
+        <span class="term"
+              [innerHTML]="ankiItem.fields.term?.value"
+        >
         </span>
 
-        <span class="transcription">
-          {{ ankiItem.fields.transcription?.value }}
+        <span class="transcription"
+              [innerHTML]="ankiItem.fields.transcription?.value"
+        >
         </span>
         ({{ ankiItem.fields.pos?.value }})
 
@@ -83,8 +86,9 @@
 
         {{ ankiItem.fields.freq?.value }} {{ ankiItem.fields.freq2?.value }}
 
-        <span class="register-lab">
-          {{ ankiItem.fields.registerlab?.value }}
+        <span class="register-lab"
+              [innerHTML]="ankiItem.fields.registerlab?.value"
+        >
         </span>
 
         @if (!compactMode()) {
@@ -101,7 +105,9 @@
             }
 
             @if (ankiItem.fields.lexunit?.value) {
-              <span class="lex-unit"> {{ ankiItem.fields.lexunit?.value }} </span>
+              <span class="lex-unit"
+                    [innerHTML]="ankiItem.fields.lexunit?.value"
+              > </span>
             }
           </div>
         }
