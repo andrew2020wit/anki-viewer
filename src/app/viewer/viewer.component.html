@@ -47,7 +47,8 @@
 
     @if (!index || (
       ankiItem.fields.term?.value &&
-      ankiItem.fields.term?.value !== ankiCards()[index - 1].fields.term?.value
+      (ankiItem.fields.term?.value !== ankiCards()[index - 1].fields.term?.value ||
+      ankiItem.fields.def?.value !== ankiCards()[index - 1].fields.def?.value)
     )) {
       <div class="term-header"
         [innerHTML]="ankiItem.fields.term?.value"
@@ -93,7 +94,8 @@
 
         @if (!compactMode()) {
           [
-          {{ ankiItem.modelName }} {{ ankiItem.fields.sensenum?.value }}
+          {{ ankiItem.deckName
+          }} {{ ankiItem.fields.sensenum?.value }}
           {{ ankiItem.fields.exampleId?.value }}
           ]
         }
