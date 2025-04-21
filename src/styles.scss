@@ -14,9 +14,18 @@ body {
     --mdc-snackbar-container-color: hsl(148, 77%, 47%);
   }
 
-  .warn {
+   [color='warn']  {
     @include mat.button-overrides((
-      text-label-text-color: red,
+      text-label-text-color: darkred,
     ));
   }
+
+  [color='primary'] {
+    @include mat.button-overrides((
+      text-label-text-color: green,
+    ));
+  }
+
+  background: antiquewhite;
+  background-image: url(https://andrew2020wit.github.io/foreign-reader/assets/background/retina-wood.png);
 }
