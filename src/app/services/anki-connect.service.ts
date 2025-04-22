@@ -57,13 +57,7 @@ export class AnkiConnectService {
 
   public answerCardsByIds(cardIds: number[], ease: EasyFactorEnum ): Observable<boolean> {
     if (!cardIds.length) {
-      return of(false).pipe(
-        tap(() => {
-          const easeKey = ease === EasyFactorEnum.Again ? 'Again' : 'Easy';
-          const message = 'AnswerCards(' + cardIds.length + ') : ' + easeKey;
-          console.log(message, cardIds);
-        }),
-      );
+      return of(false);
     }
 
     return this.http
@@ -88,12 +82,6 @@ export class AnkiConnectService {
             },
           }),
         ),
-        tap(() => {
-          const easeKey = ease === EasyFactorEnum.Again ? 'Again' : 'Easy';
-          const message = 'AnswerCards(' + cardIds.length + ') : ' + easeKey;
-          this.info.show( message);
-          console.log(message, cardIds);
-        }),
       )
   }
 }

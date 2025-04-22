@@ -1,0 +1,71 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 24px;
+
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.settings {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  justify-content: start;
+  margin-bottom: 24px;
+}
+
+.card {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 16px;
+
+  .term-block {
+    display: flex;
+    font-size: 24px;
+    gap: 16px;
+
+    .term {
+      color: blue;
+    }
+
+    .pos {
+      color: green;
+    }
+  }
+
+  .transcription, .freq {
+    font-size: 24px;
+    color: blue;
+  }
+
+  .freq {
+    color: darkred;
+  }
+
+  .example, .definition, .translation {
+    font-size: 24px;
+  }
+
+  .translation {
+    color: green;
+  }
+}
+
+.next-reviews {
+  display: flex;
+  gap: 16px;
+  font-size: 24px;
+
+  padding: 4px 8px;
+  border: 1px solid gray;
+
+  .normal {
+    color: green;
+  }
+}

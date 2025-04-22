@@ -1,22 +1,22 @@
 :host {
   display: block;
-  padding: 24px;
-  max-width: 800px;
   margin: 0 auto;
+  max-width: 800px;
+  padding: 24px;
 }
 
 .settings {
-  display: flex;
   align-items: center;
-  justify-content: start;
+  display: flex;
   gap: 8px;
+  justify-content: start;
   margin-bottom: 24px;
 }
 
 .anki-request {
-  width: 100%;
   display: flex;
   gap: 8px;
+  width: 100%;
 
   .request-mat-form-field {
     flex: 1;
@@ -34,22 +34,22 @@
 
 .result-items {
   .term-header {
-    font-weight: bold;
-    font-size: 16px;
-    margin: 8px 0;
     background-color: antiquewhite;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 8px 0;
     padding: 4px;
   }
 
   .result-item {
     border: 1px solid darkred;
+    cursor: pointer;
     margin: 16px 0;
     padding: 4px 8px;
-    cursor: pointer;
 
     &.selected {
-      outline: 1px solid green;
       border: 1px solid green;
+      outline: 1px solid green;
     }
 
     .top {
@@ -75,8 +75,8 @@
 
       .lex-unit, .ph-verb {
         color: blue;
-        margin: 8px 0;
         font-size: 16px;
+        margin: 8px 0;
       }
 
       .ph-verb {
@@ -85,8 +85,8 @@
     }
 
     .example {
-      margin: 8px 0;
       font-size: 24px;
+      margin: 8px 0;
     }
 
     .def {
@@ -100,17 +100,4 @@
       margin-top: 16px;
     }
   }
-}
-
-
-
-.loader {
-  display: block;
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 9999;
 }

@@ -14,7 +14,9 @@ export interface ICardInfoResponse {
 export interface ICardInfo {
   cardId: number;
   deckName: string;
+  due: number;
   fields: ICardFields;
+  nextReviews: [string, string, string, string];
   selected?: boolean;
   type: number; // 0=new, 1=learning, 2=review, 3=relearning
   interval: number; // -- interval (used in SRS algorithm). Negative = seconds, positive = days

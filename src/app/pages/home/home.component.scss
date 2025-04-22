@@ -1,0 +1,13 @@
+:host {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  justify-content: center;
+  margin: 200px auto 100px auto;
+  max-width: 600px;
+
+  .menu-item {
+    height: fit-content;
+  }
+}

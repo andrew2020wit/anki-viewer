@@ -1,0 +1,91 @@
+@if (ankiCard()) {
+  <div class="card">
+    <div class="term-block">
+      <span class="term" [innerHTML]="ankiCard()?.fields?.term?.value"> </span>
+      <span class="pos"> ({{ ankiCard()?.fields?.pos?.value }}) </span>
+
+      <span
+        class="register-lab"
+        [innerHTML]="ankiCard()?.fields?.registerlab?.value"
+      >
+    </span>
+
+    @if (ankiCard()?.fields?.phVerb?.value ||
+      ankiCard()?.fields?.lexunit?.value) {
+        <div class="lex-unit">
+          @if (ankiCard()?.fields?.phVerb?.value) {
+            <span class="ph-verb"> {{ ankiCard()?.fields?.phVerb?.value }} </span>
+          }
+          @if (ankiCard()?.fields?.lexunit?.value) {
+            <span class="lex-unit" [innerHTML]="ankiCard()?.fields?.lexunit?.value">
+      </span>
+          }
+        </div>
+      }
+    </div>
+
+    <div
+      class="example"
+      [innerHTML]="ankiCard()?.fields?.exampleText?.value"
+    ></div>
+
+    @if (showBackSide()) {
+      <div class="term-extra">
+        <span
+          class="transcription"
+          [innerHTML]="ankiCard()?.fields?.transcription?.value | transcription"
+        >
+        </span>
+
+        <span class="freq">
+          <span> {{ ankiCard()?.fields?.freq?.value }} </span>
+          <span> {{ ankiCard()?.fields?.freq2?.value }} </span>
+        </span>
+      </div>
+
+      <div class="definition" [innerHTML]="ankiCard()?.fields?.def?.value"></div>
+
+      @if (ankiCard()?.fields?.translation?.value) {
+        <div
+          class="translation"
+          [innerHTML]="ankiCard()?.fields?.translation?.value"
+        ></div>
+      }
+
+      <div class="next-reviews">
+        <span>{{ ankiCard()?.nextReviews?.[0] }}</span>
+        <span>{{ ankiCard()?.nextReviews?.[1] }}</span>
+        <span class="normal">{{ ankiCard()?.nextReviews?.[2] }}</span>
+        <span>{{ ankiCard()?.nextReviews?.[3] }}</span>
+      </div>
+    }
+
+  </div>
+}
+
+@if (isLoading()) {
+  <div class="loader"></div>
+}
+
+<div class="settings">
+  <a routerLink="/"> Home </a>
+
+  <div class="anki-result-sum">Results: {{ cardsNumber() }}</div>
+
+  <span class="card-type">
+   CT: {{ ankiCardTypes[ankiCard()?.type || 0] }}
+  </span>
+
+  <span>
+   D: {{ ankiCard()?.deckName }}
+  </span>
+
+  <span class="hints">
+    | Space - show extra, 1-again, 2-hard, 3-normal, 4-ease.
+  </span>
+
+  <span>
+    LA: {{ lastAnswer() }}
+  </span>
+
+</div>

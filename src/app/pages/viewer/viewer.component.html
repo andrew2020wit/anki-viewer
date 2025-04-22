@@ -1,6 +1,10 @@
 <div class="settings">
+  <a routerLink="/">
+    Home
+  </a>
+
   <div class="anki-result-sum">
-    Anki-connect, resultNumber: {{ cardsNumber() }}, max:
+    ResultNumber: {{ cardsNumber() }}, max:
     {{ MAX_ANKI_RESULT_NUMBER }}
   </div>
 
@@ -76,7 +80,7 @@
         ({{ ankiItem.fields.pos?.value }})
 
         <span class="card-type">
-          [{{ types[ankiItem.type] }}]
+          [{{ ankiCardTypes[ankiItem.type] }}]
         </span>
 
         @if (ankiItem.interval) {

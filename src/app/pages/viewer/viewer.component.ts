@@ -1,17 +1,22 @@
-import {Component, OnInit, signal} from '@angular/core';
-import {ICardInfo} from '../interfaces/anki-connect.interface';
-import {AnkiConnectService} from '../services/anki-connect.service';
-import {InfoService} from '../services/info.service';
-import {finalize, forkJoin, take} from 'rxjs';
-import {ANKI_REQUEST_TEXT_LOCAL_STORAGE_KEY, MAX_ANKI_RESULT_NUMBER,} from '../consts/anki.const';
-import {FormsModule} from '@angular/forms';
-import {MatButton} from '@angular/material/button';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {MatIconModule} from '@angular/material/icon';
-import {MatInputModule} from '@angular/material/input';
-import {EasyFactorEnum} from '../easy-factor.enum';
-import {MatCheckbox} from '@angular/material/checkbox';
-import {ToolsComponent} from './tools/tools.component';
+import { Component, OnInit, signal } from '@angular/core';
+import { finalize, forkJoin, take } from 'rxjs';
+import { FormsModule } from '@angular/forms';
+import { MatButton } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { ToolsComponent } from './tools/tools.component';
+import {
+  ANKI_REQUEST_TEXT_LOCAL_STORAGE_KEY,
+  MAX_ANKI_RESULT_NUMBER,
+} from '../../consts/anki.const';
+import { EasyFactorEnum } from '../../easy-factor.enum';
+import { ICardInfo } from '../../interfaces/anki-connect.interface';
+import { AnkiConnectService } from '../../services/anki-connect.service';
+import { InfoService } from '../../services/info.service';
+import {RouterLink} from '@angular/router';
+import {ankiCardTypes} from '../../consts/anki-card-types.const';
 
 @Component({
   selector: 'app-viewer',
@@ -23,12 +28,15 @@ import {ToolsComponent} from './tools/tools.component';
     MatIconModule,
     MatCheckbox,
     ToolsComponent,
+    RouterLink,
   ],
   templateUrl: './viewer.component.html',
   styleUrl: './viewer.component.scss',
 })
 export class ViewerComponent implements OnInit {
-  protected ankiRequestText = signal<string>(localStorage.getItem(ANKI_REQUEST_TEXT_LOCAL_STORAGE_KEY) || 'flag:2');
+  protected ankiRequestText = signal<string>(
+    localStorage.getItem(ANKI_REQUEST_TEXT_LOCAL_STORAGE_KEY) || 'flag:2'
+  );
   protected ankiCards = signal<ICardInfo[]>([]);
   protected cardsNumber = signal(0);
   protected readonly MAX_ANKI_RESULT_NUMBER = MAX_ANKI_RESULT_NUMBER;
@@ -37,31 +45,29 @@ export class ViewerComponent implements OnInit {
 
   protected selectedCardNumber = signal(0);
 
-  protected readonly types: Record<number, string> = {
-    0: 'new',
-    1: 'learning',
-    2: 'review',
-    3: 'relearning'
-  }
+  protected readonly ankiCardTypes = ankiCardTypes;
 
   constructor(
     private ankiConnectService: AnkiConnectService,
     private info: InfoService
-  ) {
-  }
+  ) {}
 
   public ngOnInit() {
     this.getAnkiCards();
   }
 
   protected selectAll(): void {
-    this.ankiCards.set(this.ankiCards().map(item => ({...item, selected: true})));
+    this.ankiCards.set(
+      this.ankiCards().map((item) => ({ ...item, selected: true }))
+    );
 
     this.selectedCardNumber.set(this.ankiCards().length);
   }
 
   protected deselectAll(): void {
-    this.ankiCards.set(this.ankiCards().map(item => ({...item, selected: false})));
+    this.ankiCards.set(
+      this.ankiCards().map((item) => ({ ...item, selected: false }))
+    );
 
     this.selectedCardNumber.set(0);
   }
@@ -79,16 +85,21 @@ export class ViewerComponent implements OnInit {
       .filter((item) => !item.selected)
       .map((item) => item.cardId);
 
-    const againObs$ = this.ankiConnectService.answerCardsByIds(againIds, EasyFactorEnum.Again);
-    const easyObs$ = this.ankiConnectService.answerCardsByIds(easyIds, EasyFactorEnum.Easy);
+    const againObs$ = this.ankiConnectService.answerCardsByIds(
+      againIds,
+      EasyFactorEnum.Again
+    );
+    const easyObs$ = this.ankiConnectService.answerCardsByIds(
+      easyIds,
+      EasyFactorEnum.Easy
+    );
 
     this.isLoading.set(true);
 
     forkJoin([againObs$, easyObs$]).subscribe(() => {
-        this.isLoading.set(false);
-        this.getAnkiCards();
-      }
-    )
+      this.isLoading.set(false);
+      this.getAnkiCards();
+    });
   }
 
   protected answerCards(easyFactor: EasyFactorEnum): void {
@@ -104,11 +115,12 @@ export class ViewerComponent implements OnInit {
 
     this.isLoading.set(true);
 
-    this.ankiConnectService.answerCardsByIds(ids, easyFactor)
+    this.ankiConnectService
+      .answerCardsByIds(ids, easyFactor)
       .pipe(
         take(1),
         finalize(() => {
-          this.isLoading.set(false)
+          this.isLoading.set(false);
         })
       )
       .subscribe(() => {
@@ -123,10 +135,7 @@ export class ViewerComponent implements OnInit {
       return;
     }
 
-    localStorage.setItem(
-      ANKI_REQUEST_TEXT_LOCAL_STORAGE_KEY,
-      ankiRequestText
-    );
+    localStorage.setItem(ANKI_REQUEST_TEXT_LOCAL_STORAGE_KEY, ankiRequestText);
 
     this.isLoading.set(true);
     this.selectedCardNumber.set(0);
@@ -136,12 +145,12 @@ export class ViewerComponent implements OnInit {
       .pipe(
         take(1),
         finalize(() => {
-          this.isLoading.set(false)
+          this.isLoading.set(false);
         })
       )
       .subscribe((notes) => {
         const notesToDisplay = notes.slice(0, MAX_ANKI_RESULT_NUMBER);
-        console.log(notesToDisplay);
+        // console.log(notesToDisplay);
         this.ankiCards.set(notesToDisplay);
         this.cardsNumber.set(notes.length);
         window.scrollTo(0, 0);
@@ -155,7 +164,7 @@ export class ViewerComponent implements OnInit {
       if (card.selected) {
         cardNumber++;
       }
-    })
+    });
 
     this.selectedCardNumber.set(cardNumber);
   }
