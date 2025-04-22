@@ -29,6 +29,11 @@
     display: flex;
     font-size: 24px;
     gap: 16px;
+    align-items: baseline;
+
+    .card-type {
+      font-size: 14px;
+    }
 
     .term {
       color: blue;

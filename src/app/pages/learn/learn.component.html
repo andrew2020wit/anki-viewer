@@ -1,6 +1,7 @@
 @if (ankiCard()) {
   <div class="card">
     <div class="term-block">
+      <span class="card-type"> {{ ankiCardTypes[ankiCard()?.type || 0] }} :</span>
       <span class="term" [innerHTML]="ankiCard()?.fields?.term?.value"> </span>
       <span class="pos"> ({{ ankiCard()?.fields?.pos?.value }}) </span>
 
