@@ -17,6 +17,7 @@ import { AnkiConnectService } from '../../services/anki-connect.service';
 import { InfoService } from '../../services/info.service';
 import {RouterLink} from '@angular/router';
 import {ankiCardTypes} from '../../consts/anki-card-types.const';
+import {TranscriptionPipe} from '../../pipes/transcription.pipe';
 
 @Component({
   selector: 'app-viewer',
@@ -29,6 +30,7 @@ import {ankiCardTypes} from '../../consts/anki-card-types.const';
     MatCheckbox,
     ToolsComponent,
     RouterLink,
+    TranscriptionPipe,
   ],
   templateUrl: './viewer.component.html',
   styleUrl: './viewer.component.scss',

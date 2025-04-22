@@ -74,7 +74,7 @@
         </span>
 
         <span class="transcription"
-              [innerHTML]="ankiItem.fields.transcription?.value"
+              [innerHTML]="ankiItem.fields.transcription?.value | transcription"
         >
         </span>
         ({{ ankiItem.fields.pos?.value }})
