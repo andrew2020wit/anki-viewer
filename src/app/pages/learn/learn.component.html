@@ -1,6 +1,9 @@
 @if (ankiCard()) {
   <div class="card">
     <div class="term-block">
+      <span class="cards-number">
+        {{ cardsNumber() }}
+      </span>
       <span class="card-type"> {{ ankiCardTypes[ankiCard()?.type || 0] }} :</span>
       <span class="term" [innerHTML]="ankiCard()?.fields?.term?.value"> </span>
       <span class="pos"> ({{ ankiCard()?.fields?.pos?.value }}) </span>
@@ -85,22 +88,11 @@
 <div class="settings">
   <a routerLink="/"> Home </a>
 
-  <div class="anki-result-sum">Results: {{ cardsNumber() }}</div>
-
-  <span class="card-type">
-   CT: {{ ankiCardTypes[ankiCard()?.type || 0] }}
-  </span>
-
   <span>
-   D: {{ ankiCard()?.deckName }}
+   Deck: {{ ankiCard()?.deckName }}
   </span>
 
   <span class="hints">
     | Space - show extra, 1-again, 2-hard, 3-normal, 4-ease.
   </span>
-
-  <span>
-    LA: {{ lastAnswer() }}
-  </span>
-
 </div>
