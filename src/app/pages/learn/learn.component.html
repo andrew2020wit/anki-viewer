@@ -53,19 +53,33 @@
       }
 
       <div class="next-reviews">
-        <span>{{ ankiCard()?.nextReviews?.[0] }}</span>
-        <span>{{ ankiCard()?.nextReviews?.[1] }}</span>
-        <span class="normal">{{ ankiCard()?.nextReviews?.[2] }}</span>
-        <span>{{ ankiCard()?.nextReviews?.[3] }}</span>
+        <span
+          [class.was-last]="lastAnswer() === 1"
+        >{{ ankiCard()?.nextReviews?.[0] }}
+        </span>
+
+        <span
+          [class.was-last]="lastAnswer() === 2"
+        >{{ ankiCard()?.nextReviews?.[1] }}
+        </span>
+
+        <span
+          [class.was-last]="lastAnswer() === 3"
+          class="normal">{{ ankiCard()?.nextReviews?.[2] }}
+        </span>
+        <span
+          [class.was-last]="lastAnswer() === 4"
+        >{{ ankiCard()?.nextReviews?.[3] }}
+        </span>
       </div>
     }
 
   </div>
 }
 
-@if (isLoading()) {
-  <div class="loader"></div>
-}
+<!--@if (isLoading()) {-->
+<!--  <div class="loader"></div>-->
+<!--}-->
 
 <div class="settings">
   <a routerLink="/"> Home </a>
