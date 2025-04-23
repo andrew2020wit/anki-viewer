@@ -66,7 +66,7 @@ export class LearnComponent implements OnInit, OnDestroy {
         }),
       )
       .subscribe((cards) => {
-        console.log(cards);
+        console.log(cards.slice(0, 50));
 
         cards.sort(sortCards);
 
