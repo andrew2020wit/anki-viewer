@@ -7,9 +7,9 @@
 It uses [Anki-Connect](https://git.sr.ht/~foosoft/anki-connect/) to search some notes, display them;
 and it can "answer" selected cards with 'easy' or 'again'.
 
-Mixed answer - selected - 'again', not selected - 'easy'.
+Mixed answer: selected - 'again', not selected - 'easy'.
 
-It's created for certain anki deck structure, so you may not see card properly for other deck.
+It's created for certain anki deck structure, so you may not see cards properly for other decks.
 
 The correct card structure:
 
@@ -17,10 +17,10 @@ The correct card structure:
 
 ## Learn
 
-It's similar to normal anki learning, but uses custom interface.
+It's similar to the normal anki learning, but uses a custom interface.
 
 By default your deck name must be "cald" (todo - use url query for deck name), and cards must be the same structure.
-You can change it if settings.
+You can change it in settings.
 
 ### Sound
 
