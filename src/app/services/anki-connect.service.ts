@@ -1,10 +1,14 @@
-import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {catchError, map, Observable, of, switchMap, take, tap} from 'rxjs';
-import {DEFAULT_ANKI_HOST} from '../consts/anki.const';
-import {InfoService} from './info.service';
-import {ICardInfo, ICardInfoResponse, IFindItemsResponse} from '../interfaces/anki-connect.interface';
-import {EasyFactorEnum} from '../easy-factor.enum';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { catchError, map, Observable, of, switchMap, take, tap } from 'rxjs';
+import { DEFAULT_ANKI_HOST } from '../consts/anki.const';
+import { InfoService } from './info.service';
+import {
+  ICardInfo,
+  ICardInfoResponse,
+  IFindItemsResponse,
+} from '../interfaces/anki-connect.interface';
+import { EasyFactorEnum } from '../easy-factor.enum';
 
 @Injectable({
   providedIn: 'root',
@@ -55,17 +59,20 @@ export class AnkiConnectService {
       );
   }
 
-  public answerCardsByIds(cardIds: number[], ease: EasyFactorEnum ): Observable<boolean> {
+  public answerCardsByIds(
+    cardIds: number[],
+    ease: EasyFactorEnum,
+  ): Observable<boolean> {
     if (!cardIds.length) {
       return of(false);
     }
 
     return this.http
       .post<boolean>(DEFAULT_ANKI_HOST, {
-        action: 'forgetCards',
+        action: 'answerCards',
         version: 6,
         params: {
-          cards: cardIds,
+          answers: cardIds.map((id) => ({ cardId: id, ease })), // Ease is between 1 (Again) and 4 (Easy).
         },
       })
       .pipe(
@@ -73,15 +80,6 @@ export class AnkiConnectService {
           this.info.error('There is error with anki-connection');
           throw err;
         }),
-        switchMap(() =>
-          this.http.post<boolean>(DEFAULT_ANKI_HOST, {
-            action: 'answerCards',
-            version: 6,
-            params: {
-              answers: cardIds.map((id) => ({ cardId: id, ease })), // Ease is between 1 (Again) and 4 (Easy).
-            },
-          }),
-        ),
-      )
+      );
   }
 }
