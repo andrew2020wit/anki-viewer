@@ -1,29 +1,27 @@
-import {Component, OnInit, signal} from '@angular/core';
-import {MatInputModule} from '@angular/material/input';
-import {MatFormFieldModule} from '@angular/material/form-field';
-import {FormsModule} from '@angular/forms';
-import {RouterLink} from '@angular/router';
+import { Component, OnInit, signal } from '@angular/core';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 import {
   computeViewProfileLabelStorageKey,
   computeViewProfileRequestStorageKey,
-  VIEW_PROFILE_NUMBER
+  VIEW_PROFILE_NUMBER,
 } from '../../utils/view-profile';
-import {SettingsItemComponent} from './settings-item/settings-item.component';
-
-export interface StringSettingItem {
-  key: string;
-  value: string;
-  label: string;
-}
+import { SettingsItemComponent } from './settings-item/settings-item.component';
+import { StringSettingItem } from '../../interfaces/string-setting-item.interface';
 
 @Component({
   selector: 'app-settings',
   imports: [
-    MatFormFieldModule, MatInputModule,
-    FormsModule, RouterLink, SettingsItemComponent,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    RouterLink,
+    SettingsItemComponent,
   ],
   templateUrl: './settings.component.html',
-  styleUrl: './settings.component.scss'
+  styleUrl: './settings.component.scss',
 })
 export class SettingsComponent implements OnInit {
   protected settingItems = signal<StringSettingItem[]>([]);
@@ -35,21 +33,21 @@ export class SettingsComponent implements OnInit {
   private initProfileSettings(): void {
     const profileSettings: StringSettingItem[] = [];
 
-    for( let i= 1; i <= VIEW_PROFILE_NUMBER; i++ ) {
+    for (let i = 1; i <= VIEW_PROFILE_NUMBER; i++) {
       const labelKey = computeViewProfileLabelStorageKey(i);
 
-      profileSettings.push( {
+      profileSettings.push({
         key: labelKey,
         label: labelKey,
-        value: localStorage.getItem(labelKey) || ''
+        value: localStorage.getItem(labelKey) || '',
       });
 
       const requestKey = computeViewProfileRequestStorageKey(i);
 
-      profileSettings.push( {
+      profileSettings.push({
         key: requestKey,
         label: requestKey,
-        value: localStorage.getItem(requestKey) || ''
+        value: localStorage.getItem(requestKey) || '',
       });
     }
 
@@ -60,5 +58,4 @@ export class SettingsComponent implements OnInit {
   protected saveSettingItem(item: StringSettingItem): void {
     localStorage.setItem(item.key, item.value);
   }
-
 }

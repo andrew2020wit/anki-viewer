@@ -41,7 +41,7 @@ import { getProfilesSettings, ViewProfile } from '../../utils/view-profile';
 })
 export class ViewerComponent implements OnInit {
   protected ankiRequestText = signal<string>(
-    localStorage.getItem(ANKI_REQUEST_TEXT_LOCAL_STORAGE_KEY) || 'flag:2'
+    localStorage.getItem(ANKI_REQUEST_TEXT_LOCAL_STORAGE_KEY) || 'flag:2',
   );
   protected ankiCards = signal<ICardInfo[]>([]);
   protected cardsNumber = signal(0);
@@ -59,7 +59,7 @@ export class ViewerComponent implements OnInit {
 
   constructor(
     private ankiConnectService: AnkiConnectService,
-    private info: InfoService
+    private info: InfoService,
   ) {}
 
   public ngOnInit() {
@@ -83,7 +83,7 @@ export class ViewerComponent implements OnInit {
 
   protected selectAll(): void {
     this.ankiCards.set(
-      this.ankiCards().map((item) => ({ ...item, selected: true }))
+      this.ankiCards().map((item) => ({ ...item, selected: true })),
     );
 
     this.selectedCardNumber.set(this.ankiCards().length);
@@ -91,7 +91,7 @@ export class ViewerComponent implements OnInit {
 
   protected deselectAll(): void {
     this.ankiCards.set(
-      this.ankiCards().map((item) => ({ ...item, selected: false }))
+      this.ankiCards().map((item) => ({ ...item, selected: false })),
     );
 
     this.selectedCardNumber.set(0);
@@ -112,11 +112,11 @@ export class ViewerComponent implements OnInit {
 
     const againObs$ = this.ankiConnectService.answerCardsByIds(
       againIds,
-      EasyFactorEnum.Again
+      EasyFactorEnum.Again,
     );
     const easyObs$ = this.ankiConnectService.answerCardsByIds(
       easyIds,
-      EasyFactorEnum.Easy
+      EasyFactorEnum.Easy,
     );
 
     this.isLoading.set(true);
@@ -146,7 +146,7 @@ export class ViewerComponent implements OnInit {
         take(1),
         finalize(() => {
           this.isLoading.set(false);
-        })
+        }),
       )
       .subscribe(() => {
         this.getAnkiCards();
@@ -171,11 +171,11 @@ export class ViewerComponent implements OnInit {
         take(1),
         finalize(() => {
           this.isLoading.set(false);
-        })
+        }),
       )
       .subscribe((notes) => {
         const notesToDisplay = notes.slice(0, MAX_ANKI_RESULT_NUMBER);
-        // console.log(notesToDisplay);
+        console.log(notesToDisplay);
         this.ankiCards.set(notesToDisplay);
         this.cardsNumber.set(notes.length);
         window.scrollTo(0, 0);
