@@ -1,6 +1,6 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {RouterOutlet} from '@angular/router';
-import {HotKeysService} from './services/hot-keys.service';
+import { Component, inject, OnInit } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+import { HotKeysService } from './services/hot-keys.service';
 
 @Component({
   selector: 'app-root',
@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
 
   private setHotKeys(): void {
     window.document.addEventListener('keydown', (event: KeyboardEvent) => {
-      this.hotKeysService.hotKeyEvent.next(event.key);
-    })
+      this.hotKeysService.hotKeyEvent.next(event.key.toLowerCase());
+    });
   }
 }

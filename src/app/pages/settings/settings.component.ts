@@ -11,6 +11,23 @@ import {
 import { SettingsItemComponent } from './settings-item/settings-item.component';
 import { StringSettingItem } from '../../interfaces/string-setting-item.interface';
 
+export const httpFileServerSettingItem: StringSettingItem = {
+  key: 'HttpFileServer',
+  label: 'HttpFileServer',
+  value: '',
+};
+
+export const defaultLearningDeckSettingItem: StringSettingItem = {
+  key: 'defaultLearningDeckSettingItem',
+  label: 'defaultLearningDeckSettingItem',
+  value: '',
+};
+
+export const extraSettings: StringSettingItem[] = [
+  httpFileServerSettingItem,
+  defaultLearningDeckSettingItem,
+];
+
 @Component({
   selector: 'app-settings',
   imports: [
@@ -28,6 +45,11 @@ export class SettingsComponent implements OnInit {
 
   public ngOnInit(): void {
     this.initProfileSettings();
+    this.initExtraSettings();
+  }
+
+  protected saveSettingItem(item: StringSettingItem): void {
+    localStorage.setItem(item.key, item.value);
   }
 
   private initProfileSettings(): void {
@@ -55,7 +77,17 @@ export class SettingsComponent implements OnInit {
     this.settingItems.set([...settings, ...profileSettings]);
   }
 
-  protected saveSettingItem(item: StringSettingItem): void {
-    localStorage.setItem(item.key, item.value);
+  private initExtraSettings(): void {
+    const res: StringSettingItem[] = [];
+
+    extraSettings.forEach((setting) => {
+      res.push({
+        key: setting.key,
+        label: setting.label,
+        value: localStorage.getItem(setting.key) || '',
+      });
+    });
+
+    this.settingItems.set([...this.settingItems(), ...res]);
   }
 }

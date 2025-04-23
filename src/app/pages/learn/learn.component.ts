@@ -1,15 +1,18 @@
-import {Component, inject, OnDestroy, OnInit, signal} from '@angular/core';
-import {finalize, Subscription, take} from 'rxjs';
-import {ICardInfo} from '../../interfaces/anki-connect.interface';
-import {AnkiConnectService} from '../../services/anki-connect.service';
-import {InfoService} from '../../services/info.service';
-import {RouterLink} from '@angular/router';
-import {ankiCardTypes} from '../../consts/anki-card-types.const';
-import {TranscriptionPipe} from '../../pipes/transcription.pipe';
-import {HotKeysService} from '../../services/hot-keys.service';
-import {HotKeys} from '../../enums/hot-keys.enum';
-import {EasyFactorEnum} from '../../easy-factor.enum';
-import {UrlsEnum} from '../../enums/urls.enum';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { finalize, Subscription, take } from 'rxjs';
+import { ICardInfo } from '../../interfaces/anki-connect.interface';
+import { AnkiConnectService } from '../../services/anki-connect.service';
+import { RouterLink } from '@angular/router';
+import { ankiCardTypes } from '../../consts/anki-card-types.const';
+import { TranscriptionPipe } from '../../pipes/transcription.pipe';
+import { HotKeysService } from '../../services/hot-keys.service';
+import { HotKeys } from '../../enums/hot-keys.enum';
+import { EasyFactorEnum } from '../../easy-factor.enum';
+import { UrlsEnum } from '../../enums/urls.enum';
+import {
+  defaultLearningDeckSettingItem,
+  httpFileServerSettingItem,
+} from '../settings/settings.component';
 
 @Component({
   selector: 'app-learn',
@@ -31,11 +34,9 @@ export class LearnComponent implements OnInit, OnDestroy {
   private readonly hotKeysService = inject(HotKeysService);
   private hotKeysServiceSubscription: Subscription | undefined;
 
-  constructor(
-    private ankiConnectService: AnkiConnectService,
-    private info: InfoService
-  ) {
-  }
+  private htmLAudioElement: HTMLAudioElement | null = null;
+
+  constructor(private ankiConnectService: AnkiConnectService) {}
 
   public ngOnInit() {
     this.getCard();
@@ -47,7 +48,10 @@ export class LearnComponent implements OnInit, OnDestroy {
   }
 
   private getCard(): void {
-    const ankiRequestText = 'deck:cald is:due';
+    const defaultLearningDeck =
+      localStorage.getItem(defaultLearningDeckSettingItem.key) || 'cald';
+
+    const ankiRequestText = `deck:${defaultLearningDeck} is:due`;
 
     this.isLoading.set(true);
     this.showBackSide.set(false);
@@ -58,7 +62,7 @@ export class LearnComponent implements OnInit, OnDestroy {
         take(1),
         finalize(() => {
           this.isLoading.set(false);
-        })
+        }),
       )
       .subscribe((notes) => {
         notes.sort((a, b) => a.due - b.due);
@@ -66,29 +70,35 @@ export class LearnComponent implements OnInit, OnDestroy {
         this.ankiCard.set(notes[0] || null);
         this.cardsNumber.set(notes.length);
         window.scrollTo(0, 0);
+        this.initAudio();
       });
   }
 
   private takeHotKey(): void {
-    this.hotKeysServiceSubscription = this.hotKeysService.hotKeyEvent.subscribe(key => {
-      switch (key) {
-        case HotKeys.ShowExtraInfo:
-          this.showBackSide.set(true);
-          break;
-        case HotKeys.LearnAgain:
-          this.answerCard(EasyFactorEnum.Again);
-          break;
-        case HotKeys.SetHard:
-          this.answerCard(EasyFactorEnum.Hard);
-          break;
-        case HotKeys.SetNormal:
-          this.answerCard(EasyFactorEnum.Normal);
-          break;
-        case HotKeys.SetEasy:
-          this.answerCard(EasyFactorEnum.Easy);
-          break;
-      }
-    })
+    this.hotKeysServiceSubscription = this.hotKeysService.hotKeyEvent.subscribe(
+      (key) => {
+        switch (key) {
+          case HotKeys.ShowExtraInfo:
+            this.showBackSide.set(true);
+            break;
+          case HotKeys.LearnAgain:
+            this.answerCard(EasyFactorEnum.Again);
+            break;
+          case HotKeys.SetHard:
+            this.answerCard(EasyFactorEnum.Hard);
+            break;
+          case HotKeys.SetNormal:
+            this.answerCard(EasyFactorEnum.Normal);
+            break;
+          case HotKeys.SetEasy:
+            this.answerCard(EasyFactorEnum.Easy);
+            break;
+          case HotKeys.ReplayAudio:
+            this.replayAudio();
+            break;
+        }
+      },
+    );
   }
 
   private answerCard(easyFactor: EasyFactorEnum): void {
@@ -106,11 +116,40 @@ export class LearnComponent implements OnInit, OnDestroy {
         take(1),
         finalize(() => {
           this.isLoading.set(false);
-        })
+        }),
       )
       .subscribe(() => {
         this.lastAnswer.set(easyFactor);
         this.getCard();
       });
+  }
+
+  private initAudio(): void {
+    const soundUrlStr = this.ankiCard()?.fields?.sound?.value;
+
+    this.htmLAudioElement = null;
+
+    if (!soundUrlStr) {
+      return;
+    }
+
+    const soundUrl = soundUrlStr
+      .replaceAll('[sound:', '')
+      .replaceAll(']', '')
+      .trim();
+
+    const baseUrl = localStorage.getItem(httpFileServerSettingItem.key);
+
+    if (!soundUrl || !baseUrl) {
+      return;
+    }
+
+    this.htmLAudioElement = new Audio(baseUrl + soundUrl);
+
+    this.htmLAudioElement.play();
+  }
+
+  protected replayAudio(): void {
+    this.htmLAudioElement?.play();
   }
 }

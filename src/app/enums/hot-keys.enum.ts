@@ -3,5 +3,6 @@ export enum HotKeys {
   LearnAgain = '1',
   SetHard = '2',
   SetNormal = '3',
-  SetEasy = '4'
+  SetEasy = '4',
+  ReplayAudio = 'r',
 }

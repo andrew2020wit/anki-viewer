@@ -13,6 +13,7 @@ export interface ICardFields {
   pos?: IStringValue;
   registerlab?: IStringValue;
   sensenum?: IStringValue;
+  sound?: IStringValue;
   term?: IStringValue;
   transcription?: IStringValue;
   translation?: IStringValue;
