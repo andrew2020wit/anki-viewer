@@ -17,6 +17,13 @@ export const routes: Routes = [
 
   },
   {
+    path: UrlsEnum.Settings,
+    title: 'Settings',
+    loadComponent: () =>
+      import('./pages/settings/settings.component').then((m) => m.SettingsComponent),
+
+  },
+  {
     path: '',
     pathMatch: 'full',
     loadComponent: () => import('./pages/home/home.component')

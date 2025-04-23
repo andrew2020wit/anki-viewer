@@ -15,10 +15,12 @@ import { EasyFactorEnum } from '../../easy-factor.enum';
 import { ICardInfo } from '../../interfaces/anki-connect.interface';
 import { AnkiConnectService } from '../../services/anki-connect.service';
 import { InfoService } from '../../services/info.service';
-import {RouterLink} from '@angular/router';
-import {ankiCardTypes} from '../../consts/anki-card-types.const';
-import {TranscriptionPipe} from '../../pipes/transcription.pipe';
-import {UrlsEnum} from '../../enums/urls.enum';
+import { RouterLink } from '@angular/router';
+import { ankiCardTypes } from '../../consts/anki-card-types.const';
+import { TranscriptionPipe } from '../../pipes/transcription.pipe';
+import { UrlsEnum } from '../../enums/urls.enum';
+import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { getProfilesSettings, ViewProfile } from '../../utils/view-profile';
 
 @Component({
   selector: 'app-viewer',
@@ -32,6 +34,7 @@ import {UrlsEnum} from '../../enums/urls.enum';
     ToolsComponent,
     RouterLink,
     TranscriptionPipe,
+    MatButtonToggleModule,
   ],
   templateUrl: './viewer.component.html',
   styleUrl: './viewer.component.scss',
@@ -47,9 +50,12 @@ export class ViewerComponent implements OnInit {
   protected isLoading = signal(false);
 
   protected selectedCardNumber = signal(0);
+  protected profileIndex = signal(0);
 
   protected readonly UrlsEnum = UrlsEnum;
   protected readonly ankiCardTypes = ankiCardTypes;
+
+  protected profiles = signal<ViewProfile[]>([]);
 
   constructor(
     private ankiConnectService: AnkiConnectService,
@@ -57,6 +63,21 @@ export class ViewerComponent implements OnInit {
   ) {}
 
   public ngOnInit() {
+    this.initProfiles();
+    this.getAnkiCards();
+  }
+
+  protected setProfile(profile: ViewProfile | null): void {
+    if (!profile) {
+      return;
+    }
+
+    if (profile.request === this.ankiRequestText()) {
+      return;
+    }
+
+    this.ankiRequestText.set(profile.request);
+
     this.getAnkiCards();
   }
 
@@ -171,5 +192,18 @@ export class ViewerComponent implements OnInit {
     });
 
     this.selectedCardNumber.set(cardNumber);
+  }
+
+  private initProfiles(): void {
+    this.profiles.set(getProfilesSettings());
+    let currentIndex = 0;
+
+    this.profiles().forEach((profile) => {
+      if (profile.request === this.ankiRequestText()) {
+        currentIndex = profile.index;
+      }
+    });
+
+    this.profileIndex.set(currentIndex);
   }
 }

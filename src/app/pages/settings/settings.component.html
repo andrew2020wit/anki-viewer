@@ -1,0 +1,12 @@
+<a routerLink="/">
+  Home
+</a>
+
+<br><br>
+
+@for (settingItem of settingItems(); track settingItem.key) {
+ <app-settings-item
+   [settingItem]="settingItem"
+   (set)="saveSettingItem($event)"
+ />
+}
