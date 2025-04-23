@@ -9,135 +9,154 @@
   </div>
 
   @if (profiles().length) {
-  <mat-button-toggle-group [(ngModel)]="profileIndex">
-    <mat-button-toggle [value]="0" (click)="setProfile(null)">
-      Custom
-    </mat-button-toggle>
+    <mat-button-toggle-group [(ngModel)]="profileIndex">
+      <mat-button-toggle [value]="0" (click)="setProfile(null)">
+        Custom
+      </mat-button-toggle>
 
-    @for (profile of profiles(); track profile.index) {
-    <mat-button-toggle [value]="profile.index" (click)="setProfile(profile)">
-      {{ profile.label }}
-    </mat-button-toggle>
-    }
-  </mat-button-toggle-group>
+      @for (profile of profiles(); track profile.index) {
+        <mat-button-toggle
+          [value]="profile.index"
+          (click)="setProfile(profile)"
+        >
+          {{ profile.label }}
+        </mat-button-toggle>
+      }
+    </mat-button-toggle-group>
   }
 
   <mat-checkbox [(ngModel)]="compactMode"> Compact </mat-checkbox>
 </div>
 
 @if (!profileIndex()) {
-<div class="anki-request">
-  <mat-form-field class="request-mat-form-field" appearance="outline">
-    <mat-label>Anki request text</mat-label>
-    <input
-      matInput
-      class="flag-input"
-      (keydown.enter)="getAnkiCards()"
-      [(ngModel)]="ankiRequestText"
-    />
-  </mat-form-field>
+  <div class="anki-request">
+    <mat-form-field class="request-mat-form-field" appearance="outline">
+      <mat-label>Anki request text</mat-label>
+      <input
+        matInput
+        class="flag-input"
+        (keydown.enter)="getAnkiCards()"
+        [(ngModel)]="ankiRequestText"
+      />
+    </mat-form-field>
 
-  <button
-    mat-button
-    color="primary"
-    [disabled]="!ankiRequestText()"
-    (click)="getAnkiCards()"
-  >
-    Go!
-  </button>
-</div>
+    <button
+      mat-button
+      color="primary"
+      [disabled]="!ankiRequestText()"
+      (click)="getAnkiCards()"
+    >
+      Go!
+    </button>
+  </div>
 } @else {
-<div class="request-readonly">
-  {{ ankiRequestText() }}
-</div>
-} @if (ankiCards().length) {
-<app-tools
-  [selectedCardNumber]="selectedCardNumber()"
-  (selectAll)="selectAll()"
-  (deselectAll)="deselectAll()"
-  (answerCards)="answerCards($event)"
-  (mixedAnswer)="mixedAnswer()"
-/>
+  <div class="request-readonly">
+    {{ ankiRequestText() }}
+  </div>
+}
+@if (ankiCards().length) {
+  <app-tools
+    [selectedCardNumber]="selectedCardNumber()"
+    (selectAll)="selectAll()"
+    (deselectAll)="deselectAll()"
+    (answerCards)="answerCards($event)"
+    (mixedAnswer)="mixedAnswer()"
+  />
 }
 
 <div class="result-items">
-  @for (ankiItem of ankiCards(); let index = $index; track ankiItem) { @if
-  (!index || ( ankiItem.fields.term?.value && (ankiItem.fields.term?.value !==
-  ankiCards()[index - 1].fields.term?.value || ankiItem.fields.def?.value !==
-  ankiCards()[index - 1].fields.def?.value) )) {
-  <div class="term-header" [innerHTML]="ankiItem.fields.term?.value"></div>
-  }
-  <div
-    class="result-item"
-    [class.selected]="ankiItem.selected"
-    (click)="
-      ankiItem.selected = !ankiItem.selected; computeSelectedCardNumber()
-    "
-  >
-    <div class="top">
-      <span class="index"> {{ index + 1 }}. </span>
-      <span class="term" [innerHTML]="ankiItem.fields.term?.value"> </span>
+  @for (ankiItem of ankiCards(); let index = $index; track ankiItem) {
+    @if (
+      !index ||
+      (ankiItem.fields.term?.value &&
+        (ankiItem.fields.term?.value !==
+          ankiCards()[index - 1].fields.term?.value ||
+          ankiItem.fields.def?.value !==
+            ankiCards()[index - 1].fields.def?.value))
+    ) {
+      <div class="term-header" [innerHTML]="ankiItem.fields.term?.value"></div>
+    }
+    <div
+      class="result-item"
+      [class.selected]="ankiItem.selected"
+      (click)="
+        ankiItem.selected = !ankiItem.selected; computeSelectedCardNumber()
+      "
+    >
+      <div class="top">
+        <span class="index"> {{ index + 1 }}. </span>
+        <span class="term" [innerHTML]="ankiItem.fields.term?.value"> </span>
 
-      <span
-        class="transcription"
-        [innerHTML]="ankiItem.fields.transcription?.value | transcription"
-      >
-      </span>
-      ({{ ankiItem.fields.pos?.value }})
-
-      <span class="card-type"> [{{ ankiCardTypes[ankiItem.type] }}] </span>
-
-      @if (ankiItem.interval) {
-      <span class="interval"> [int: {{ ankiItem.interval }}] </span>
-      }
-
-      {{ ankiItem.fields.freq?.value }} {{ ankiItem.fields.freq2?.value }}
-
-      <span
-        class="register-lab"
-        [innerHTML]="ankiItem.fields.registerlab?.value"
-      >
-      </span>
-
-      @if (!compactMode()) { [
-      {{ ankiItem.deckName }} {{ ankiItem.fields.sensenum?.value }}
-      {{ ankiItem.fields.exampleId?.value }}
-      ] } @if (ankiItem.fields.phVerb?.value || ankiItem.fields.lexunit?.value)
-      {
-      <div class="lex-unit">
-        @if (ankiItem.fields.phVerb?.value) {
-        <span class="ph-verb"> {{ ankiItem.fields.phVerb?.value }} </span>
-        } @if (ankiItem.fields.lexunit?.value) {
-        <span class="lex-unit" [innerHTML]="ankiItem.fields.lexunit?.value">
+        <span
+          class="transcription"
+          [innerHTML]="ankiItem.fields.transcription?.value | transcription"
+        >
         </span>
+        ({{ ankiItem.fields.pos?.value }})
+
+        <span class="card-type"> [{{ ankiCardTypes[ankiItem.type] }}] </span>
+
+        @if (ankiItem.interval) {
+          <span class="interval"> [int: {{ ankiItem.interval }}] </span>
+        }
+
+        {{ ankiItem.fields.freq?.value }} {{ ankiItem.fields.freq2?.value }}
+
+        <span
+          class="register-lab"
+          [innerHTML]="ankiItem.fields.registerlab?.value"
+        >
+        </span>
+
+        @if (!compactMode()) {
+          [ {{ ankiItem.deckName }} {{ ankiItem.fields.sensenum?.value }}
+          {{ ankiItem.fields.exampleId?.value }}
+          ]
+        }
+        @if (ankiItem.fields.phVerb?.value || ankiItem.fields.lexunit?.value) {
+          <div class="lex-unit">
+            @if (ankiItem.fields.phVerb?.value) {
+              <span class="ph-verb"> {{ ankiItem.fields.phVerb?.value }} </span>
+            }
+            @if (ankiItem.fields.lexunit?.value) {
+              <span
+                class="lex-unit"
+                [innerHTML]="ankiItem.fields.lexunit?.value"
+              >
+              </span>
+            }
+          </div>
         }
       </div>
+
+      <div
+        class="example"
+        [innerHTML]="ankiItem.fields.exampleText?.value"
+      ></div>
+
+      @if (!compactMode() || ankiItem.selected) {
+        <div class="def" [innerHTML]="ankiItem.fields.def?.value"></div>
+
+        @if (ankiItem.fields.translation?.value) {
+          <div
+            class="translation"
+            [innerHTML]="ankiItem.fields.translation?.value"
+          ></div>
+        }
       }
     </div>
-
-    <div class="example" [innerHTML]="ankiItem.fields.exampleText?.value"></div>
-
-    @if (!compactMode() || ankiItem.selected) {
-    <div class="def" [innerHTML]="ankiItem.fields.def?.value"></div>
-
-    @if (ankiItem.fields.translation?.value) {
-    <div
-      class="translation"
-      [innerHTML]="ankiItem.fields.translation?.value"
-    ></div>
-    } }
-  </div>
   }
 </div>
 
 @if (ankiCards().length > 10) {
-<app-tools
-  [selectedCardNumber]="selectedCardNumber()"
-  (selectAll)="selectAll()"
-  (deselectAll)="deselectAll()"
-  (answerCards)="answerCards($event)"
-  (mixedAnswer)="mixedAnswer()"
-/>
-} @if (isLoading()) {
-<div class="loader"></div>
+  <app-tools
+    [selectedCardNumber]="selectedCardNumber()"
+    (selectAll)="selectAll()"
+    (deselectAll)="deselectAll()"
+    (answerCards)="answerCards($event)"
+    (mixedAnswer)="mixedAnswer()"
+  />
+}
+@if (isLoading()) {
+  <div class="loader"></div>
 }
