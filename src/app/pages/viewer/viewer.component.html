@@ -46,6 +46,10 @@
     Go!
   </button>
 </div>
+} @else {
+<div class="request-readonly">
+  {{ ankiRequestText() }}
+</div>
 } @if (ankiCards().length) {
 <app-tools
   [selectedCardNumber]="selectedCardNumber()"

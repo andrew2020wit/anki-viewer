@@ -74,7 +74,8 @@
         color: darkblue;
       }
 
-      .lex-unit, .ph-verb {
+      .lex-unit,
+      .ph-verb {
         color: blue;
         font-size: 16px;
         margin: 8px 0;
@@ -101,4 +102,9 @@
       margin-top: 16px;
     }
   }
+}
+
+.request-readonly {
+  border: 1px solid gray;
+  padding: 4px 8px;
 }
