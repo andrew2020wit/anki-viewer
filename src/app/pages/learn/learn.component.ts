@@ -24,7 +24,10 @@ import { sortCards } from '../../utils/sort-cards';
 export class LearnComponent implements OnInit, OnDestroy {
   protected isLoading = signal(false);
   protected ankiCard = signal<ICardInfo | null>(null);
+
   protected cardsNumber = signal(0);
+  protected learningCardsNumber = signal(0);
+
   protected showBackSide = signal(true);
   protected lastAnswer = signal(0);
 
@@ -72,6 +75,9 @@ export class LearnComponent implements OnInit, OnDestroy {
 
         this.ankiCard.set(cards[0] || null);
         this.cardsNumber.set(cards.length);
+        this.learningCardsNumber.set(
+          cards.filter((item) => item.type === 1).length,
+        );
         window.scrollTo(0, 0);
         this.initAudio();
       });
