@@ -13,6 +13,7 @@ import {
   defaultLearningDeckSettingItem,
   httpFileServerSettingItem,
 } from '../settings/settings.component';
+import { sortCards } from '../../utils/sort-cards';
 
 @Component({
   selector: 'app-learn',
@@ -64,11 +65,13 @@ export class LearnComponent implements OnInit, OnDestroy {
           this.isLoading.set(false);
         }),
       )
-      .subscribe((notes) => {
-        notes.sort((a, b) => a.due - b.due);
-        // console.log(notes.slice(0, 50));
-        this.ankiCard.set(notes[0] || null);
-        this.cardsNumber.set(notes.length);
+      .subscribe((cards) => {
+        console.log(cards);
+
+        cards.sort(sortCards);
+
+        this.ankiCard.set(cards[0] || null);
+        this.cardsNumber.set(cards.length);
         window.scrollTo(0, 0);
         this.initAudio();
       });
