@@ -83,6 +83,7 @@ export class LearnComponent implements OnInit, OnDestroy {
         switch (key) {
           case HotKeys.ShowExtraInfo:
             this.showBackSide.set(true);
+            this.replayAudio();
             break;
           case HotKeys.LearnAgain:
             this.answerCard(EasyFactorEnum.Again);
