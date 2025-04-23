@@ -33,6 +33,10 @@
 
     .card-type {
       font-size: 14px;
+
+      &.review {
+        color: green;
+      }
     }
 
     .term {
@@ -69,6 +73,11 @@
 
   padding: 4px 8px;
   border: 1px solid gray;
+
+  &.review {
+    border: 1px solid darkred;
+    outline: 1px solid darkred;
+  }
 
   .normal {
     color: green;

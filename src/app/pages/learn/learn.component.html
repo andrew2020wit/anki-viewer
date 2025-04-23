@@ -4,8 +4,15 @@
       <span class="cards-number">
         {{ cardsNumber() }}
       </span>
-      <span class="card-type"> {{ ankiCardTypes[ankiCard()?.type || 0] }} :</span>
+
+      <span class="card-type"
+            [class.review]=" ankiCardTypes[ankiCard()?.type || 9] === 'review'"
+      >
+        {{ ankiCardTypes[ankiCard()?.type || 9] }} :
+      </span>
+
       <span class="term" [innerHTML]="ankiCard()?.fields?.term?.value"> </span>
+
       <span class="pos"> ({{ ankiCard()?.fields?.pos?.value }}) </span>
 
       <span
@@ -56,7 +63,9 @@
         ></div>
       }
 
-      <div class="next-reviews">
+      <div class="next-reviews"
+           [class.review]=" ankiCardTypes[ankiCard()?.type || 9] === 'review'"
+      >
         <span
           [class.was-last]="lastAnswer() === 1"
         >{{ ankiCard()?.nextReviews?.[0] }}

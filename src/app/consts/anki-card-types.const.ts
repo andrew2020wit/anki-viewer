@@ -3,4 +3,5 @@ export const ankiCardTypes: Record<number, string> = {
   1: 'learning',
   2: 'review',
   3: 'relearning',
+  9: 'unknown'
 };
