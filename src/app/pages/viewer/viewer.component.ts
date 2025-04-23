@@ -18,6 +18,7 @@ import { InfoService } from '../../services/info.service';
 import {RouterLink} from '@angular/router';
 import {ankiCardTypes} from '../../consts/anki-card-types.const';
 import {TranscriptionPipe} from '../../pipes/transcription.pipe';
+import {UrlsEnum} from '../../enums/urls.enum';
 
 @Component({
   selector: 'app-viewer',
@@ -47,6 +48,7 @@ export class ViewerComponent implements OnInit {
 
   protected selectedCardNumber = signal(0);
 
+  protected readonly UrlsEnum = UrlsEnum;
   protected readonly ankiCardTypes = ankiCardTypes;
 
   constructor(

@@ -1,3 +1,11 @@
+@if (!ankiCard()) {
+  <div class="empty-block">
+    <a [routerLink]=" '/' + UrlsEnum.Viewer"> Viewer </a>
+    <br/>
+    <br/>
+  </div>
+}
+
 @if (ankiCard()) {
   <div class="card">
     <div class="term-block">

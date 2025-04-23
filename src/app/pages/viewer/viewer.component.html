@@ -3,6 +3,10 @@
     Home
   </a>
 
+  <a  [routerLink]="'/' + UrlsEnum.Learn">
+    Learn
+  </a>
+
   <div class="anki-result-sum">
     ResultNumber: {{ cardsNumber() }}, max:
     {{ MAX_ANKI_RESULT_NUMBER }}

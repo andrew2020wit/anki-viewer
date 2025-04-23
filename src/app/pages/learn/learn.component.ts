@@ -4,12 +4,12 @@ import {ICardInfo} from '../../interfaces/anki-connect.interface';
 import {AnkiConnectService} from '../../services/anki-connect.service';
 import {InfoService} from '../../services/info.service';
 import {RouterLink} from '@angular/router';
-import {MAX_ANKI_RESULT_NUMBER} from '../../consts/anki.const';
 import {ankiCardTypes} from '../../consts/anki-card-types.const';
 import {TranscriptionPipe} from '../../pipes/transcription.pipe';
 import {HotKeysService} from '../../services/hot-keys.service';
 import {HotKeys} from '../../enums/hot-keys.enum';
 import {EasyFactorEnum} from '../../easy-factor.enum';
+import {UrlsEnum} from '../../enums/urls.enum';
 
 @Component({
   selector: 'app-learn',
@@ -23,6 +23,8 @@ export class LearnComponent implements OnInit, OnDestroy {
   protected cardsNumber = signal(0);
   protected showBackSide = signal(true);
   protected lastAnswer = signal(0);
+
+  protected readonly UrlsEnum = UrlsEnum;
 
   protected readonly ankiCardTypes = ankiCardTypes;
 
