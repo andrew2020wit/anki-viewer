@@ -6,7 +6,6 @@ import { RouterLink } from '@angular/router';
 import { ankiCardTypes } from '../../consts/anki-card-types.const';
 import { TranscriptionPipe } from '../../pipes/transcription.pipe';
 import { HotKeysService } from '../../services/hot-keys.service';
-import { HotKeys } from '../../enums/hot-keys.enum';
 import { EasyFactorEnum } from '../../easy-factor.enum';
 import { UrlsEnum } from '../../enums/urls.enum';
 import {
@@ -14,6 +13,7 @@ import {
   httpFileServerSettingItem,
 } from '../settings/settings.component';
 import { sortCards } from '../../utils/sort-cards';
+import { chekcHotKey, HotKeysExtionsEnum } from '../../utils/hot-keys';
 
 @Component({
   selector: 'app-learn',
@@ -86,24 +86,24 @@ export class LearnComponent implements OnInit, OnDestroy {
   private takeHotKey(): void {
     this.hotKeysServiceSubscription = this.hotKeysService.hotKeyEvent.subscribe(
       (key) => {
-        switch (key) {
-          case HotKeys.ShowExtraInfo:
+        switch (true) {
+          case chekcHotKey(HotKeysExtionsEnum.ShowExtraInfo, key):
             this.showBackSide.set(true);
             this.replayAudio();
             break;
-          case HotKeys.LearnAgain:
+          case chekcHotKey(HotKeysExtionsEnum.LearnAgain, key):
             this.answerCard(EasyFactorEnum.Again);
             break;
-          case HotKeys.SetHard:
+          case chekcHotKey(HotKeysExtionsEnum.SetHard, key):
             this.answerCard(EasyFactorEnum.Hard);
             break;
-          case HotKeys.SetNormal:
+          case chekcHotKey(HotKeysExtionsEnum.SetNormal, key):
             this.answerCard(EasyFactorEnum.Normal);
             break;
-          case HotKeys.SetEasy:
+          case chekcHotKey(HotKeysExtionsEnum.SetEasy, key):
             this.answerCard(EasyFactorEnum.Easy);
             break;
-          case HotKeys.ReplayAudio:
+          case chekcHotKey(HotKeysExtionsEnum.ReplayAudio, key):
             this.replayAudio();
             break;
         }
