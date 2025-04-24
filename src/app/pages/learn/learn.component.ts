@@ -77,6 +77,7 @@ export class LearnComponent implements OnInit, OnDestroy {
       )
       .subscribe((cards) => {
         console.log(cards.slice(0, 50));
+        this.stopAudio();
 
         cards.sort(sortCards);
 
@@ -180,6 +181,10 @@ export class LearnComponent implements OnInit, OnDestroy {
 
   protected replayAudio(): void {
     this.htmLAudioElement?.play();
+  }
+
+  private stopAudio(): void {
+    this.htmLAudioElement?.pause();
   }
 
   private switchTimer(value: boolean): void {
