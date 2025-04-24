@@ -212,6 +212,10 @@ export class LearnComponent implements OnInit, OnDestroy {
   }
 
   protected replayAudio(): void {
+    if (this.htmLAudioElement) {
+      this.htmLAudioElement.currentTime = 0;
+    }
+
     this.htmLAudioElement?.play();
   }
 
