@@ -14,10 +14,11 @@ import {
 } from '../settings/settings.component';
 import { sortCards } from '../../utils/sort-cards';
 import { chekcHotKey, HotKeysExtionsEnum } from '../../utils/hot-keys';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-learn',
-  imports: [RouterLink, TranscriptionPipe],
+  imports: [RouterLink, TranscriptionPipe, DatePipe],
   templateUrl: './learn.component.html',
   styleUrl: './learn.component.scss',
 })
@@ -30,6 +31,11 @@ export class LearnComponent implements OnInit, OnDestroy {
 
   protected showBackSide = signal(true);
   protected lastAnswer = signal(0);
+
+  protected timerIsOn = signal(false);
+  protected timerCounter = signal(0);
+  protected timerTimeMin = signal(0);
+  private timerBaseTimeMs = 0;
 
   protected readonly UrlsEnum = UrlsEnum;
 
@@ -45,6 +51,7 @@ export class LearnComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     this.getCard();
     this.takeHotKey();
+    this.switchTimer(true);
   }
 
   public ngOnDestroy() {
@@ -106,12 +113,23 @@ export class LearnComponent implements OnInit, OnDestroy {
           case chekcHotKey(HotKeysExtionsEnum.ReplayAudio, key):
             this.replayAudio();
             break;
+
+          case chekcHotKey(HotKeysExtionsEnum.StartTimer, key):
+            this.switchTimer(true);
+            break;
+          case chekcHotKey(HotKeysExtionsEnum.StopTimer, key):
+            this.switchTimer(false);
+            break;
         }
       },
     );
   }
 
   private answerCard(easyFactor: EasyFactorEnum): void {
+    if (!this.showBackSide()) {
+      return;
+    }
+
     this.isLoading.set(true);
 
     const cardId = this.ankiCard()?.cardId;
@@ -129,6 +147,7 @@ export class LearnComponent implements OnInit, OnDestroy {
         }),
       )
       .subscribe(() => {
+        this.increaseTimer();
         this.lastAnswer.set(easyFactor);
         this.getCard();
       });
@@ -161,5 +180,32 @@ export class LearnComponent implements OnInit, OnDestroy {
 
   protected replayAudio(): void {
     this.htmLAudioElement?.play();
+  }
+
+  private switchTimer(value: boolean): void {
+    this.timerIsOn.set(value);
+
+    this.timerCounter.set(0);
+    this.timerTimeMin.set(0);
+
+    if (value) {
+      this.timerBaseTimeMs = Date.now();
+    } else {
+      this.timerBaseTimeMs = 0;
+    }
+  }
+
+  private increaseTimer(): void {
+    if (!this.timerIsOn()) {
+      return;
+    }
+
+    this.timerCounter.update((value) => value + 1);
+
+    const difference = Math.round((Date.now() - this.timerBaseTimeMs)/1000);
+
+    const minutes = Math.floor(difference / 60);
+
+    this.timerTimeMin.set(minutes);
   }
 }

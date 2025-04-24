@@ -9,12 +9,18 @@
   box-sizing: border-box;
 }
 
-.settings {
+.bottom {
   align-items: center;
   display: flex;
+  flex-direction: column;
   gap: 8px;
-  justify-content: start;
+
   margin-bottom: 24px;
+
+  .bottom-line {
+    display: flex;
+    gap: 8px;
+  }
 }
 
 .card {
@@ -96,6 +102,12 @@
   color: darkred;
 }
 
-.cards-number {
+.cards-number, .timer-counter {
   color: darkmagenta;
+}
+
+.timer-block {
+  .timer-value {
+    color: green;
+  }
 }

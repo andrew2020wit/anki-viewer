@@ -5,6 +5,8 @@ export enum HotKeysExtionsEnum {
   SetNormal = 'SetNormal',
   SetEasy = 'SetEasy',
   ReplayAudio = 'ReplayAudio',
+  StartTimer = 'StartTimer',
+  StopTimer = 'StopTimer',
 }
 
 export const hotKeys: Record<HotKeysExtionsEnum, string[]> = {
@@ -13,6 +15,8 @@ export const hotKeys: Record<HotKeysExtionsEnum, string[]> = {
   [HotKeysExtionsEnum.SetHard]: ['2'],
   [HotKeysExtionsEnum.SetNormal]: ['3', 'enter'],
   [HotKeysExtionsEnum.SetEasy]: ['4'],
+  [HotKeysExtionsEnum.StartTimer]: ['8'],
+  [HotKeysExtionsEnum.StopTimer]: ['9'],
   [HotKeysExtionsEnum.ReplayAudio]: ['r', 'к'], // Cyrillic: к
 };
 

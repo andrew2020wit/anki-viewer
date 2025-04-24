@@ -9,6 +9,13 @@
 @if (ankiCard()) {
   <div class="card">
     <div class="term-block">
+      @if (timerIsOn()) {
+        <span class="timer-block">
+          <span class="timer-counter"> {{ timerCounter() }} </span>
+          <span class="timer-value"> {{ timerTimeMin() }} </span>
+        </span>
+      }
+
       <span class="cards-number">
         {{ learningCardsNumber() }} :
         {{ cardsNumber() }}
@@ -81,27 +88,29 @@
           [innerHTML]="ankiCard()?.fields?.translation?.value"
         ></div>
       }
-    }
 
-    <div
-      class="next-reviews"
-      [class.review]="ankiCardTypes[ankiCard()?.type || 9] === 'review'"
-    >
+      <div
+        class="next-reviews"
+        [class.review]="ankiCardTypes[ankiCard()?.type || 9] === 'review'"
+      >
       <span [class.was-last]="lastAnswer() === 1"
-        >{{ ankiCard()?.nextReviews?.[0] }}
+      >{{ ankiCard()?.nextReviews?.[0] }}
       </span>
 
-      <span [class.was-last]="lastAnswer() === 2"
+        <span [class.was-last]="lastAnswer() === 2"
         >{{ ankiCard()?.nextReviews?.[1] }}
       </span>
 
-      <span [class.was-last]="lastAnswer() === 3" class="normal"
+        <span [class.was-last]="lastAnswer() === 3" class="normal"
         >{{ ankiCard()?.nextReviews?.[2] }}
       </span>
-      <span [class.was-last]="lastAnswer() === 4"
+        <span [class.was-last]="lastAnswer() === 4"
         >{{ ankiCard()?.nextReviews?.[3] }}
       </span>
-    </div>
+      </div>
+    }
+
+
   </div>
 }
 
@@ -109,13 +118,17 @@
 <!--  <div class="loader"></div>-->
 <!--}-->
 
-<div class="settings">
-  <a routerLink="/"> Home </a>
+<div class="bottom">
+  <div class="bottom-line">
+    <a routerLink="/"> Home </a>
 
-  <span> Deck: {{ ankiCard()?.deckName }} </span>
+    <span> Deck: {{ ankiCard()?.deckName }} </span>
 
-  <span class="hints">
+    <span class="hints">
     | Space - show extra, 1-again, 2-hard, 3 (or enter) -normal, 4-ease. R -
     replay sound.
   </span>
+  </div>
+
+
 </div>
