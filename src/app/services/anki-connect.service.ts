@@ -19,6 +19,25 @@ export class AnkiConnectService {
     private info: InfoService,
   ) {}
 
+  public getCardById(id: number): Observable<ICardInfo> {
+    return this.http
+      .post<ICardInfoResponse>(DEFAULT_ANKI_HOST, {
+        action: 'cardsInfo',
+        version: 6,
+        params: {
+          cards: [id],
+        },
+      })
+      .pipe(
+        tap((x) => {
+          if (x?.error) {
+            this.info.error('Anki findCards error');
+          }
+        }),
+        map((x) => x.result?.[0]),
+      );
+  }
+
   public findCards(request: string): Observable<ICardInfo[]> {
     return this.http
       .post<IFindItemsResponse>(DEFAULT_ANKI_HOST, {

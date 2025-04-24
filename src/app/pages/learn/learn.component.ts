@@ -45,6 +45,8 @@ export class LearnComponent implements OnInit, OnDestroy {
 
   private htmLAudioElement: HTMLAudioElement | null = null;
 
+  private lastCardId = 0;
+
   constructor(private ankiConnectService: AnkiConnectService) {}
 
   public ngOnInit() {
@@ -90,6 +92,32 @@ export class LearnComponent implements OnInit, OnDestroy {
       });
   }
 
+  private getCardById(id: number): void {
+    if (!id) {
+      return;
+    }
+
+    this.isLoading.set(true);
+    this.showBackSide.set(false);
+
+    this.ankiConnectService
+      .getCardById(id)
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.isLoading.set(false);
+        }),
+      )
+      .subscribe((card) => {
+        this.stopAudio();
+        this.ankiCard.set(card || null);
+        this.cardsNumber.set(0);
+        this.learningCardsNumber.set(0);
+        window.scrollTo(0, 0);
+        this.initAudio();
+      });
+  }
+
   private takeHotKey(): void {
     this.hotKeysServiceSubscription = this.hotKeysService.hotKeyEvent.subscribe(
       (key) => {
@@ -120,6 +148,10 @@ export class LearnComponent implements OnInit, OnDestroy {
           case chekcHotKey(HotKeysExtionsEnum.StopTimer, key):
             this.switchTimer(false);
             break;
+
+          case chekcHotKey(HotKeysExtionsEnum.RestoreLastCard, key):
+            this.restoreLastCard();
+            break;
         }
       },
     );
@@ -147,6 +179,7 @@ export class LearnComponent implements OnInit, OnDestroy {
         }),
       )
       .subscribe(() => {
+        this.lastCardId = cardId;
         this.increaseTimer();
         this.lastAnswer.set(easyFactor);
         this.getCard();
@@ -211,5 +244,23 @@ export class LearnComponent implements OnInit, OnDestroy {
     const minutes = Math.floor(difference / 60);
 
     this.timerTimeMin.set(minutes);
+  }
+
+  private restoreLastCard(): void {
+    if (!this.lastCardId) {
+      return;
+    }
+
+    this.ankiConnectService
+      .answerCardsByIds([this.lastCardId], EasyFactorEnum.Again)
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.isLoading.set(false);
+        }),
+      )
+      .subscribe(() => {
+        this.getCardById(this.lastCardId);
+      });
   }
 }

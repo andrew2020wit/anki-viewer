@@ -7,6 +7,7 @@ export enum HotKeysExtionsEnum {
   ReplayAudio = 'ReplayAudio',
   StartTimer = 'StartTimer',
   StopTimer = 'StopTimer',
+  RestoreLastCard = 'RestoreLastCard',
 }
 
 export const hotKeys: Record<HotKeysExtionsEnum, string[]> = {
@@ -18,6 +19,7 @@ export const hotKeys: Record<HotKeysExtionsEnum, string[]> = {
   [HotKeysExtionsEnum.StartTimer]: ['8'],
   [HotKeysExtionsEnum.StopTimer]: ['9'],
   [HotKeysExtionsEnum.ReplayAudio]: ['r', 'к'], // Cyrillic: к
+  [HotKeysExtionsEnum.RestoreLastCard]: ['z', 'я']
 };
 
 export function chekcHotKey(
