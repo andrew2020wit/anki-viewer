@@ -31,10 +31,9 @@ export class LearnComponent implements OnInit, OnDestroy {
   protected showBackSide = signal(true);
   protected lastAnswer = signal(0);
 
-  protected timerIsOn = signal(false);
   protected timerCounter = signal(0);
   protected timerTimeMin = signal(0);
-  private timerBaseTimeMs = 0;
+  private readonly timerBaseTimeMs = Date.now();
 
   protected readonly UrlsEnum = UrlsEnum;
 
@@ -52,7 +51,6 @@ export class LearnComponent implements OnInit, OnDestroy {
   public ngOnInit() {
     this.getCard();
     this.takeHotKey();
-    this.switchTimer(true);
   }
 
   public ngOnDestroy() {
@@ -142,13 +140,6 @@ export class LearnComponent implements OnInit, OnDestroy {
             this.replayAudio();
             break;
 
-          case chekcHotKey(HotKeysExtionsEnum.StartTimer, key):
-            this.switchTimer(true);
-            break;
-          case chekcHotKey(HotKeysExtionsEnum.StopTimer, key):
-            this.switchTimer(false);
-            break;
-
           case chekcHotKey(HotKeysExtionsEnum.RestoreLastCard, key):
             this.restoreLastCard();
             break;
@@ -223,24 +214,7 @@ export class LearnComponent implements OnInit, OnDestroy {
     this.htmLAudioElement?.pause();
   }
 
-  private switchTimer(value: boolean): void {
-    this.timerIsOn.set(value);
-
-    this.timerCounter.set(0);
-    this.timerTimeMin.set(0);
-
-    if (value) {
-      this.timerBaseTimeMs = Date.now();
-    } else {
-      this.timerBaseTimeMs = 0;
-    }
-  }
-
   private increaseTimer(): void {
-    if (!this.timerIsOn()) {
-      return;
-    }
-
     this.timerCounter.update((value) => value + 1);
 
     const difference = Math.round((Date.now() - this.timerBaseTimeMs) / 1000);
