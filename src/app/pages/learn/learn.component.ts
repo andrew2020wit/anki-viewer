@@ -14,11 +14,10 @@ import {
 } from '../settings/settings.component';
 import { sortCards } from '../../utils/sort-cards';
 import { chekcHotKey, HotKeysExtionsEnum } from '../../utils/hot-keys';
-import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-learn',
-  imports: [RouterLink, TranscriptionPipe, DatePipe],
+  imports: [RouterLink, TranscriptionPipe],
   templateUrl: './learn.component.html',
   styleUrl: './learn.component.scss',
 })
@@ -207,7 +206,7 @@ export class LearnComponent implements OnInit, OnDestroy {
 
     this.timerCounter.update((value) => value + 1);
 
-    const difference = Math.round((Date.now() - this.timerBaseTimeMs)/1000);
+    const difference = Math.round((Date.now() - this.timerBaseTimeMs) / 1000);
 
     const minutes = Math.floor(difference / 60);
 
