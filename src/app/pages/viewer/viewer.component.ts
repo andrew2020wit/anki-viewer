@@ -57,6 +57,9 @@ export class ViewerComponent implements OnInit {
 
   protected profiles = signal<ViewProfile[]>([]);
 
+  protected timerTimeMin = signal(0);
+  private readonly timerBaseTimeMs = Date.now();
+
   constructor(
     private ankiConnectService: AnkiConnectService,
     private info: InfoService,
@@ -176,6 +179,7 @@ export class ViewerComponent implements OnInit {
       .subscribe((notes) => {
         const notesToDisplay = notes.slice(0, MAX_ANKI_RESULT_NUMBER);
         console.log(notesToDisplay);
+        this.increaseTimer();
         this.ankiCards.set(notesToDisplay);
         this.cardsNumber.set(notes.length);
         window.scrollTo(0, 0);
@@ -205,5 +209,13 @@ export class ViewerComponent implements OnInit {
     });
 
     this.profileIndex.set(currentIndex);
+  }
+
+  private increaseTimer(): void {
+    const difference = Math.round((Date.now() - this.timerBaseTimeMs) / 1000);
+
+    const minutes = Math.floor(difference / 60);
+
+    this.timerTimeMin.set(minutes);
   }
 }
