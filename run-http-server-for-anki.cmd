@@ -1,0 +1,1 @@
+http-server C:\temp-progs\anki-files-for-http\ -p 8085 --cors

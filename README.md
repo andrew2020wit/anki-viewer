@@ -1,5 +1,7 @@
 # AnkiViewer
 
+Simple front-end for Anki via [Anki-Connect](https://git.sr.ht/~foosoft/anki-connect/)
+
 [https://andrew2020wit.github.io/anki-viewer/](https://andrew2020wit.github.io/anki-viewer/)
 
 ## Viewer
@@ -31,6 +33,11 @@ You can use: [http-server](https://github.com/http-party/http-server/tree/master
 Set url in settings like: http://127.0.0.1:8085/
 
 ("/" - in the end!)
+
+1. install Node.js
+2. install [http-server](https://github.com/http-party/http-server/tree/master)
+3. optional: create folder `anki-files-for-http`, copy anki audio files
+4. run `http-server C:\temp-progs\anki-files-for-http\ -p 8085 --cors`
 
 ### Hot keys
 
