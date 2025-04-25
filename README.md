@@ -21,8 +21,10 @@ The correct card structure:
 
 It's similar to the normal anki learning, but uses a custom interface.
 
-By default, your deck name must be "cald" (todo - use url query for deck name), and cards must be the same structure.
-You can change it in settings.
+Deck name is taken from:
+1. Url (/learn?deck=cald)
+2. Settings
+3. "cald"
 
 ### Sound
 

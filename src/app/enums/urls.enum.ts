@@ -1,5 +1,9 @@
 export enum UrlsEnum {
   Viewer = 'viewer',
   Learn = 'learn',
-  Settings = 'settings'
+  Settings = 'settings',
+}
+
+export enum UrlQueriesEnum {
+  Deck = 'deck',
 }
