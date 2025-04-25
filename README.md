@@ -1,6 +1,6 @@
 # AnkiViewer
 
-Simple front-end for Anki via [Anki-Connect](https://git.sr.ht/~foosoft/anki-connect/)
+This is a simple front-end for Anki via [Anki-Connect](https://git.sr.ht/~foosoft/anki-connect/)
 
 [https://andrew2020wit.github.io/anki-viewer/](https://andrew2020wit.github.io/anki-viewer/)
 
