@@ -1,13 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, map, Observable, of, switchMap, take, tap } from 'rxjs';
+import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
 import { DEFAULT_ANKI_HOST } from '../consts/anki.const';
 import { InfoService } from './info.service';
-import {
-  ICardInfo,
-  ICardInfoResponse,
-  IFindItemsResponse,
-} from '../interfaces/anki-connect.interface';
+import { ICardInfo, ICardInfoResponse, IFindItemsResponse } from '../interfaces/anki-connect.interface';
 import { EasyFactorEnum } from '../easy-factor.enum';
 
 @Injectable({
@@ -78,10 +74,7 @@ export class AnkiConnectService {
       );
   }
 
-  public answerCardsByIds(
-    cardIds: number[],
-    ease: EasyFactorEnum,
-  ): Observable<boolean> {
+  public answerCardsByIds(cardIds: number[], ease: EasyFactorEnum): Observable<boolean> {
     if (!cardIds.length) {
       return of(false);
     }

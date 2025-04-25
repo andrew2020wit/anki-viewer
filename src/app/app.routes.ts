@@ -6,28 +6,22 @@ export const routes: Routes = [
   {
     path: UrlsEnum.Viewer,
     title: getTitleWithVersion('Anki Viewer'),
-    loadComponent: () =>
-      import('./pages/viewer/viewer.component').then((m) => m.ViewerComponent),
+    loadComponent: () => import('./pages/viewer/viewer.component').then((m) => m.ViewerComponent),
   },
   {
     path: UrlsEnum.Learn,
     title: getTitleWithVersion('Anki Learn'),
-    loadComponent: () =>
-      import('./pages/learn/learn.component').then((m) => m.LearnComponent),
+    loadComponent: () => import('./pages/learn/learn.component').then((m) => m.LearnComponent),
   },
   {
     path: UrlsEnum.Settings,
     title: getTitleWithVersion('Settings'),
-    loadComponent: () =>
-      import('./pages/settings/settings.component').then(
-        (m) => m.SettingsComponent,
-      ),
+    loadComponent: () => import('./pages/settings/settings.component').then((m) => m.SettingsComponent),
   },
   {
     path: '',
     pathMatch: 'full',
     title: getTitleWithVersion('Anki Viewer'),
-    loadComponent: () =>
-      import('./pages/home/home.component').then((m) => m.HomeComponent),
+    loadComponent: () => import('./pages/home/home.component').then((m) => m.HomeComponent),
   },
 ];

@@ -22,6 +22,7 @@ The correct card structure:
 It's similar to the normal anki learning, but uses a custom interface.
 
 Deck name is taken from:
+
 1. Url (/learn?deck=cald)
 2. Settings
 3. "cald"

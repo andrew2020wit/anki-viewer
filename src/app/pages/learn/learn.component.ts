@@ -10,7 +10,7 @@ import { EasyFactorEnum } from '../../easy-factor.enum';
 import { UrlQueriesEnum, UrlsEnum } from '../../enums/urls.enum';
 import { defaultLearningDeckSettingItem, httpFileServerSettingItem } from '../settings/settings.component';
 import { sortCards } from '../../utils/sort-cards';
-import { chekcHotKey, HotKeysExtionsEnum } from '../../utils/hot-keys';
+import { checkHotKey, HotKeysExtionsEnum } from '../../utils/hot-keys';
 import { defaultDeckNameConst } from '../../consts/default-deck-name.const';
 
 @Component({
@@ -22,26 +22,19 @@ import { defaultDeckNameConst } from '../../consts/default-deck-name.const';
 export class LearnComponent implements OnInit, OnDestroy {
   protected isLoading = signal(false);
   protected ankiCard = signal<ICardInfo | null>(null);
-
   protected cardsNumber = signal(0);
   protected learningCardsNumber = signal(0);
-
   protected showBackSide = signal(true);
   protected lastAnswer = signal(0);
-
   protected timerCounter = signal(0);
   protected timerTimeMin = signal(0);
-  private readonly timerBaseTimeMs = Date.now();
-
   protected readonly UrlsEnum = UrlsEnum;
-
   protected readonly ankiCardTypes = ankiCardTypes;
 
+  private readonly timerBaseTimeMs = Date.now();
   private readonly hotKeysService = inject(HotKeysService);
   private hotKeysServiceSubscription: Subscription | undefined;
-
   private htmLAudioElement: HTMLAudioElement | null = null;
-
   private lastCardId = 0;
   private deckName = defaultDeckNameConst;
 
@@ -61,6 +54,14 @@ export class LearnComponent implements OnInit, OnDestroy {
     this.hotKeysServiceSubscription?.unsubscribe();
   }
 
+  protected replayAudio(): void {
+    if (this.htmLAudioElement) {
+      this.htmLAudioElement.currentTime = 0;
+    }
+
+    this.htmLAudioElement?.play();
+  }
+
   private getCard(): void {
     const ankiRequestText = `deck:${this.deckName} is:due`;
 
@@ -76,7 +77,7 @@ export class LearnComponent implements OnInit, OnDestroy {
         }),
       )
       .subscribe((cards) => {
-        console.log(cards.slice(0, 50));
+        // console.log(cards.slice(0, 50));
         this.stopAudio();
 
         cards.sort(sortCards);
@@ -118,27 +119,27 @@ export class LearnComponent implements OnInit, OnDestroy {
   private takeHotKey(): void {
     this.hotKeysServiceSubscription = this.hotKeysService.hotKeyEvent.subscribe((key) => {
       switch (true) {
-        case chekcHotKey(HotKeysExtionsEnum.ShowExtraInfo, key):
+        case checkHotKey(HotKeysExtionsEnum.ShowExtraInfo, key):
           this.showBackSide.set(true);
           this.replayAudio();
           break;
-        case chekcHotKey(HotKeysExtionsEnum.LearnAgain, key):
+        case checkHotKey(HotKeysExtionsEnum.LearnAgain, key):
           this.answerCard(EasyFactorEnum.Again);
           break;
-        case chekcHotKey(HotKeysExtionsEnum.SetHard, key):
+        case checkHotKey(HotKeysExtionsEnum.SetHard, key):
           this.answerCard(EasyFactorEnum.Hard);
           break;
-        case chekcHotKey(HotKeysExtionsEnum.SetNormal, key):
+        case checkHotKey(HotKeysExtionsEnum.SetNormal, key):
           this.answerCard(EasyFactorEnum.Normal);
           break;
-        case chekcHotKey(HotKeysExtionsEnum.SetEasy, key):
+        case checkHotKey(HotKeysExtionsEnum.SetEasy, key):
           this.answerCard(EasyFactorEnum.Easy);
           break;
-        case chekcHotKey(HotKeysExtionsEnum.ReplayAudio, key):
+        case checkHotKey(HotKeysExtionsEnum.ReplayAudio, key):
           this.replayAudio();
           break;
 
-        case chekcHotKey(HotKeysExtionsEnum.RestoreLastCard, key):
+        case checkHotKey(HotKeysExtionsEnum.RestoreLastCard, key):
           this.restoreLastCard();
           break;
       }
@@ -194,14 +195,6 @@ export class LearnComponent implements OnInit, OnDestroy {
     this.htmLAudioElement = new Audio(baseUrl + soundUrl);
 
     this.htmLAudioElement.play();
-  }
-
-  protected replayAudio(): void {
-    if (this.htmLAudioElement) {
-      this.htmLAudioElement.currentTime = 0;
-    }
-
-    this.htmLAudioElement?.play();
   }
 
   private stopAudio(): void {

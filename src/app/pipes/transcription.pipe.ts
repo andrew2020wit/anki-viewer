@@ -1,10 +1,9 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'transcription'
+  name: 'transcription',
 })
 export class TranscriptionPipe implements PipeTransform {
-
   transform(value: string | undefined): string {
     if (!value) return '';
 
@@ -23,5 +22,4 @@ export class TranscriptionPipe implements PipeTransform {
       return value;
     }
   }
-
 }

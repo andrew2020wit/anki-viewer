@@ -7,14 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-settings-item',
-  imports: [
-    MatButton,
-    MatFormFieldModule,
-    MatInput,
-    MatLabel,
-    ReactiveFormsModule,
-    FormsModule,
-  ],
+  imports: [MatButton, MatFormFieldModule, MatInput, MatLabel, ReactiveFormsModule, FormsModule],
   templateUrl: './settings-item.component.html',
   styleUrl: './settings-item.component.scss',
 })

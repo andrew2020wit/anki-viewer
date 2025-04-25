@@ -10,48 +10,31 @@
 
   @if (profiles().length) {
     <mat-button-toggle-group [(ngModel)]="profileIndex">
-      <mat-button-toggle [value]="0" (click)="setProfile(null)">
-        Custom
-      </mat-button-toggle>
+      <mat-button-toggle [value]="0" (click)="setProfile(null)"> Custom</mat-button-toggle>
 
       @for (profile of profiles(); track profile.index) {
-        <mat-button-toggle
-          [value]="profile.index"
-          (click)="setProfile(profile)"
-        >
+        <mat-button-toggle [value]="profile.index" (click)="setProfile(profile)">
           {{ profile.label }}
         </mat-button-toggle>
       }
     </mat-button-toggle-group>
   }
 
-  <mat-checkbox [(ngModel)]="compactMode"> Compact </mat-checkbox>
+  <mat-checkbox [(ngModel)]="compactMode"> Compact</mat-checkbox>
 
   <span class="timer-block">
-        <span class="timer-value"> {{ timerTimeMin() }} </span>
-      </span>
+    <span class="timer-value"> {{ timerTimeMin() }} </span>
+  </span>
 </div>
 
 @if (!profileIndex()) {
   <div class="anki-request">
     <mat-form-field class="request-mat-form-field" appearance="outline">
       <mat-label>Anki request text</mat-label>
-      <input
-        matInput
-        class="flag-input"
-        (keydown.enter)="getAnkiCards()"
-        [(ngModel)]="ankiRequestText"
-      />
+      <input matInput class="flag-input" (keydown.enter)="getAnkiCards()" [(ngModel)]="ankiRequestText"/>
     </mat-form-field>
 
-    <button
-      mat-button
-      color="primary"
-      [disabled]="!ankiRequestText()"
-      (click)="getAnkiCards()"
-    >
-      Go!
-    </button>
+    <button mat-button color="primary" [disabled]="!ankiRequestText()" (click)="getAnkiCards()">Go!</button>
   </div>
 } @else {
   <div class="request-readonly">
@@ -70,32 +53,22 @@
 
 <div class="result-items">
   @for (ankiItem of ankiCards(); let index = $index; track ankiItem) {
-    @if (
-      !index ||
-      (ankiItem.fields.term?.value &&
-        (ankiItem.fields.term?.value !==
-          ankiCards()[index - 1].fields.term?.value ||
-          ankiItem.fields.def?.value !==
-            ankiCards()[index - 1].fields.def?.value))
-    ) {
+    @if (!index ||
+    (ankiItem.fields.term?.value &&
+      (ankiItem.fields.term?.value !== ankiCards()[index - 1].fields.term?.value ||
+        ankiItem.fields.def?.value !== ankiCards()[index - 1].fields.def?.value))) {
       <div class="term-header" [innerHTML]="ankiItem.fields.term?.value"></div>
     }
     <div
       class="result-item"
       [class.selected]="ankiItem.selected"
-      (click)="
-        ankiItem.selected = !ankiItem.selected; computeSelectedCardNumber()
-      "
+      (click)="ankiItem.selected = !ankiItem.selected; computeSelectedCardNumber()"
     >
       <div class="top">
         <span class="index"> {{ index + 1 }}. </span>
         <span class="term" [innerHTML]="ankiItem.fields.term?.value"> </span>
 
-        <span
-          class="transcription"
-          [innerHTML]="ankiItem.fields.transcription?.value | transcription"
-        >
-        </span>
+        <span class="transcription" [innerHTML]="ankiItem.fields.transcription?.value | transcription"> </span>
         ({{ ankiItem.fields.pos?.value }})
 
         <span class="card-type"> [{{ ankiCardTypes[ankiItem.type] }}] </span>
@@ -106,11 +79,7 @@
 
         {{ ankiItem.fields.freq?.value }} {{ ankiItem.fields.freq2?.value }}
 
-        <span
-          class="register-lab"
-          [innerHTML]="ankiItem.fields.registerlab?.value"
-        >
-        </span>
+        <span class="register-lab" [innerHTML]="ankiItem.fields.registerlab?.value"> </span>
 
         @if (!compactMode()) {
           [ {{ ankiItem.deckName }} {{ ankiItem.fields.sensenum?.value }}
@@ -123,29 +92,19 @@
               <span class="ph-verb"> {{ ankiItem.fields.phVerb?.value }} </span>
             }
             @if (ankiItem.fields.lexunit?.value) {
-              <span
-                class="lex-unit"
-                [innerHTML]="ankiItem.fields.lexunit?.value"
-              >
-              </span>
+              <span class="lex-unit" [innerHTML]="ankiItem.fields.lexunit?.value"> </span>
             }
           </div>
         }
       </div>
 
-      <div
-        class="example"
-        [innerHTML]="ankiItem.fields.exampleText?.value"
-      ></div>
+      <div class="example" [innerHTML]="ankiItem.fields.exampleText?.value"></div>
 
       @if (!compactMode() || ankiItem.selected) {
         <div class="def" [innerHTML]="ankiItem.fields.def?.value"></div>
 
         @if (ankiItem.fields.translation?.value) {
-          <div
-            class="translation"
-            [innerHTML]="ankiItem.fields.translation?.value"
-          ></div>
+          <div class="translation" [innerHTML]="ankiItem.fields.translation?.value"></div>
         }
       }
     </div>
@@ -161,6 +120,7 @@
     (mixedAnswer)="mixedAnswer()"
   />
 }
+
 @if (isLoading()) {
   <div class="loader"></div>
 }

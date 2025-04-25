@@ -1,12 +1,11 @@
 :host {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
+  height: 100%;
   margin: 0 auto;
   max-width: 1200px;
   padding: 24px;
-
-  height: 100%;
-  box-sizing: border-box;
 }
 
 .bottom {
@@ -24,18 +23,18 @@
 }
 
 .card {
+  align-items: center;
   display: flex;
   flex: 1;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
   gap: 16px;
+  justify-content: flex-start;
 
   .term-block {
+    align-items: baseline;
     display: flex;
     font-size: 24px;
     gap: 16px;
-    align-items: baseline;
 
     .card-type {
       font-size: 14px;
@@ -54,16 +53,19 @@
     }
   }
 
-  .transcription, .freq {
-    font-size: 24px;
+  .transcription,
+  .freq {
     color: blue;
+    font-size: 24px;
   }
 
   .freq {
     color: darkred;
   }
 
-  .example, .definition, .translation {
+  .example,
+  .definition,
+  .translation {
     font-size: 24px;
   }
 
@@ -73,12 +75,12 @@
 }
 
 .next-reviews {
+  border: 1px solid gray;
   display: flex;
-  gap: 16px;
   font-size: 24px;
 
+  gap: 16px;
   padding: 4px 8px;
-  border: 1px solid gray;
 
   &.review {
     border: 1px solid darkred;
@@ -102,7 +104,8 @@
   color: darkred;
 }
 
-.cards-number, .timer-counter {
+.cards-number,
+.timer-counter {
   color: darkmagenta;
 }
 

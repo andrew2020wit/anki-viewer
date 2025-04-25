@@ -1,12 +1,7 @@
-<a routerLink="/">
-  Home
-</a>
+<a routerLink="/"> Home </a>
 
-<br><br>
+<br /><br />
 
 @for (settingItem of settingItems(); track settingItem.key) {
- <app-settings-item
-   [settingItem]="settingItem"
-   (set)="saveSettingItem($event)"
- />
+  <app-settings-item [settingItem]="settingItem" (set)="saveSettingItem($event)" />
 }

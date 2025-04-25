@@ -15,12 +15,9 @@ export const hotKeys: Record<HotKeysExtionsEnum, string[]> = {
   [HotKeysExtionsEnum.SetNormal]: ['3', 'enter'],
   [HotKeysExtionsEnum.SetEasy]: ['4'],
   [HotKeysExtionsEnum.ReplayAudio]: ['r', 'к'], // Cyrillic: к
-  [HotKeysExtionsEnum.RestoreLastCard]: ['z', 'я']
+  [HotKeysExtionsEnum.RestoreLastCard]: ['z', 'я'],
 };
 
-export function chekcHotKey(
-  action: HotKeysExtionsEnum,
-  keyChar: string,
-): boolean {
+export function checkHotKey(action: HotKeysExtionsEnum, keyChar: string): boolean {
   return hotKeys[action].includes(keyChar);
 }

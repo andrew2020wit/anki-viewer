@@ -23,20 +23,11 @@ export const defaultLearningDeckSettingItem: StringSettingItem = {
   value: '',
 };
 
-export const extraSettings: StringSettingItem[] = [
-  httpFileServerSettingItem,
-  defaultLearningDeckSettingItem,
-];
+export const extraSettings: StringSettingItem[] = [httpFileServerSettingItem, defaultLearningDeckSettingItem];
 
 @Component({
   selector: 'app-settings',
-  imports: [
-    MatFormFieldModule,
-    MatInputModule,
-    FormsModule,
-    RouterLink,
-    SettingsItemComponent,
-  ],
+  imports: [MatFormFieldModule, MatInputModule, FormsModule, RouterLink, SettingsItemComponent],
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
 })

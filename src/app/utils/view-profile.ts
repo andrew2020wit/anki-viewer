@@ -21,9 +21,9 @@ export function getProfilesSettings(): ViewProfile[] {
     settingItems.push({
       index: i,
       label: localStorage.getItem(computeViewProfileLabelStorageKey(i)) || '',
-      request: localStorage.getItem(computeViewProfileRequestStorageKey(i)) || ''
-    })
+      request: localStorage.getItem(computeViewProfileRequestStorageKey(i)) || '',
+    });
   }
 
-  return settingItems.filter(item => item.request && item.label);
+  return settingItems.filter((item) => item.request && item.label);
 }
