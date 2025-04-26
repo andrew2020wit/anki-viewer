@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1745645491749,
+  "timestamp": 1745646071122,
   "index": "/anki-viewer/index.html",
   "assetGroups": [
     {
@@ -77,7 +77,7 @@
     "/anki-viewer/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
     "/anki-viewer/index.html": "87870f8106920dee79d47f6cc29cc58b5880a011",
     "/anki-viewer/main-B6C6JBOH.js": "9efb22c8bfdec21c0e1646ecbd9bd7c3b771be5a",
-    "/anki-viewer/manifest.webmanifest": "216450bf1410712355d69d2b4342300c00460852",
+    "/anki-viewer/manifest.webmanifest": "e69f8bb5d6f65512157753ce012cacdb061dfca8",
     "/anki-viewer/polyfills-FFHMD2TL.js": "f49b49a155bc7d192db62a4c15d0a612b460a667",
     "/anki-viewer/styles-MO625NUT.css": "0596d31dbdc6485b30fc3815ffb91cd58dd8c7a8"
   },
