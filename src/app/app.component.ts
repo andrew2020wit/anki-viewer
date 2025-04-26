@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HotKeysService } from './services/hot-keys.service';
+import { PwaToolService } from './services/pwa-tool.service';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +11,10 @@ import { HotKeysService } from './services/hot-keys.service';
 })
 export class AppComponent implements OnInit {
   private readonly hotKeysService = inject(HotKeysService);
+  private readonly pwaToolService = inject(PwaToolService);
 
   public ngOnInit() {
+    this.pwaToolService.init();
     this.setHotKeys();
   }
 
