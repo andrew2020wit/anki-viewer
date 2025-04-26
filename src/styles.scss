@@ -1,6 +1,9 @@
 @use '@angular/material' as mat;
 
-html, body { height: 100%; }
+html, body {
+  height: 100%;
+}
+
 body {
   margin: 0;
 
@@ -14,7 +17,7 @@ body {
     --mdc-snackbar-container-color: hsl(148, 77%, 47%);
   }
 
-   [color='warn']  {
+  [color='warn'] {
     @include mat.button-overrides((
       text-label-text-color: darkred,
     ));
@@ -27,7 +30,7 @@ body {
   }
 
   background: antiquewhite;
-  background-image: url(https://andrew2020wit.github.io/foreign-reader/assets/background/retina-wood.png);
+  background-image: url("./assets/retina-wood.png");
 
   .loader {
     background: rgba(0, 0, 0, 0.5);
