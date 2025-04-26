@@ -1,0 +1,103 @@
+{
+  "configVersion": 1,
+  "timestamp": 1745641545182,
+  "index": "/anki-viewer/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/anki-viewer/chunk-3L7U4E3D.js",
+        "/anki-viewer/chunk-5H24RP25.js",
+        "/anki-viewer/chunk-5K5SMW74.js",
+        "/anki-viewer/chunk-6E7H3Z4S.js",
+        "/anki-viewer/chunk-6NUBTLNE.js",
+        "/anki-viewer/chunk-7DFG6TQP.js",
+        "/anki-viewer/chunk-BEG3DCZC.js",
+        "/anki-viewer/chunk-JUJG6HVI.js",
+        "/anki-viewer/chunk-K3GQFY5E.js",
+        "/anki-viewer/chunk-KZRYJMQQ.js",
+        "/anki-viewer/chunk-OFTAFKT7.js",
+        "/anki-viewer/chunk-QNUSU4OJ.js",
+        "/anki-viewer/favicon.ico",
+        "/anki-viewer/index.html",
+        "/anki-viewer/main-63C36357.js",
+        "/anki-viewer/manifest.webmanifest",
+        "/anki-viewer/polyfills-FFHMD2TL.js",
+        "/anki-viewer/styles-MO625NUT.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "/anki-viewer/icons/icon-128x128.png",
+        "/anki-viewer/icons/icon-144x144.png",
+        "/anki-viewer/icons/icon-152x152.png",
+        "/anki-viewer/icons/icon-192x192.png",
+        "/anki-viewer/icons/icon-384x384.png",
+        "/anki-viewer/icons/icon-512x512.png",
+        "/anki-viewer/icons/icon-72x72.png",
+        "/anki-viewer/icons/icon-96x96.png"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "/anki-viewer/chunk-3L7U4E3D.js": "17ae97613034c06358031a57c53c3444783995bc",
+    "/anki-viewer/chunk-5H24RP25.js": "48181f4be1531a97fe3a71465ac0e72cf9ddd91b",
+    "/anki-viewer/chunk-5K5SMW74.js": "cd6e989e7bd8091cf632c94e3d39607b524928f8",
+    "/anki-viewer/chunk-6E7H3Z4S.js": "4fe9697c7094ffcaddb212aa491b5ca90ddadd65",
+    "/anki-viewer/chunk-6NUBTLNE.js": "7843e415acc01ae7e99c1a68033c5a8191d6c8a6",
+    "/anki-viewer/chunk-7DFG6TQP.js": "46bc2edd5da41917de4b33f4b36d6b91a21c289e",
+    "/anki-viewer/chunk-BEG3DCZC.js": "ee3bb97c75a309ea2032379a61ecbab6833d3506",
+    "/anki-viewer/chunk-JUJG6HVI.js": "229402b8291fd2877f9ea4cb27a8e35a1ce6943a",
+    "/anki-viewer/chunk-K3GQFY5E.js": "329fd076a3ac72d02164d8add5b8704808f875f3",
+    "/anki-viewer/chunk-KZRYJMQQ.js": "ef0b04d6feccd244a6fb7180529642b67cecc496",
+    "/anki-viewer/chunk-OFTAFKT7.js": "e47478e39d0aa4a5c6657896973b4c72ad08fc95",
+    "/anki-viewer/chunk-QNUSU4OJ.js": "35dc297b659882de1ef23d274baaf7a594375a4c",
+    "/anki-viewer/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
+    "/anki-viewer/icons/icon-128x128.png": "f912963bdc6d5a38d8f1dd0afbaab2ce8d657acb",
+    "/anki-viewer/icons/icon-144x144.png": "b155fd5f2fd5d2ea7760721063003c4cd95fd783",
+    "/anki-viewer/icons/icon-152x152.png": "eae6e0f0c8afb8aaae339e2a569b43e9238e5e6c",
+    "/anki-viewer/icons/icon-192x192.png": "15c4180454633880d98674aa7394656196c91584",
+    "/anki-viewer/icons/icon-384x384.png": "94a915751ef6c9282df9aea405ad679230631814",
+    "/anki-viewer/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
+    "/anki-viewer/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
+    "/anki-viewer/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
+    "/anki-viewer/index.html": "cd79da7a75165cfa0a61a8c8f5c71af1c32b8cc6",
+    "/anki-viewer/main-63C36357.js": "bddffa40a7898657e9358e2bda4ae08ff96f1b59",
+    "/anki-viewer/manifest.webmanifest": "216450bf1410712355d69d2b4342300c00460852",
+    "/anki-viewer/polyfills-FFHMD2TL.js": "f49b49a155bc7d192db62a4c15d0a612b460a667",
+    "/anki-viewer/styles-MO625NUT.css": "0596d31dbdc6485b30fc3815ffb91cd58dd8c7a8"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
