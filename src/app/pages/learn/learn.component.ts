@@ -142,8 +142,40 @@ export class LearnComponent implements OnInit, OnDestroy {
         case checkHotKey(HotKeysExtionsEnum.RestoreLastCard, key):
           this.restoreLastCard();
           break;
+
+        case checkHotKey(HotKeysExtionsEnum.ForgetCard, key):
+          this.forgetCard();
+          break;
       }
     });
+  }
+
+  private forgetCard(): void {
+    if (!this.showBackSide()) {
+      return;
+    }
+
+    this.isLoading.set(true);
+
+    const cardId = this.ankiCard()?.cardId;
+
+    if (!cardId) {
+      return;
+    }
+
+    this.ankiConnectService
+      .forgetCard(cardId)
+      .pipe(
+        take(1),
+        finalize(() => {
+          this.isLoading.set(false);
+        }),
+      )
+      .subscribe(() => {
+        this.lastAnswer.set(0);
+        this.increaseTimer();
+        this.getCard();
+      });
   }
 
   private answerCard(easyFactor: EasyFactorEnum): void {

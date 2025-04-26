@@ -74,6 +74,27 @@ export class AnkiConnectService {
       );
   }
 
+  public forgetCard(cardId: number): Observable<boolean> {
+    if (!cardId) {
+      return of(false);
+    }
+
+    return this.http
+      .post<boolean>(DEFAULT_ANKI_HOST, {
+        action: 'forgetCards',
+        version: 6,
+        params: {
+          cards: [cardId],
+        },
+      })
+      .pipe(
+        catchError((err) => {
+          this.info.error('There is error with anki-connection');
+          throw err;
+        }),
+      );
+  }
+
   public answerCardsByIds(cardIds: number[], ease: EasyFactorEnum): Observable<boolean> {
     if (!cardIds.length) {
       return of(false);
