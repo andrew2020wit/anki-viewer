@@ -160,7 +160,7 @@ export class ViewerComponent implements OnInit {
       )
       .subscribe((notes) => {
         const notesToDisplay = notes.slice(0, MAX_ANKI_RESULT_NUMBER);
-        console.log(notesToDisplay);
+        // console.log(notesToDisplay);
         this.increaseTimer();
         this.ankiCards.set(notesToDisplay);
         this.cardsNumber.set(notes.length);
