@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1745646071122,
+  "timestamp": 1745647850459,
   "index": "/anki-viewer/index.html",
   "assetGroups": [
     {
@@ -28,7 +28,7 @@
         "/anki-viewer/main-B6C6JBOH.js",
         "/anki-viewer/manifest.webmanifest",
         "/anki-viewer/polyfills-FFHMD2TL.js",
-        "/anki-viewer/styles-MO625NUT.css"
+        "/anki-viewer/styles-YABXZKM4.css"
       ],
       "patterns": []
     },
@@ -40,6 +40,7 @@
         "ignoreVary": true
       },
       "urls": [
+        "/anki-viewer/assets/retina-wood.png",
         "/anki-viewer/icons/icon-128x128.png",
         "/anki-viewer/icons/icon-144x144.png",
         "/anki-viewer/icons/icon-152x152.png",
@@ -47,13 +48,15 @@
         "/anki-viewer/icons/icon-384x384.png",
         "/anki-viewer/icons/icon-512x512.png",
         "/anki-viewer/icons/icon-72x72.png",
-        "/anki-viewer/icons/icon-96x96.png"
+        "/anki-viewer/icons/icon-96x96.png",
+        "/anki-viewer/media/retina-wood-STTVQHPQ.png"
       ],
       "patterns": []
     }
   ],
   "dataGroups": [],
   "hashTable": {
+    "/anki-viewer/assets/retina-wood.png": "52136902e1119e9cdf8ada1af9350b29b0e2e0cf",
     "/anki-viewer/chunk-5H24RP25.js": "48181f4be1531a97fe3a71465ac0e72cf9ddd91b",
     "/anki-viewer/chunk-5K5SMW74.js": "cd6e989e7bd8091cf632c94e3d39607b524928f8",
     "/anki-viewer/chunk-6E7H3Z4S.js": "4fe9697c7094ffcaddb212aa491b5ca90ddadd65",
@@ -75,11 +78,12 @@
     "/anki-viewer/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
     "/anki-viewer/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
     "/anki-viewer/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
-    "/anki-viewer/index.html": "87870f8106920dee79d47f6cc29cc58b5880a011",
+    "/anki-viewer/index.html": "758c9dcaa346630865c2c2f15303a0cb60736f1e",
     "/anki-viewer/main-B6C6JBOH.js": "9efb22c8bfdec21c0e1646ecbd9bd7c3b771be5a",
     "/anki-viewer/manifest.webmanifest": "e69f8bb5d6f65512157753ce012cacdb061dfca8",
+    "/anki-viewer/media/retina-wood-STTVQHPQ.png": "52136902e1119e9cdf8ada1af9350b29b0e2e0cf",
     "/anki-viewer/polyfills-FFHMD2TL.js": "f49b49a155bc7d192db62a4c15d0a612b460a667",
-    "/anki-viewer/styles-MO625NUT.css": "0596d31dbdc6485b30fc3815ffb91cd58dd8c7a8"
+    "/anki-viewer/styles-YABXZKM4.css": "82a8b46d1863510d21d98d92121e48ec903ba408"
   },
   "navigationUrls": [
     {
