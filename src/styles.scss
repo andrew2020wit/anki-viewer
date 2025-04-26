@@ -1,5 +1,19 @@
 @use '@angular/material' as mat;
 
+html {
+  @include mat.theme((
+    color: mat.$green-palette,
+    typography: Roboto,
+    density: 0,
+  ));
+}
+
+.warning {
+  @include mat.theme((
+    color: mat.$red-palette,
+  ));
+}
+
 html, body {
   height: 100%;
 }
@@ -15,18 +29,6 @@ body {
 
   .info-snack {
     --mdc-snackbar-container-color: hsl(148, 77%, 47%);
-  }
-
-  [color='warn'] {
-    @include mat.button-overrides((
-      text-label-text-color: darkred,
-    ));
-  }
-
-  [color='primary'] {
-    @include mat.button-overrides((
-      text-label-text-color: green,
-    ));
   }
 
   background: antiquewhite;

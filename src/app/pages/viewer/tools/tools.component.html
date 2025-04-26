@@ -5,7 +5,7 @@
 
   <button mat-button color="primary" (click)="answerCards.emit(EasyFactorEnum.Again)">AnswerCards: Again</button>
 
-  <button mat-button color="warn" (click)="answerCards.emit(EasyFactorEnum.Easy)">AnswerCards: Easy</button>
+  <button class="warning" mat-button (click)="answerCards.emit(EasyFactorEnum.Easy)">AnswerCards: Easy</button>
 
   <button mat-button color="primary" (click)="mixedAnswer.emit()">
     AnswerCards: Mixed ({{ selectedCardNumber() }})

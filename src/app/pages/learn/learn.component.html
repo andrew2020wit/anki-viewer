@@ -80,14 +80,14 @@
 <div class="bottom">
   <div class="bottom-line">
     <a routerLink="/"> Home </a>
+    <a [routerLink]="'/' + UrlsEnum.Viewer"> Viewer </a>
 
-    <span> Deck: {{ ankiCard()?.deckName }} </span>
 
     <span class="hints">
-      | Space - show extra, 1-again, 2-hard, 3 (or enter) -normal, 4-ease.
+      Space - show extra, 1-again, 2-hard, 3 (or enter) -normal, 4-ease.
 
       <br/>
-
+<span> Deck: {{ ankiCard()?.deckName }} </span> |
       R - replay sound.
       z - restore.
       ForgetCard - 0.
