@@ -20,6 +20,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { getProfilesSettings, ViewProfile } from '../../utils/view-profile';
 import { httpFileServerSettingItem, maxAnkiResultNumberSettingItem } from '../settings/settings.component';
 import { extractSoundUrl } from '../../utils/extract-sound-url';
+import { sortCards } from '../../utils/sort-cards';
 
 @Component({
   selector: 'app-viewer',
@@ -220,6 +221,10 @@ export class ViewerComponent implements OnInit {
         }),
       )
       .subscribe((notes) => {
+        if (ankiRequestText.includes('is:due')) {
+          notes.sort(sortCards);
+        }
+
         const notesToDisplay = notes.slice(0, this.MAX_ANKI_RESULT_NUMBER);
         // console.log(notesToDisplay);
         this.increaseTimer();
