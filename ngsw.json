@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1745725890362,
+  "timestamp": 1745748784078,
   "index": "/anki-viewer/index.html",
   "assetGroups": [
     {
@@ -12,23 +12,22 @@
       },
       "urls": [
         "/anki-viewer/chunk-5K5SMW74.js",
-        "/anki-viewer/chunk-6T3GBMCP.js",
-        "/anki-viewer/chunk-DCJHUNA6.js",
         "/anki-viewer/chunk-DHOAWFLH.js",
         "/anki-viewer/chunk-FMCXJ7Z2.js",
+        "/anki-viewer/chunk-GWILJIGV.js",
         "/anki-viewer/chunk-LQSYGPAI.js",
-        "/anki-viewer/chunk-OK4QWF4I.js",
-        "/anki-viewer/chunk-Q3F423WH.js",
         "/anki-viewer/chunk-Q4LM43N5.js",
-        "/anki-viewer/chunk-QEL4GCD3.js",
         "/anki-viewer/chunk-QO4EGXB2.js",
-        "/anki-viewer/chunk-SWMHFUP2.js",
+        "/anki-viewer/chunk-UWWZ53Z5.js",
+        "/anki-viewer/chunk-VPHBBQZ6.js",
+        "/anki-viewer/chunk-W27U7HON.js",
+        "/anki-viewer/chunk-WSM3J4PD.js",
         "/anki-viewer/favicon.ico",
         "/anki-viewer/index.html",
-        "/anki-viewer/main-5QKKQ36X.js",
+        "/anki-viewer/main-4YZSPLVB.js",
         "/anki-viewer/manifest.webmanifest",
         "/anki-viewer/polyfills-FFHMD2TL.js",
-        "/anki-viewer/styles-VB6OYPWD.css"
+        "/anki-viewer/styles-2XHUGLSR.css"
       ],
       "patterns": []
     },
@@ -58,17 +57,16 @@
   "hashTable": {
     "/anki-viewer/assets/retina-wood.png": "52136902e1119e9cdf8ada1af9350b29b0e2e0cf",
     "/anki-viewer/chunk-5K5SMW74.js": "cd6e989e7bd8091cf632c94e3d39607b524928f8",
-    "/anki-viewer/chunk-6T3GBMCP.js": "58ffcae91b463aaed150e0488b22ecf16f347ba3",
-    "/anki-viewer/chunk-DCJHUNA6.js": "48e299f7a45cca7204825601091a6b7ded742947",
     "/anki-viewer/chunk-DHOAWFLH.js": "ece37ceae3d737035c0c54944d00f817d9bd93c6",
     "/anki-viewer/chunk-FMCXJ7Z2.js": "ccbd5afc923d13e01684ca07485310041e281f9e",
+    "/anki-viewer/chunk-GWILJIGV.js": "cee25c5bbc42979ee63571c0d6c4c79ed40d907b",
     "/anki-viewer/chunk-LQSYGPAI.js": "f7ed950809894cdf8b7c736f440f416a61e50c3b",
-    "/anki-viewer/chunk-OK4QWF4I.js": "6dbee0ff38b34c83e4500dfd15174f204afa338d",
-    "/anki-viewer/chunk-Q3F423WH.js": "7fe344a9bd60e49712f15182ce1f363df9c6a822",
     "/anki-viewer/chunk-Q4LM43N5.js": "bb8df932b4f2fb6d76348175f2c81a8152d4e492",
-    "/anki-viewer/chunk-QEL4GCD3.js": "ad7431299da59fda85062999c5e72f0040225c44",
     "/anki-viewer/chunk-QO4EGXB2.js": "3881518642c7b489ee44ac87b2172abfbff73a9f",
-    "/anki-viewer/chunk-SWMHFUP2.js": "0987bc2542e9fcbb34e5a1553aeb5d1b542d9a35",
+    "/anki-viewer/chunk-UWWZ53Z5.js": "505a4d137f52d8c8653b91463512932a641280f1",
+    "/anki-viewer/chunk-VPHBBQZ6.js": "632b1cbaea931fcc58140f5be4dd6551a4fbc678",
+    "/anki-viewer/chunk-W27U7HON.js": "b155fcc0f33bb54a5bc4a5df6d8fb6ae4e9bb255",
+    "/anki-viewer/chunk-WSM3J4PD.js": "788aa41b3eaa57579e0a54237e8532f3d4a8d308",
     "/anki-viewer/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
     "/anki-viewer/icons/icon-128x128.png": "f912963bdc6d5a38d8f1dd0afbaab2ce8d657acb",
     "/anki-viewer/icons/icon-144x144.png": "b155fd5f2fd5d2ea7760721063003c4cd95fd783",
@@ -78,12 +76,12 @@
     "/anki-viewer/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
     "/anki-viewer/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
     "/anki-viewer/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
-    "/anki-viewer/index.html": "df02dcfae5ad7e794cb64ef3f9835cd562e043a5",
-    "/anki-viewer/main-5QKKQ36X.js": "57b65ba2c927e5984e869c1d0e00ce74059309a4",
+    "/anki-viewer/index.html": "aa4c277ca8f84fc00b005b5c0a3b8cd2b9cf09a0",
+    "/anki-viewer/main-4YZSPLVB.js": "fded04b38d1759e42b396b705ee556b37d1a2ee3",
     "/anki-viewer/manifest.webmanifest": "e69f8bb5d6f65512157753ce012cacdb061dfca8",
     "/anki-viewer/media/retina-wood-STTVQHPQ.png": "52136902e1119e9cdf8ada1af9350b29b0e2e0cf",
     "/anki-viewer/polyfills-FFHMD2TL.js": "f49b49a155bc7d192db62a4c15d0a612b460a667",
-    "/anki-viewer/styles-VB6OYPWD.css": "309b2e7379ed80c550f69820b89863aafc138f6e"
+    "/anki-viewer/styles-2XHUGLSR.css": "7a6c047738f19e463eb05f42d2dae24fd27520c3"
   },
   "navigationUrls": [
     {
