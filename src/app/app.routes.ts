@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
 import { UrlsEnum } from './enums/urls.enum';
-import { getTitleWithVersion } from './consts/app-version.const';
+import { getTitleWithVersion } from './app-version.const';
 
 export const routes: Routes = [
   {
