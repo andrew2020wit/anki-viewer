@@ -56,6 +56,10 @@
       outline: 1px solid green;
     }
 
+    &.is-playing {
+      outline: 1px solid darkred;
+    }
+
     .top {
       color: gray;
       font-size: 14px;

@@ -1,5 +1,5 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { finalize, forkJoin, take } from 'rxjs';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
+import { finalize, forkJoin, Subscription, take } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -21,6 +21,13 @@ import { getProfilesSettings, ViewProfile } from '../../utils/view-profile';
 import { httpFileServerSettingItem, maxAnkiResultNumberSettingItem } from '../settings/settings.component';
 import { extractSoundUrl } from '../../utils/extract-sound-url';
 import { sortCards } from '../../utils/sort-cards';
+import { checkHotKey, HotKeysEnum } from '../../utils/hot-keys';
+import { HotKeysService } from '../../services/hot-keys.service';
+
+interface AudioItem {
+  url: string;
+  listIndex: number;
+}
 
 @Component({
   selector: 'app-viewer',
@@ -39,7 +46,7 @@ import { sortCards } from '../../utils/sort-cards';
   templateUrl: './viewer.component.html',
   styleUrl: './viewer.component.scss',
 })
-export class ViewerComponent implements OnInit {
+export class ViewerComponent implements OnInit, OnDestroy {
   protected ankiRequestText = signal<string>(localStorage.getItem(ANKI_REQUEST_TEXT_LOCAL_STORAGE_KEY) || 'flag:2');
   protected ankiCards = signal<ICardInfo[]>([]);
   protected cardsNumber = signal(0);
@@ -55,14 +62,18 @@ export class ViewerComponent implements OnInit {
   protected profiles = signal<ViewProfile[]>([]);
   protected timerTimeMin = signal(0);
   protected autoPlayIsOn = signal(false);
+  protected indexOfPlayingItem = signal(-1);
+  protected readonly resultItemIdPrefix = 'app-viewer-result-item-';
 
   private readonly timerBaseTimeMs = Date.now();
 
-  private audioList: string[] = [];
+  private audioList: AudioItem[] = [];
   private currentAudioIndex = 0;
   private htmLAudioElement: HTMLAudioElement | null = null;
   private readonly baseAudioUrl = localStorage.getItem(httpFileServerSettingItem.key);
   private readonly audioListDelayMs = 1000;
+  private readonly hotKeysService = inject(HotKeysService);
+  private hotKeysServiceSubscription: Subscription | undefined;
 
   constructor(
     private ankiConnectService: AnkiConnectService,
@@ -75,8 +86,14 @@ export class ViewerComponent implements OnInit {
   }
 
   public ngOnInit() {
+    this.takeHotKey();
     this.initProfiles();
     this.getAnkiCards();
+  }
+
+  public ngOnDestroy() {
+    this.hotKeysServiceSubscription?.unsubscribe();
+    this.stopAudioPlay();
   }
 
   protected switchAutoPlay(): void {
@@ -91,8 +108,13 @@ export class ViewerComponent implements OnInit {
 
   private computeAutoPlaylist(): void {
     this.audioList = this.ankiCards()
-      .map((item) => extractSoundUrl(item.fields?.sound?.value))
-      .filter((item) => !!item);
+      .map((item, index) => {
+        return {
+          url: extractSoundUrl(item.fields?.sound?.value),
+          listIndex: index,
+        };
+      })
+      .filter((item) => !!item.url);
 
     this.currentAudioIndex = 0;
   }
@@ -106,9 +128,15 @@ export class ViewerComponent implements OnInit {
       this.currentAudioIndex = 0;
     }
 
-    this.htmLAudioElement = new Audio(this.baseAudioUrl + this.audioList[this.currentAudioIndex]);
+    this.htmLAudioElement = new Audio(this.baseAudioUrl + this.audioList[this.currentAudioIndex].url);
 
     this.htmLAudioElement.play();
+
+    document
+      .getElementById(this.resultItemIdPrefix + this.audioList[this.currentAudioIndex].listIndex)
+      ?.scrollIntoView({ behavior: 'smooth' });
+
+    this.indexOfPlayingItem.set(this.audioList[this.currentAudioIndex].listIndex);
 
     this.htmLAudioElement.addEventListener('ended', () => {
       this.currentAudioIndex++;
@@ -122,6 +150,7 @@ export class ViewerComponent implements OnInit {
   private stopAudioPlay(): void {
     this.htmLAudioElement?.pause();
     this.htmLAudioElement?.remove();
+    this.indexOfPlayingItem.set(-1);
   }
 
   protected setProfile(profile: ViewProfile | null): void {
@@ -271,5 +300,15 @@ export class ViewerComponent implements OnInit {
     const minutes = Math.floor(difference / 60);
 
     this.timerTimeMin.set(minutes);
+  }
+
+  private takeHotKey(): void {
+    this.hotKeysServiceSubscription = this.hotKeysService.hotKeyEvent.subscribe((key) => {
+      switch (true) {
+        case checkHotKey(HotKeysEnum.ReplayAudio, key):
+          this.switchAutoPlay();
+          break;
+      }
+    });
   }
 }

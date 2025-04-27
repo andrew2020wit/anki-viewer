@@ -10,7 +10,7 @@ import { EasyFactorEnum } from '../../easy-factor.enum';
 import { UrlQueriesEnum, UrlsEnum } from '../../enums/urls.enum';
 import { defaultLearningDeckSettingItem, httpFileServerSettingItem } from '../settings/settings.component';
 import { sortCards } from '../../utils/sort-cards';
-import { checkHotKey, HotKeysExtionsEnum } from '../../utils/hot-keys';
+import { checkHotKey, HotKeysEnum } from '../../utils/hot-keys';
 import { defaultDeckNameConst } from '../../consts/default-deck-name.const';
 import { extractSoundUrl } from '../../utils/extract-sound-url';
 
@@ -53,6 +53,8 @@ export class LearnComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy() {
     this.hotKeysServiceSubscription?.unsubscribe();
+    this.htmLAudioElement?.pause();
+    this.htmLAudioElement?.remove();
   }
 
   protected replayAudio(): void {
@@ -120,31 +122,31 @@ export class LearnComponent implements OnInit, OnDestroy {
   private takeHotKey(): void {
     this.hotKeysServiceSubscription = this.hotKeysService.hotKeyEvent.subscribe((key) => {
       switch (true) {
-        case checkHotKey(HotKeysExtionsEnum.ShowExtraInfo, key):
+        case checkHotKey(HotKeysEnum.ShowExtraInfo, key):
           this.showBackSide.set(true);
           this.replayAudio();
           break;
-        case checkHotKey(HotKeysExtionsEnum.LearnAgain, key):
+        case checkHotKey(HotKeysEnum.LearnAgain, key):
           this.answerCard(EasyFactorEnum.Again);
           break;
-        case checkHotKey(HotKeysExtionsEnum.SetHard, key):
+        case checkHotKey(HotKeysEnum.SetHard, key):
           this.answerCard(EasyFactorEnum.Hard);
           break;
-        case checkHotKey(HotKeysExtionsEnum.SetNormal, key):
+        case checkHotKey(HotKeysEnum.SetNormal, key):
           this.answerCard(EasyFactorEnum.Normal);
           break;
-        case checkHotKey(HotKeysExtionsEnum.SetEasy, key):
+        case checkHotKey(HotKeysEnum.SetEasy, key):
           this.answerCard(EasyFactorEnum.Easy);
           break;
-        case checkHotKey(HotKeysExtionsEnum.ReplayAudio, key):
+        case checkHotKey(HotKeysEnum.ReplayAudio, key):
           this.replayAudio();
           break;
 
-        case checkHotKey(HotKeysExtionsEnum.RestoreLastCard, key):
+        case checkHotKey(HotKeysEnum.RestoreLastCard, key):
           this.restoreLastCard();
           break;
 
-        case checkHotKey(HotKeysExtionsEnum.ForgetCard, key):
+        case checkHotKey(HotKeysEnum.ForgetCard, key):
           this.forgetCard();
           break;
       }

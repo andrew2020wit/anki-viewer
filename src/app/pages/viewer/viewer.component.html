@@ -16,7 +16,7 @@
           [class.accent]="autoPlayIsOn()"
           (click)="switchAutoPlay()"
   >
-    Autoplay
+    Autoplay (R)
   </button>
 </div>
 
@@ -58,7 +58,9 @@
     }
     <div
       class="result-item"
+      [id]="resultItemIdPrefix + index"
       [class.selected]="ankiItem.selected"
+      [class.is-playing]="indexOfPlayingItem() === index"
       (click)="ankiItem.selected = !ankiItem.selected; computeSelectedCardNumber()"
     >
       <div class="top">
