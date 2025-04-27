@@ -18,12 +18,29 @@ export const httpFileServerSettingItem: StringSettingItem = {
 };
 
 export const defaultLearningDeckSettingItem: StringSettingItem = {
-  key: 'defaultLearningDeckSettingItem',
-  label: 'defaultLearningDeckSettingItem',
+  key: 'defaultLearningDeck',
+  label: 'defaultLearningDeck',
   value: '',
 };
 
-export const extraSettings: StringSettingItem[] = [httpFileServerSettingItem, defaultLearningDeckSettingItem];
+export const ankiHostSettingItem: StringSettingItem = {
+  key: 'ankiHost',
+  label: 'ankiHost',
+  value: '',
+};
+
+export const maxAnkiResultNumberSettingItem: StringSettingItem = {
+  key: 'maxAnkiResultNumber',
+  label: 'maxAnkiResultNumber',
+  value: '',
+};
+
+export const extraSettings: StringSettingItem[] = [
+  httpFileServerSettingItem,
+  defaultLearningDeckSettingItem,
+  ankiHostSettingItem,
+  maxAnkiResultNumberSettingItem,
+];
 
 @Component({
   selector: 'app-settings',

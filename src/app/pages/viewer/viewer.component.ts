@@ -7,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckbox } from '@angular/material/checkbox';
 import { ToolsComponent } from './tools/tools.component';
-import { ANKI_REQUEST_TEXT_LOCAL_STORAGE_KEY, MAX_ANKI_RESULT_NUMBER } from '../../consts/anki.const';
+import { ANKI_REQUEST_TEXT_LOCAL_STORAGE_KEY, DEFAULT_MAX_ANKI_RESULT_NUMBER } from '../../consts/anki.const';
 import { EasyFactorEnum } from '../../easy-factor.enum';
 import { ICardInfo } from '../../interfaces/anki-connect.interface';
 import { AnkiConnectService } from '../../services/anki-connect.service';
@@ -40,7 +40,7 @@ export class ViewerComponent implements OnInit {
   protected ankiRequestText = signal<string>(localStorage.getItem(ANKI_REQUEST_TEXT_LOCAL_STORAGE_KEY) || 'flag:2');
   protected ankiCards = signal<ICardInfo[]>([]);
   protected cardsNumber = signal(0);
-  protected readonly MAX_ANKI_RESULT_NUMBER = MAX_ANKI_RESULT_NUMBER;
+  protected readonly MAX_ANKI_RESULT_NUMBER = DEFAULT_MAX_ANKI_RESULT_NUMBER;
   protected compactMode = signal(true);
   protected isLoading = signal(false);
   protected selectedCardNumber = signal(0);
@@ -159,7 +159,7 @@ export class ViewerComponent implements OnInit {
         }),
       )
       .subscribe((notes) => {
-        const notesToDisplay = notes.slice(0, MAX_ANKI_RESULT_NUMBER);
+        const notesToDisplay = notes.slice(0, DEFAULT_MAX_ANKI_RESULT_NUMBER);
         // console.log(notesToDisplay);
         this.increaseTimer();
         this.ankiCards.set(notesToDisplay);

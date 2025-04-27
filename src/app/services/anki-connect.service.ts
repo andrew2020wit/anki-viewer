@@ -1,15 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
-import { DEFAULT_ANKI_HOST } from '../consts/anki.const';
 import { InfoService } from './info.service';
 import { ICardInfo, ICardInfoResponse, IFindItemsResponse } from '../interfaces/anki-connect.interface';
 import { EasyFactorEnum } from '../easy-factor.enum';
+import { DEFAULT_ANKI_HOST } from '../consts/anki.const';
+import { ankiHostSettingItem } from '../pages/settings/settings.component';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnkiConnectService {
+  private readonly ankiHost = localStorage.getItem(ankiHostSettingItem.key) || DEFAULT_ANKI_HOST;
+
   constructor(
     private http: HttpClient,
     private info: InfoService,
@@ -17,7 +20,7 @@ export class AnkiConnectService {
 
   public getCardById(id: number): Observable<ICardInfo> {
     return this.http
-      .post<ICardInfoResponse>(DEFAULT_ANKI_HOST, {
+      .post<ICardInfoResponse>(this.ankiHost, {
         action: 'cardsInfo',
         version: 6,
         params: {
@@ -36,7 +39,7 @@ export class AnkiConnectService {
 
   public findCards(request: string): Observable<ICardInfo[]> {
     return this.http
-      .post<IFindItemsResponse>(DEFAULT_ANKI_HOST, {
+      .post<IFindItemsResponse>(this.ankiHost, {
         action: 'findCards',
         version: 6,
         params: {
@@ -55,7 +58,7 @@ export class AnkiConnectService {
         }),
         switchMap((idsObject) => {
           return this.http
-            .post<ICardInfoResponse>(DEFAULT_ANKI_HOST, {
+            .post<ICardInfoResponse>(this.ankiHost, {
               action: 'cardsInfo',
               version: 6,
               params: {
@@ -80,7 +83,7 @@ export class AnkiConnectService {
     }
 
     return this.http
-      .post<boolean>(DEFAULT_ANKI_HOST, {
+      .post<boolean>(this.ankiHost, {
         action: 'forgetCards',
         version: 6,
         params: {
@@ -101,7 +104,7 @@ export class AnkiConnectService {
     }
 
     return this.http
-      .post<boolean>(DEFAULT_ANKI_HOST, {
+      .post<boolean>(this.ankiHost, {
         action: 'answerCards',
         version: 6,
         params: {

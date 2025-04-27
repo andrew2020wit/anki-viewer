@@ -1,4 +1,4 @@
-export const VIEW_PROFILE_NUMBER = 4;
+export const VIEW_PROFILE_NUMBER = 2;
 
 export interface ViewProfile {
   label: string;
@@ -7,11 +7,11 @@ export interface ViewProfile {
 }
 
 export function computeViewProfileLabelStorageKey(index: number): string {
-  return 'ViewProfileLabelStorageKey-' + index;
+  return 'ViewProfileLabel-' + index;
 }
 
 export function computeViewProfileRequestStorageKey(index: number): string {
-  return 'ViewProfileRequestStorageKey-' + index;
+  return 'ViewProfileRequest-' + index;
 }
 
 export function getProfilesSettings(): ViewProfile[] {
