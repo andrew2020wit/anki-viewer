@@ -25,13 +25,13 @@ export const defaultLearningDeckSettingItem: StringSettingItem = {
 
 export const ankiHostSettingItem: StringSettingItem = {
   key: 'ankiHost',
-  label: 'ankiHost',
+  label: 'ankiHost, def - http://127.0.0.1:8765',
   value: '',
 };
 
 export const maxAnkiResultNumberSettingItem: StringSettingItem = {
   key: 'maxAnkiResultNumber',
-  label: 'maxAnkiResultNumber',
+  label: 'maxAnkiResultNumber (max - 500, def - 50)',
   value: '',
 };
 

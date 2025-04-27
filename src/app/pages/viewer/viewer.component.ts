@@ -18,6 +18,7 @@ import { TranscriptionPipe } from '../../pipes/transcription.pipe';
 import { UrlsEnum } from '../../enums/urls.enum';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { getProfilesSettings, ViewProfile } from '../../utils/view-profile';
+import { maxAnkiResultNumberSettingItem } from '../settings/settings.component';
 
 @Component({
   selector: 'app-viewer',
@@ -40,7 +41,9 @@ export class ViewerComponent implements OnInit {
   protected ankiRequestText = signal<string>(localStorage.getItem(ANKI_REQUEST_TEXT_LOCAL_STORAGE_KEY) || 'flag:2');
   protected ankiCards = signal<ICardInfo[]>([]);
   protected cardsNumber = signal(0);
-  protected readonly MAX_ANKI_RESULT_NUMBER = DEFAULT_MAX_ANKI_RESULT_NUMBER;
+
+  protected readonly MAX_ANKI_RESULT_NUMBER: number = DEFAULT_MAX_ANKI_RESULT_NUMBER;
+
   protected compactMode = signal(true);
   protected isLoading = signal(false);
   protected selectedCardNumber = signal(0);
@@ -55,7 +58,12 @@ export class ViewerComponent implements OnInit {
   constructor(
     private ankiConnectService: AnkiConnectService,
     private info: InfoService,
-  ) {}
+  ) {
+    const maxNumber = +(localStorage.getItem(maxAnkiResultNumberSettingItem.key) || 0);
+    if (Number.isInteger(maxNumber) && maxNumber < 500 && maxNumber > 0) {
+      this.MAX_ANKI_RESULT_NUMBER = maxNumber;
+    }
+  }
 
   public ngOnInit() {
     this.initProfiles();
@@ -159,7 +167,7 @@ export class ViewerComponent implements OnInit {
         }),
       )
       .subscribe((notes) => {
-        const notesToDisplay = notes.slice(0, DEFAULT_MAX_ANKI_RESULT_NUMBER);
+        const notesToDisplay = notes.slice(0, this.MAX_ANKI_RESULT_NUMBER);
         // console.log(notesToDisplay);
         this.increaseTimer();
         this.ankiCards.set(notesToDisplay);

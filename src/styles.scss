@@ -8,6 +8,13 @@ html {
   ));
 }
 
+.accent {
+  @include mat.theme((
+    color: mat.$violet-palette,
+  ));
+}
+
+
 .warning {
   @include mat.theme((
     color: mat.$red-palette,

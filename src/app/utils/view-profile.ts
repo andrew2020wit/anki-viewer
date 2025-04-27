@@ -1,4 +1,4 @@
-export const VIEW_PROFILE_NUMBER = 2;
+export const VIEW_PROFILE_NUMBER = 4;
 
 export interface ViewProfile {
   label: string;
