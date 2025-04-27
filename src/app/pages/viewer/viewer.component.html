@@ -8,23 +8,16 @@
     {{ MAX_ANKI_RESULT_NUMBER }}
   </div>
 
-  @if (profiles().length) {
-    <mat-button-toggle-group [(ngModel)]="profileIndex">
-      <mat-button-toggle [value]="0" (click)="setProfile(null)"> Custom</mat-button-toggle>
-
-      @for (profile of profiles(); track profile.index) {
-        <mat-button-toggle [value]="profile.index" (click)="setProfile(profile)">
-          {{ profile.label }}
-        </mat-button-toggle>
-      }
-    </mat-button-toggle-group>
-  }
-
-  <mat-checkbox [(ngModel)]="compactMode"> Compact</mat-checkbox>
-
   <span class="timer-block">
     <span class="timer-value"> {{ timerTimeMin() }} </span>
   </span>
+
+  <button mat-raised-button
+          [class.accent]="autoPlayIsOn()"
+          (click)="switchAutoPlay()"
+  >
+    Autoplay
+  </button>
 </div>
 
 @if (!profileIndex()) {
@@ -124,6 +117,22 @@
     (mixedAnswer)="mixedAnswer()"
   />
 }
+
+<div class="bottom-tools">
+  <mat-checkbox [(ngModel)]="compactMode"> Compact</mat-checkbox>
+
+  @if (profiles().length) {
+    <mat-button-toggle-group [(ngModel)]="profileIndex">
+      <mat-button-toggle [value]="0" (click)="setProfile(null)"> Custom</mat-button-toggle>
+
+      @for (profile of profiles(); track profile.index) {
+        <mat-button-toggle [value]="profile.index" (click)="setProfile(profile)">
+          {{ profile.label }}
+        </mat-button-toggle>
+      }
+    </mat-button-toggle-group>
+  }
+</div>
 
 @if (isLoading()) {
   <div class="loader"></div>

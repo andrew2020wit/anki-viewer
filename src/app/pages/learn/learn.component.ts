@@ -12,6 +12,7 @@ import { defaultLearningDeckSettingItem, httpFileServerSettingItem } from '../se
 import { sortCards } from '../../utils/sort-cards';
 import { checkHotKey, HotKeysExtionsEnum } from '../../utils/hot-keys';
 import { defaultDeckNameConst } from '../../consts/default-deck-name.const';
+import { extractSoundUrl } from '../../utils/extract-sound-url';
 
 @Component({
   selector: 'app-learn',
@@ -216,7 +217,7 @@ export class LearnComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const soundUrl = soundUrlStr.replaceAll('[sound:', '').replaceAll(']', '').trim();
+    const soundUrl = extractSoundUrl(soundUrlStr);
 
     const baseUrl = localStorage.getItem(httpFileServerSettingItem.key);
 

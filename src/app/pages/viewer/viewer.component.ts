@@ -18,7 +18,8 @@ import { TranscriptionPipe } from '../../pipes/transcription.pipe';
 import { UrlsEnum } from '../../enums/urls.enum';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { getProfilesSettings, ViewProfile } from '../../utils/view-profile';
-import { maxAnkiResultNumberSettingItem } from '../settings/settings.component';
+import { httpFileServerSettingItem, maxAnkiResultNumberSettingItem } from '../settings/settings.component';
+import { extractSoundUrl } from '../../utils/extract-sound-url';
 
 @Component({
   selector: 'app-viewer',
@@ -52,8 +53,15 @@ export class ViewerComponent implements OnInit {
   protected readonly ankiCardTypes = ankiCardTypes;
   protected profiles = signal<ViewProfile[]>([]);
   protected timerTimeMin = signal(0);
+  protected autoPlayIsOn = signal(false);
 
   private readonly timerBaseTimeMs = Date.now();
+
+  private audioList: string[] = [];
+  private currentAudioIndex = 0;
+  private htmLAudioElement: HTMLAudioElement | null = null;
+  private readonly baseAudioUrl = localStorage.getItem(httpFileServerSettingItem.key);
+  private readonly audioListDelayMs = 1000;
 
   constructor(
     private ankiConnectService: AnkiConnectService,
@@ -68,6 +76,51 @@ export class ViewerComponent implements OnInit {
   public ngOnInit() {
     this.initProfiles();
     this.getAnkiCards();
+  }
+
+  protected switchAutoPlay(): void {
+    this.autoPlayIsOn.update((value) => !value);
+
+    if (this.autoPlayIsOn()) {
+      this.playCurrentAudioItem();
+    } else {
+      this.stopAudioPlay();
+    }
+  }
+
+  private computeAutoPlaylist(): void {
+    this.audioList = this.ankiCards()
+      .map((item) => extractSoundUrl(item.fields?.sound?.value))
+      .filter((item) => !!item);
+
+    this.currentAudioIndex = 0;
+  }
+
+  private playCurrentAudioItem(): void {
+    if (!this.baseAudioUrl || !this.audioList.length || !this.autoPlayIsOn()) {
+      return;
+    }
+
+    if (this.currentAudioIndex > this.audioList.length - 1) {
+      this.currentAudioIndex = 0;
+    }
+
+    this.htmLAudioElement = new Audio(this.baseAudioUrl + this.audioList[this.currentAudioIndex]);
+
+    this.htmLAudioElement.play();
+
+    this.htmLAudioElement.addEventListener('ended', () => {
+      this.currentAudioIndex++;
+
+      setTimeout(() => {
+        this.playCurrentAudioItem();
+      }, this.audioListDelayMs);
+    });
+  }
+
+  private stopAudioPlay(): void {
+    this.htmLAudioElement?.pause();
+    this.htmLAudioElement?.remove();
   }
 
   protected setProfile(profile: ViewProfile | null): void {
@@ -173,6 +226,12 @@ export class ViewerComponent implements OnInit {
         this.ankiCards.set(notesToDisplay);
         this.cardsNumber.set(notes.length);
         window.scrollTo(0, 0);
+
+        this.computeAutoPlaylist();
+
+        if (this.autoPlayIsOn()) {
+          this.playCurrentAudioItem();
+        }
       });
   }
 
