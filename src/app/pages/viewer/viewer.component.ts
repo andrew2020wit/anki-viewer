@@ -254,8 +254,14 @@ export class ViewerComponent implements OnInit, OnDestroy {
           notes.sort(sortCards);
         }
 
+        if (ankiRequestText.includes(' rated:')) {
+          notes.sort((a, b) => {
+            return b.mod - a.mod;
+          });
+        }
+
         const notesToDisplay = notes.slice(0, this.MAX_ANKI_RESULT_NUMBER);
-        // console.log(notesToDisplay);
+
         this.increaseTimer();
         this.ankiCards.set(notesToDisplay);
         this.cardsNumber.set(notes.length);
