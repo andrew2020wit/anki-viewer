@@ -1,1 +1,0 @@
-import{I as e,f as o}from"./chunk-5H24RP25.js";var r=class t{hotKeyEvent=new o;static \u0275fac=function(c){return new(c||t)};static \u0275prov=e({token:t,factory:t.\u0275fac,providedIn:"root"})};export{r as a};
