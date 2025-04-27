@@ -52,7 +52,7 @@
 }
 
 <div class="result-items">
-  @for (ankiItem of ankiCards(); let index = $index; track ankiItem) {
+  @for (ankiItem of ankiCards(); let index = $index; track ankiItem.cardId) {
     @if (!index ||
     (ankiItem.fields.term?.value &&
       (ankiItem.fields.term?.value !== ankiCards()[index - 1].fields.term?.value ||
