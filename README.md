@@ -13,6 +13,12 @@ Here you can also listen to the audio for the entire list of cards.
 
 The learning mode is similar to Anki's regular mode, but customized to my preferences.
 
+![1](/screenshots/1.png)
+
+![2](/screenshots/2.png)
+
+![3](/screenshots/3.png)
+
 [https://andrew2020wit.github.io/anki-viewer/](https://andrew2020wit.github.io/anki-viewer/)
 
 ## Viewer
