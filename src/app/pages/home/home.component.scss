@@ -8,6 +8,17 @@
   max-width: 600px;
 
   .menu-item {
+    display: grid;
+    grid-template-columns: 80px 1fr;
     height: fit-content;
+
+    &.link {
+      margin-left: 16px;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 8px;
+    }
   }
 }

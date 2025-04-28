@@ -1,31 +1,35 @@
 <div class="menu-item">
-  <a [routerLink]="'/' + UrlsEnum.Viewer"> Viewer </a>
+  <button mat-button class="accent" [routerLink]="'/' + UrlsEnum.Viewer"> Viewer</button>
 
-  @for (profile of profileSettings(); track profile.index) {
-    <button mat-button
-            (click)="goToView(profile)"
-    >
-      {{ profile.label }}
-    </button>
-  }
+  <div class="buttons">
+    @for (profile of profileSettings(); track profile.index) {
+      <button mat-button
+              (click)="goToView(profile)"
+      >
+        {{ profile.label }}
+      </button>
+    }
+  </div>
 </div>
 
 <div class="menu-item">
-  <a [routerLink]="'/' + UrlsEnum.Learn"> Learn </a>
+  <button mat-button class="accent" [routerLink]="'/' + UrlsEnum.Learn"> Learn</button>
 
-  @for (deck of learningDecks(); track deck) {
-    <button mat-button
-            (click)="goToDeck(deck)"
-    >
-      {{ deck }}
-    </button>
-  }
+  <div class="buttons">
+    @for (deck of learningDecks(); track deck) {
+      <button mat-button
+              (click)="goToDeck(deck)"
+      >
+        {{ deck }}
+      </button>
+    }
+  </div>
 </div>
 
 <div class="menu-item">
-  <a [routerLink]="'/' + UrlsEnum.Settings"> Settings </a>
+  <button mat-button class="accent" [routerLink]="'/' + UrlsEnum.Settings"> Settings</button>
 </div>
 
-<div class="menu-item">
+<div class="menu-item link">
   <a href="https://github.com/andrew2020wit/anki-viewer" target="_blank"> GitHub </a>
 </div>
