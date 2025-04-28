@@ -20,6 +20,20 @@
   </button>
 </div>
 
+<div class="settings">
+  @if (profiles().length) {
+    <mat-button-toggle-group [(ngModel)]="profileIndex">
+      <mat-button-toggle [value]="0" (click)="setProfile(null)"> Custom</mat-button-toggle>
+
+      @for (profile of profiles(); track profile.index) {
+        <mat-button-toggle [value]="profile.index" (click)="setProfile(profile)">
+          {{ profile.label }}
+        </mat-button-toggle>
+      }
+    </mat-button-toggle-group>
+  }
+</div>
+
 @if (!profileIndex()) {
   <div class="anki-request">
     <mat-form-field class="request-mat-form-field" appearance="outline">
@@ -122,18 +136,6 @@
 
 <div class="bottom-tools">
   <mat-checkbox [(ngModel)]="compactMode"> Compact</mat-checkbox>
-
-  @if (profiles().length) {
-    <mat-button-toggle-group [(ngModel)]="profileIndex">
-      <mat-button-toggle [value]="0" (click)="setProfile(null)"> Custom</mat-button-toggle>
-
-      @for (profile of profiles(); track profile.index) {
-        <mat-button-toggle [value]="profile.index" (click)="setProfile(profile)">
-          {{ profile.label }}
-        </mat-button-toggle>
-      }
-    </mat-button-toggle-group>
-  }
 </div>
 
 @if (isLoading()) {
