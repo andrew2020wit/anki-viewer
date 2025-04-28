@@ -1,0 +1,1 @@
+function r(t){return"ViewProfileLabel-"+t}function i(t){return"ViewProfileRequest-"+t}function o(){let t=[];for(let e=1;e<=4;e++)t.push({index:e,label:localStorage.getItem(r(e))||"",request:localStorage.getItem(i(e))||""});return t.filter(e=>e.request&&e.label)}export{r as a,i as b,o as c};

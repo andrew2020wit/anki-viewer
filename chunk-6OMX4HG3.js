@@ -1,0 +1,1 @@
+var t={key:"ankiHost",label:"ankiHost, def - http://127.0.0.1:8765",value:""},e={key:"maxAnkiResultNumber",label:"maxAnkiResultNumber (max - 500, def - 50)",value:""},n={key:"HttpFileServer",label:"HttpFileServer",value:""},i={key:"learningDecks",label:"learning decks, like: xxx yyy zzzz",value:""},r=[n,i,t,e];export{t as a,e as b,n as c,i as d,r as e};

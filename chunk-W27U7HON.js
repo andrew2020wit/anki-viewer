@@ -1,1 +1,0 @@
-import{m as a,n as b,o as c,p as d,q as e,r as f}from"./chunk-GWILJIGV.js";import"./chunk-LQSYGPAI.js";import"./chunk-Q4LM43N5.js";export{f as SettingsComponent,c as ankiHostSettingItem,b as defaultLearningDeckSettingItem,e as extraSettings,a as httpFileServerSettingItem,d as maxAnkiResultNumberSettingItem};
