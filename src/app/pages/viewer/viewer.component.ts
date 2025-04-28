@@ -319,6 +319,8 @@ export class ViewerComponent implements OnInit, OnDestroy {
 
     const profile = this.profiles()[profileIndex - 1];
 
+    this.profileIndex.set(profileIndex);
+
     this.setProfile(profile);
   }
 
