@@ -74,6 +74,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
   private readonly audioListDelayMs = 1000;
   private readonly hotKeysService = inject(HotKeysService);
   private hotKeysServiceSubscription: Subscription | undefined;
+  private audioTimeout: ReturnType<typeof setTimeout> | undefined;
 
   constructor(
     private ankiConnectService: AnkiConnectService,
@@ -141,13 +142,17 @@ export class ViewerComponent implements OnInit, OnDestroy {
     this.htmLAudioElement.addEventListener('ended', () => {
       this.currentAudioIndex++;
 
-      setTimeout(() => {
+      this.audioTimeout = setTimeout(() => {
         this.playCurrentAudioItem();
       }, this.audioListDelayMs);
     });
   }
 
   private stopAudioPlay(): void {
+    if (this.audioTimeout) {
+      clearTimeout(this.audioTimeout);
+    }
+
     this.htmLAudioElement?.pause();
     this.htmLAudioElement?.remove();
     this.indexOfPlayingItem.set(-1);
