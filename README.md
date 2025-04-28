@@ -1,6 +1,17 @@
 # AnkiViewer
 
-This is a simple front-end for Anki via [Anki-Connect](https://git.sr.ht/~foosoft/anki-connect/)
+This is a special front-end for Anki via [Anki-Connect](https://git.sr.ht/~foosoft/anki-connect/)
+
+It is designed to work with a large deck, based on a large dictionary.
+
+The deck must have a special structure. You can work with two or three decks.
+
+There are two modes: view and study.
+
+View mode is designed to filter a large deck and highlight some entries for study.
+Here you can also listen to the audio for the entire list of cards.
+
+The learning mode is similar to Anki's regular mode, but customized to my preferences.
 
 [https://andrew2020wit.github.io/anki-viewer/](https://andrew2020wit.github.io/anki-viewer/)
 
