@@ -40,9 +40,9 @@ export class LearnComponent implements OnInit, OnDestroy {
   private deckName = defaultDeckNameConst;
 
   constructor(
-    private ankiConnectService: AnkiConnectService,
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
+    private readonly ankiConnectService: AnkiConnectService,
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly router: Router,
   ) {}
 
   public ngOnInit() {
@@ -148,6 +148,10 @@ export class LearnComponent implements OnInit, OnDestroy {
 
         case checkHotKey(HotKeysEnum.ForgetCard, key):
           this.forgetCard();
+          break;
+
+        case checkHotKey(HotKeysEnum.GoHome, key):
+          this.goHome();
           break;
       }
     });
@@ -280,5 +284,9 @@ export class LearnComponent implements OnInit, OnDestroy {
     }
 
     this.deckName = deckName;
+  }
+
+  private goHome(): void {
+    this.router.navigate(['/']);
   }
 }

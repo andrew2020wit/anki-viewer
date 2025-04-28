@@ -12,7 +12,7 @@ import { EasyFactorEnum } from '../../easy-factor.enum';
 import { ICardInfo } from '../../interfaces/anki-connect.interface';
 import { AnkiConnectService } from '../../services/anki-connect.service';
 import { InfoService } from '../../services/info.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { ankiCardTypes } from '../../consts/anki-card-types.const';
 import { TranscriptionPipe } from '../../pipes/transcription.pipe';
 import { UrlsEnum } from '../../enums/urls.enum';
@@ -77,8 +77,9 @@ export class ViewerComponent implements OnInit, OnDestroy {
   private audioTimeout: ReturnType<typeof setTimeout> | undefined;
 
   constructor(
-    private ankiConnectService: AnkiConnectService,
-    private info: InfoService,
+    private readonly ankiConnectService: AnkiConnectService,
+    private readonly info: InfoService,
+    private readonly router: Router,
   ) {
     const maxNumber = +(localStorage.getItem(maxAnkiResultNumberSettingItem.key) || 0);
     if (Number.isInteger(maxNumber) && maxNumber < 500 && maxNumber > 0) {
@@ -320,7 +321,15 @@ export class ViewerComponent implements OnInit, OnDestroy {
         case checkHotKey(HotKeysEnum.PlayAudio, key):
           this.switchAutoPlay();
           break;
+
+        case checkHotKey(HotKeysEnum.GoHome, key):
+          this.goHome();
+          break;
       }
     });
+  }
+
+  private goHome(): void {
+    this.router.navigate(['/']);
   }
 }
