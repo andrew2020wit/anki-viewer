@@ -1,23 +1,25 @@
 export enum HotKeysEnum {
-  ShowExtraInfo = 'ShowExtraInfo',
+  ForgetCard = 'ForgetCard',
+  GoHome = 'GoHome',
   LearnAgain = 'LearnAgain',
+  PlayAudio = 'PlayAudio',
+  RestoreLastCard = 'RestoreLastCard',
+  SetEasy = 'SetEasy',
   SetHard = 'SetHard',
   SetNormal = 'SetNormal',
-  SetEasy = 'SetEasy',
-  ReplayAudio = 'ReplayAudio',
-  RestoreLastCard = 'RestoreLastCard',
-  ForgetCard = 'ForgetCard',
+  ShowExtraInfo = 'ShowExtraInfo',
 }
 
 export const hotKeys: Record<HotKeysEnum, string[]> = {
-  [HotKeysEnum.ShowExtraInfo]: [' '],
+  [HotKeysEnum.ForgetCard]: ['0'],
+  [HotKeysEnum.GoHome]: ['h', 'р'], // Cyrillic: р
   [HotKeysEnum.LearnAgain]: ['1'],
+  [HotKeysEnum.PlayAudio]: ['r', 'к'], // Cyrillic: к
+  [HotKeysEnum.RestoreLastCard]: ['z', 'я'],
+  [HotKeysEnum.SetEasy]: ['4'],
   [HotKeysEnum.SetHard]: ['2'],
   [HotKeysEnum.SetNormal]: ['3', 'enter'],
-  [HotKeysEnum.SetEasy]: ['4'],
-  [HotKeysEnum.ForgetCard]: ['0'],
-  [HotKeysEnum.ReplayAudio]: ['r', 'к'], // Cyrillic: к
-  [HotKeysEnum.RestoreLastCard]: ['z', 'я'],
+  [HotKeysEnum.ShowExtraInfo]: [' '],
 };
 
 export function checkHotKey(action: HotKeysEnum, keyChar: string): boolean {

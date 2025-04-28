@@ -317,7 +317,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
   private takeHotKey(): void {
     this.hotKeysServiceSubscription = this.hotKeysService.hotKeyEvent.subscribe((key) => {
       switch (true) {
-        case checkHotKey(HotKeysEnum.ReplayAudio, key):
+        case checkHotKey(HotKeysEnum.PlayAudio, key):
           this.switchAutoPlay();
           break;
       }

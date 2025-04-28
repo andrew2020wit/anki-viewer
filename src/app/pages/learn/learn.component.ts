@@ -138,7 +138,7 @@ export class LearnComponent implements OnInit, OnDestroy {
         case checkHotKey(HotKeysEnum.SetEasy, key):
           this.answerCard(EasyFactorEnum.Easy);
           break;
-        case checkHotKey(HotKeysEnum.ReplayAudio, key):
+        case checkHotKey(HotKeysEnum.PlayAudio, key):
           this.replayAudio();
           break;
 
