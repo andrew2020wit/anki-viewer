@@ -151,6 +151,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
   private stopAudioPlay(): void {
     if (this.audioTimeout) {
       clearTimeout(this.audioTimeout);
+      this.audioTimeout = undefined;
     }
 
     this.htmLAudioElement?.pause();
