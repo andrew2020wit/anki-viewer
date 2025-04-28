@@ -1,13 +1,29 @@
 <div class="menu-item">
-  <a [routerLink]="'/' + UrlsEnum.Viewer">Viewer</a>
+  <a [routerLink]="'/' + UrlsEnum.Viewer"> Viewer </a>
+
+  @for (profile of profileSettings(); track profile.index) {
+    <button mat-button
+            (click)="goToView(profile)"
+    >
+      {{ profile.label }}
+    </button>
+  }
 </div>
 
 <div class="menu-item">
-  <a [routerLink]="'/' + UrlsEnum.Learn">Learn</a>
+  <a [routerLink]="'/' + UrlsEnum.Learn"> Learn </a>
+
+  @for (deck of learningDecks(); track deck) {
+    <button mat-button
+            (click)="goToDeck(deck)"
+    >
+      {{ deck }}
+    </button>
+  }
 </div>
 
 <div class="menu-item">
-  <a [routerLink]="'/' + UrlsEnum.Settings">Settings</a>
+  <a [routerLink]="'/' + UrlsEnum.Settings"> Settings </a>
 </div>
 
 <div class="menu-item">

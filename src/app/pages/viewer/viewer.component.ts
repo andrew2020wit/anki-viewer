@@ -12,17 +12,17 @@ import { EasyFactorEnum } from '../../easy-factor.enum';
 import { ICardInfo } from '../../interfaces/anki-connect.interface';
 import { AnkiConnectService } from '../../services/anki-connect.service';
 import { InfoService } from '../../services/info.service';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ankiCardTypes } from '../../consts/anki-card-types.const';
 import { TranscriptionPipe } from '../../pipes/transcription.pipe';
-import { UrlsEnum } from '../../enums/urls.enum';
+import { UrlQueriesEnum, UrlsEnum } from '../../enums/urls.enum';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { getProfilesSettings, ViewProfile } from '../../utils/view-profile';
-import { httpFileServerSettingItem, maxAnkiResultNumberSettingItem } from '../settings/settings.component';
 import { extractSoundUrl } from '../../utils/extract-sound-url';
 import { sortCards } from '../../utils/sort-cards';
 import { checkHotKey, HotKeysEnum } from '../../utils/hot-keys';
 import { HotKeysService } from '../../services/hot-keys.service';
+import { httpFileServerSettingItem, maxAnkiResultNumberSettingItem } from '../settings/const/extra-settings.const';
 
 interface AudioItem {
   url: string;
@@ -80,6 +80,7 @@ export class ViewerComponent implements OnInit, OnDestroy {
     private readonly ankiConnectService: AnkiConnectService,
     private readonly info: InfoService,
     private readonly router: Router,
+    private readonly activatedRoute: ActivatedRoute,
   ) {
     const maxNumber = +(localStorage.getItem(maxAnkiResultNumberSettingItem.key) || 0);
     if (Number.isInteger(maxNumber) && maxNumber < 500 && maxNumber > 0) {
@@ -305,6 +306,20 @@ export class ViewerComponent implements OnInit, OnDestroy {
     });
 
     this.profileIndex.set(currentIndex);
+
+    this.checkUrlProfile();
+  }
+
+  private checkUrlProfile(): void {
+    const profileIndex = +this.activatedRoute.snapshot.queryParams[UrlQueriesEnum.Profile];
+
+    if (!profileIndex || Number.isNaN(profileIndex) || profileIndex < 1) {
+      return;
+    }
+
+    const profile = this.profiles()[profileIndex - 1];
+
+    this.setProfile(profile);
   }
 
   private increaseTimer(): void {

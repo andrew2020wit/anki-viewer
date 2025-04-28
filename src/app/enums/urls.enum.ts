@@ -6,4 +6,5 @@ export enum UrlsEnum {
 
 export enum UrlQueriesEnum {
   Deck = 'deck',
+  Profile = 'profile',
 }

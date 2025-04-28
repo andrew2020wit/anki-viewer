@@ -12,7 +12,7 @@ export enum HotKeysEnum {
 
 export const hotKeys: Record<HotKeysEnum, string[]> = {
   [HotKeysEnum.ForgetCard]: ['0'],
-  [HotKeysEnum.GoHome]: ['h', 'р'], // Cyrillic: р
+  [HotKeysEnum.GoHome]: ['home', 'h', 'р'], // Cyrillic: р
   [HotKeysEnum.LearnAgain]: ['1'],
   [HotKeysEnum.PlayAudio]: ['r', 'к'], // Cyrillic: к
   [HotKeysEnum.RestoreLastCard]: ['z', 'я'],

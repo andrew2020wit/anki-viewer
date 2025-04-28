@@ -5,7 +5,7 @@ import { InfoService } from './info.service';
 import { ICardInfo, ICardInfoResponse, IFindItemsResponse } from '../interfaces/anki-connect.interface';
 import { EasyFactorEnum } from '../easy-factor.enum';
 import { DEFAULT_ANKI_HOST } from '../consts/anki.const';
-import { ankiHostSettingItem } from '../pages/settings/settings.component';
+import { ankiHostSettingItem } from '../pages/settings/const/extra-settings.const';
 
 @Injectable({
   providedIn: 'root',

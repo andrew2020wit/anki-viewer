@@ -8,11 +8,11 @@ import { TranscriptionPipe } from '../../pipes/transcription.pipe';
 import { HotKeysService } from '../../services/hot-keys.service';
 import { EasyFactorEnum } from '../../easy-factor.enum';
 import { UrlQueriesEnum, UrlsEnum } from '../../enums/urls.enum';
-import { defaultLearningDeckSettingItem, httpFileServerSettingItem } from '../settings/settings.component';
 import { sortCards } from '../../utils/sort-cards';
 import { checkHotKey, HotKeysEnum } from '../../utils/hot-keys';
 import { defaultDeckNameConst } from '../../consts/default-deck-name.const';
 import { extractSoundUrl } from '../../utils/extract-sound-url';
+import { httpFileServerSettingItem, learningDecksSettingItem } from '../settings/const/extra-settings.const';
 
 @Component({
   selector: 'app-learn',
@@ -270,7 +270,7 @@ export class LearnComponent implements OnInit, OnDestroy {
 
   private checkDeckName(): void {
     const urlDeckName = this.activatedRoute.snapshot.queryParams[UrlQueriesEnum.Deck];
-    const localStorageDeckName = localStorage.getItem(defaultLearningDeckSettingItem.key);
+    const localStorageDeckName = localStorage.getItem(learningDecksSettingItem.key)?.split(' ')?.[0];
     const deckName = urlDeckName || localStorageDeckName || defaultDeckNameConst;
 
     if (!urlDeckName) {

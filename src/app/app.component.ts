@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
 
   private setHotKeys(): void {
     window.document.addEventListener('keydown', (event: KeyboardEvent) => {
+      // console.log(event);
       this.hotKeysService.hotKeyEvent.next(event.key.toLowerCase());
     });
   }
