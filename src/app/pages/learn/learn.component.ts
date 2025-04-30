@@ -13,10 +13,11 @@ import { checkHotKey, HotKeysEnum } from '../../utils/hot-keys';
 import { defaultDeckNameConst } from '../../consts/default-deck-name.const';
 import { extractSoundUrl } from '../../utils/extract-sound-url';
 import { httpFileServerSettingItem, learningDecksSettingItem } from '../settings/const/extra-settings.const';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-learn',
-  imports: [RouterLink, TranscriptionPipe],
+  imports: [RouterLink, TranscriptionPipe, MatTooltipModule],
   templateUrl: './learn.component.html',
   styleUrl: './learn.component.scss',
 })
@@ -135,9 +136,9 @@ export class LearnComponent implements OnInit, OnDestroy {
         case checkHotKey(HotKeysEnum.SetNormal, key):
           this.answerCard(EasyFactorEnum.Normal);
           break;
-        case checkHotKey(HotKeysEnum.SetEasy, key):
-          this.answerCard(EasyFactorEnum.Easy);
-          break;
+        // case checkHotKey(HotKeysEnum.SetEasy, key):
+        //   this.answerCard(EasyFactorEnum.Easy);
+        //   break;
         case checkHotKey(HotKeysEnum.PlayAudio, key):
           this.replayAudio();
           break;
@@ -185,7 +186,7 @@ export class LearnComponent implements OnInit, OnDestroy {
       });
   }
 
-  private answerCard(easyFactor: EasyFactorEnum): void {
+  protected answerCard(easyFactor: EasyFactorEnum): void {
     if (!this.showBackSide()) {
       return;
     }
@@ -289,4 +290,6 @@ export class LearnComponent implements OnInit, OnDestroy {
   private goHome(): void {
     this.router.navigate(['/']);
   }
+
+  protected readonly EasyFactorEnum = EasyFactorEnum;
 }

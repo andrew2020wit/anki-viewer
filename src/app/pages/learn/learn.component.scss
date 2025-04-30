@@ -80,6 +80,7 @@
   gap: 16px;
   padding: 4px 8px;
 
+
   &.review {
     border: 1px solid darkred;
     outline: 1px solid darkred;
@@ -91,6 +92,10 @@
 
   .was-last {
     text-decoration: underline;
+  }
+
+  .next-button {
+    cursor: pointer;
   }
 }
 
