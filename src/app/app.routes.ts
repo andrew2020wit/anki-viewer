@@ -4,11 +4,6 @@ import { getTitleWithVersion } from './app-version.const';
 
 export const routes: Routes = [
   {
-    path: UrlsEnum.Viewer,
-    title: getTitleWithVersion('Anki Viewer'),
-    loadComponent: () => import('./pages/viewer/viewer.component').then((m) => m.ViewerComponent),
-  },
-  {
     path: UrlsEnum.Learn,
     title: getTitleWithVersion('Anki Learn'),
     loadComponent: () => import('./pages/learn/learn.component').then((m) => m.LearnComponent),
@@ -19,8 +14,7 @@ export const routes: Routes = [
     loadComponent: () => import('./pages/settings/settings.component').then((m) => m.SettingsComponent),
   },
   {
-    path: '',
-    pathMatch: 'full',
+    path: '**',
     title: getTitleWithVersion('Anki Viewer'),
     loadComponent: () => import('./pages/home/home.component').then((m) => m.HomeComponent),
   },

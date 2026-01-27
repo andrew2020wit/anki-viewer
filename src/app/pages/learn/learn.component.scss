@@ -117,3 +117,26 @@
     color: green;
   }
 }
+
+.markers {
+  display: flex;
+  align-items: center;
+  padding: 4px;
+  gap: 4px;
+  align-self: flex-end;
+
+  $marker-size: 8px;
+
+  .loader-marker,
+  .hot-key-is-ready-marker {
+    display: block;
+    width: $marker-size;
+    height: $marker-size;
+    background-color: green;
+  }
+
+  .loader-marker.is-loading,
+  .hot-key-is-ready-marker.hot-key-is-not-ready {
+    background-color: red;
+  }
+}

@@ -1,12 +1,11 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
-import { SettingsItemComponent } from './settings-item/settings-item.component';
-import { StringSettingItem } from '../../interfaces/string-setting-item.interface';
-import { extraSettingsConst } from './const/extra-settings.const';
-import { getProfileStringSettingItems } from './util/get-profile-string-setting-items';
+import {Component, inject} from '@angular/core';
+import {MatInputModule} from '@angular/material/input';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {FormsModule} from '@angular/forms';
+import {RouterLink} from '@angular/router';
+import {SettingsItemComponent} from './settings-item/settings-item.component';
+import {StringSettingItem} from '../../interfaces/string-setting-item.interface';
+import {LocalStorage} from '../../services/local-storage.service';
 
 @Component({
   selector: 'app-settings',
@@ -14,36 +13,23 @@ import { getProfileStringSettingItems } from './util/get-profile-string-setting-
   templateUrl: './settings.component.html',
   styleUrl: './settings.component.scss',
 })
-export class SettingsComponent implements OnInit {
-  protected settingItems = signal<StringSettingItem[]>([]);
+export class SettingsComponent {
+  private readonly localStorage = inject(LocalStorage);
 
-  public ngOnInit(): void {
-    this.initProfileSettings();
-    this.initExtraSettings();
-  }
+  protected readonly settings: StringSettingItem[] = [
+    {
+      key: this.localStorage.keys.deckName,
+      label: 'learning deck',
+      value: this.localStorage.getItem(this.localStorage.keys.deckName) || '',
+    },
+    {
+      key: this.localStorage.keys.ankiHost,
+      label: 'ankiHost, default - http://127.0.0.1:8765',
+      value: this.localStorage.getItem(this.localStorage.keys.ankiHost) || '',
+    },
+  ];
 
   protected saveSettingItem(item: StringSettingItem): void {
-    localStorage.setItem(item.key, item.value);
-  }
-
-  private initProfileSettings(): void {
-    const profileSettings = getProfileStringSettingItems();
-    const settings = this.settingItems();
-
-    this.settingItems.set([...settings, ...profileSettings]);
-  }
-
-  private initExtraSettings(): void {
-    const res: StringSettingItem[] = [];
-
-    extraSettingsConst.forEach((setting) => {
-      res.push({
-        key: setting.key,
-        label: setting.label,
-        value: localStorage.getItem(setting.key) || '',
-      });
-    });
-
-    this.settingItems.set([...this.settingItems(), ...res]);
+    this.localStorage.setItem(item.key, item.value);
   }
 }

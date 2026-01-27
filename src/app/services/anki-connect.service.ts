@@ -1,17 +1,18 @@
-import { Injectable } from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, map, Observable, of, switchMap, tap } from 'rxjs';
 import { InfoService } from './info.service';
 import { ICardInfo, ICardInfoResponse, IFindItemsResponse } from '../interfaces/anki-connect.interface';
 import { EasyFactorEnum } from '../easy-factor.enum';
 import { DEFAULT_ANKI_HOST } from '../consts/anki.const';
-import { ankiHostSettingItem } from '../pages/settings/const/extra-settings.const';
+import {LocalStorage} from './local-storage.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AnkiConnectService {
-  private readonly ankiHost = localStorage.getItem(ankiHostSettingItem.key) || DEFAULT_ANKI_HOST;
+  private readonly localStorage = inject(LocalStorage);
+  private readonly ankiHost = this.localStorage.getItem(this.localStorage.keys.ankiHost) || DEFAULT_ANKI_HOST;
 
   constructor(
     private http: HttpClient,
@@ -73,27 +74,6 @@ export class AnkiConnectService {
               }),
               map((x) => x.result),
             );
-        }),
-      );
-  }
-
-  public forgetCard(cardId: number): Observable<boolean> {
-    if (!cardId) {
-      return of(false);
-    }
-
-    return this.http
-      .post<boolean>(this.ankiHost, {
-        action: 'forgetCards',
-        version: 6,
-        params: {
-          cards: [cardId],
-        },
-      })
-      .pipe(
-        catchError((err) => {
-          this.info.error('There is error with anki-connection');
-          throw err;
         }),
       );
   }

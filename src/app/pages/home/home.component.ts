@@ -1,9 +1,7 @@
-import { Component, OnInit, signal } from '@angular/core';
-import { UrlQueriesEnum, UrlsEnum } from '../../enums/urls.enum';
-import { Router, RouterLink } from '@angular/router';
-import { learningDecksSettingItem } from '../settings/const/extra-settings.const';
-import { MatButton } from '@angular/material/button';
-import { getProfilesSettings, ViewProfile } from '../../utils/view-profile';
+import {Component} from '@angular/core';
+import {UrlsEnum} from '../../enums/urls.enum';
+import {RouterLink} from '@angular/router';
+import {MatButton} from '@angular/material/button';
 
 @Component({
   selector: 'app-home',
@@ -11,28 +9,6 @@ import { getProfilesSettings, ViewProfile } from '../../utils/view-profile';
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   protected readonly UrlsEnum = UrlsEnum;
-
-  protected learningDecks = signal<string[]>([]);
-
-  protected profileSettings = signal<ViewProfile[]>([]);
-
-  constructor(private router: Router) {}
-
-  public ngOnInit() {
-    const decks = localStorage.getItem(learningDecksSettingItem.key)?.split(' ') || [];
-    this.learningDecks.set(decks);
-
-    const profileSettings = getProfilesSettings();
-    this.profileSettings.set(profileSettings);
-  }
-
-  protected goToDeck(deck: string) {
-    this.router.navigate(['/', UrlsEnum.Learn], { queryParams: { [UrlQueriesEnum.Deck]: deck } });
-  }
-
-  protected goToView(profile: ViewProfile) {
-    this.router.navigate(['/', UrlsEnum.Viewer], { queryParams: { [UrlQueriesEnum.Profile]: profile.index } });
-  }
 }

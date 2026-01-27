@@ -2,11 +2,8 @@ export enum HotKeysEnum {
   ForgetCard = 'ForgetCard',
   GoHome = 'GoHome',
   LearnAgain = 'LearnAgain',
-  PlayAudio = 'PlayAudio',
   RestoreLastCard = 'RestoreLastCard',
-  // SetEasy = 'SetEasy',
-  SetHard = 'SetHard',
-  SetNormal = 'SetNormal',
+  SetEasy = 'SetEasy',
   ShowExtraInfo = 'ShowExtraInfo',
 }
 
@@ -14,11 +11,8 @@ export const hotKeys: Record<HotKeysEnum, string[]> = {
   [HotKeysEnum.ForgetCard]: ['0'],
   [HotKeysEnum.GoHome]: ['home', 'h', 'р'], // Cyrillic: р
   [HotKeysEnum.LearnAgain]: ['1'],
-  [HotKeysEnum.PlayAudio]: ['r', 'к'], // Cyrillic: к
   [HotKeysEnum.RestoreLastCard]: ['z', 'я'],
-  // [HotKeysEnum.SetEasy]: [],
-  [HotKeysEnum.SetHard]: ['2'],
-  [HotKeysEnum.SetNormal]: ['3', 'enter'],
+  [HotKeysEnum.SetEasy]: ['3'],
   [HotKeysEnum.ShowExtraInfo]: [' '],
 };
 

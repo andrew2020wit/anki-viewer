@@ -2,6 +2,6 @@
 
 <br /><br />
 
-@for (settingItem of settingItems(); track settingItem.key) {
+@for (settingItem of settings; track settingItem.key) {
   <app-settings-item [settingItem]="settingItem" (set)="saveSettingItem($event)" />
 }

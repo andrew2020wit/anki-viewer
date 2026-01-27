@@ -1,1 +1,1 @@
-export const defaultDeckNameConst = 'cald';
+export const defaultDeckNameConst = 'filtered';
