@@ -18,7 +18,11 @@
         {{ cardsNumber() }}
       </span>
 
-      <span class="term" [innerHTML]="ankiCard()?.fields?.term?.value"> </span>
+      <a class="hide-link" [href]="'http://127.0.0.1:3003/term-search?term=' + ankiCard()?.fields?.term?.value"
+         target="_blank"
+      >
+        <span class="term" [innerHTML]="ankiCard()?.fields?.term?.value"> </span>
+      </a>
 
       <span class="pos"> ({{ ankiCard()?.fields?.partOfSpeech?.value }}) </span>
 
