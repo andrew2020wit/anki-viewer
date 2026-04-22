@@ -1,12 +1,16 @@
-:host {
+.content {
+  margin: 4px 0 16px;
+  color: gray;
+  font-size: 1rem;
   display: flex;
-  width: 100%;
+  gap: 4px;
+  align-items: center;
   justify-content: center;
+  width: 100%;
 
-  .content {
-    margin: 4px 0 16px;
-    color: gray;
-    font-size: 1rem;
-    letter-spacing: 4px;
+  .letter {
+    &.selected {
+      color: black;
+    }
   }
 }

@@ -1,4 +1,6 @@
-<app-alphabet-bar/>
+<app-alphabet-bar
+  [word]="ankiCard()?.fields?.term?.value || ''"
+/>
 
 @if (ankiCard()) {
   <div class="card">
