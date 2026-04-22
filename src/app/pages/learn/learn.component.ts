@@ -16,11 +16,12 @@ import {LocalStorage} from '../../services/local-storage.service';
 import {GamepadService} from '../../services/gamepad/gamepad.service';
 import {XboxGamepadButtonsEnum} from '../../services/gamepad/xbox-gamepad-buttons.enum';
 import {UntilDestroy, untilDestroyed} from '@ngneat/until-destroy';
+import {AlphabetBarComponent} from './alphabet-bar/alphabet-bar.component';
 
 @UntilDestroy()
 @Component({
   selector: 'app-learn',
-  imports: [RouterLink, TranscriptionPipe, MatTooltipModule],
+  imports: [RouterLink, TranscriptionPipe, MatTooltipModule, AlphabetBarComponent],
   templateUrl: './learn.component.html',
   styleUrl: './learn.component.scss',
 })

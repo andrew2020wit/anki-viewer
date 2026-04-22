@@ -1,0 +1,12 @@
+:host {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+
+  .content {
+    margin: 4px 0 16px;
+    color: gray;
+    font-size: 1rem;
+    letter-spacing: 4px;
+  }
+}
