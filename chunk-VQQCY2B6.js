@@ -1,0 +1,1 @@
+import{J as r}from"./chunk-SIXQFYUU.js";var a=class t{keys={ankiHost:"ankiHost",deckName:"deckName"};keyPrefix="anki-viewer-";setItem(e,i){localStorage.setItem(this.keyPrefix+e,i)}getItem(e){return localStorage.getItem(this.keyPrefix+e)||""}static \u0275fac=function(i){return new(i||t)};static \u0275prov=r({token:t,factory:t.\u0275fac,providedIn:"root"})};export{a};

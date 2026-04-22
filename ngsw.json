@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1774594031417,
+  "timestamp": 1776842811735,
   "index": "/anki-viewer/index.html",
   "assetGroups": [
     {
@@ -12,18 +12,18 @@
       },
       "urls": [
         "/anki-viewer/chunk-22XOOZYV.js",
-        "/anki-viewer/chunk-DSJQ3KWC.js",
-        "/anki-viewer/chunk-FKT4AWYS.js",
-        "/anki-viewer/chunk-K7BIS2ZC.js",
-        "/anki-viewer/chunk-MRTMN4D4.js",
-        "/anki-viewer/chunk-RZTP26BM.js",
-        "/anki-viewer/chunk-UARQ66GG.js",
+        "/anki-viewer/chunk-ARA5V4LT.js",
+        "/anki-viewer/chunk-MUIYHFES.js",
+        "/anki-viewer/chunk-NGCSJUTE.js",
+        "/anki-viewer/chunk-SIXQFYUU.js",
+        "/anki-viewer/chunk-TC77L7XL.js",
+        "/anki-viewer/chunk-VQQCY2B6.js",
         "/anki-viewer/favicon.ico",
         "/anki-viewer/index.html",
-        "/anki-viewer/main-BFMQ75GN.js",
+        "/anki-viewer/main-FGIGOQKH.js",
         "/anki-viewer/manifest.webmanifest",
-        "/anki-viewer/polyfills-FFHMD2TL.js",
-        "/anki-viewer/styles-2XHUGLSR.css"
+        "/anki-viewer/polyfills-HPZ7KTN2.js",
+        "/anki-viewer/styles-32QXIG45.css"
       ],
       "patterns": []
     },
@@ -53,12 +53,12 @@
   "hashTable": {
     "/anki-viewer/assets/retina-wood.png": "52136902e1119e9cdf8ada1af9350b29b0e2e0cf",
     "/anki-viewer/chunk-22XOOZYV.js": "414f6b57348f20e7be43d321245ab20cd8d1e43d",
-    "/anki-viewer/chunk-DSJQ3KWC.js": "9192485c11eda47f6934c56f49a8f8e683f7b64b",
-    "/anki-viewer/chunk-FKT4AWYS.js": "a8987202d2bf1cf649cf93abc20e5da011a72fed",
-    "/anki-viewer/chunk-K7BIS2ZC.js": "a98a14c0bebb707b9412137484a473a5165707cf",
-    "/anki-viewer/chunk-MRTMN4D4.js": "50e90542976f5ea8b665142728e8b51b8b039296",
-    "/anki-viewer/chunk-RZTP26BM.js": "80c53bb02b557192b18b414ad1be4bce28c8658d",
-    "/anki-viewer/chunk-UARQ66GG.js": "078e3f9997f87a621705255b9671d819e8a983b3",
+    "/anki-viewer/chunk-ARA5V4LT.js": "7f1cfbc41cce8dd8a0b01c7758ba1e5446602708",
+    "/anki-viewer/chunk-MUIYHFES.js": "751fc4d31cad15cdea551ff4ae8714aebbb5d308",
+    "/anki-viewer/chunk-NGCSJUTE.js": "9d387aac9f64a0c8bb08afa8872aa09b6053ae2a",
+    "/anki-viewer/chunk-SIXQFYUU.js": "71312d5dd96b88fa0cdfd59e23278b2626e6377a",
+    "/anki-viewer/chunk-TC77L7XL.js": "7a952146710f14fd25cdbfe65c64368f2c7efffc",
+    "/anki-viewer/chunk-VQQCY2B6.js": "7eae6bce6bd6e9fa38c5ec2adabc000a75aec9aa",
     "/anki-viewer/favicon.ico": "9c39f434fe1261f68c5e3eefdf734630d99c5670",
     "/anki-viewer/icons/icon-128x128.png": "f912963bdc6d5a38d8f1dd0afbaab2ce8d657acb",
     "/anki-viewer/icons/icon-144x144.png": "b155fd5f2fd5d2ea7760721063003c4cd95fd783",
@@ -68,12 +68,12 @@
     "/anki-viewer/icons/icon-512x512.png": "1de182f76f7329dfa8f9fcdd1fdcdd695bea6a99",
     "/anki-viewer/icons/icon-72x72.png": "aa88a6096bd973be7f6d7a5489bfa6bc2463f8c4",
     "/anki-viewer/icons/icon-96x96.png": "7fb8f59c30ce2ff12c700321a0b39e14b3dc8f95",
-    "/anki-viewer/index.html": "fc576cfb869a761689b4a6959f25c0fdfdf984cd",
-    "/anki-viewer/main-BFMQ75GN.js": "8fa30bd07307c84d7c7bd51e63bd01cf88b3b378",
+    "/anki-viewer/index.html": "77b26ed21d69ca0bcaafe34a9c91ffefcd8635ed",
+    "/anki-viewer/main-FGIGOQKH.js": "ee881826dcab31c24f70bd627e06d016c26dbe12",
     "/anki-viewer/manifest.webmanifest": "e69f8bb5d6f65512157753ce012cacdb061dfca8",
     "/anki-viewer/media/retina-wood-STTVQHPQ.png": "52136902e1119e9cdf8ada1af9350b29b0e2e0cf",
-    "/anki-viewer/polyfills-FFHMD2TL.js": "f49b49a155bc7d192db62a4c15d0a612b460a667",
-    "/anki-viewer/styles-2XHUGLSR.css": "7a6c047738f19e463eb05f42d2dae24fd27520c3"
+    "/anki-viewer/polyfills-HPZ7KTN2.js": "a328286aa2e927a96bf670f744a3fb4f9eec3a51",
+    "/anki-viewer/styles-32QXIG45.css": "dc0e06e36a674f5086d6280f19fc3fcbc452278b"
   },
   "navigationUrls": [
     {
