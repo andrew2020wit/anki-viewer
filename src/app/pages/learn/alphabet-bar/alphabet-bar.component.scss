@@ -9,8 +9,20 @@
   width: 100%;
 
   .letter {
-    &.selected {
-      color: black;
+    &.first {
+      color: red;
+    }
+
+    &.second {
+      color: darkgoldenrod;
+    }
+
+    &.third {
+      color: green;
+    }
+
+    &.fourth {
+      color: blue;
     }
   }
 }

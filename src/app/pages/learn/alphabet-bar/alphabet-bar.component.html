@@ -1,7 +1,7 @@
 <div class="content">
   @for (letter of letters(); track letter.letter) {
     <div class="letter"
-         [class.selected]="letter.isSelected"
+         [ngClass]="letter.className"
     >
       {{ letter.letter }}
     </div>
