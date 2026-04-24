@@ -23,7 +23,6 @@ export class AlphabetBarComponent {
 
   protected readonly letters = computed(()=> {
     const word = this.word();
-    if (!word) return [];
 
     const letters: Latter[] = [];
 
@@ -31,28 +30,25 @@ export class AlphabetBarComponent {
       let className = '';
 
       switch (letter) {
-        case word[0].toUpperCase():
+        case word[0]?.toUpperCase():
           className = 'first';
           break;
-        case word[1].toUpperCase():
+        case word[1]?.toUpperCase():
           className = 'second';
           break;
-        case word[2].toUpperCase():
+        case word[2]?.toUpperCase():
           className = 'third';
           break;
-        case word[3].toUpperCase():
+        case word[3]?.toUpperCase():
           className = 'fourth';
           break;
       }
-
 
       letters.push({
         letter,
         className
       });
     }
-
-    console.log(letters);
 
     return letters;
   })
