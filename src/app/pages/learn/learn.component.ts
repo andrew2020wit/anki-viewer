@@ -37,6 +37,10 @@ export class LearnComponent implements OnInit, OnDestroy {
   protected readonly UrlsEnum = UrlsEnum;
   protected readonly ankiCardTypes = ankiCardTypes;
   protected hotKeyIsReadyAfterTimeout = signal(false);
+
+  protected readonly listeningLink = 'http://127.0.0.1:3003/listening';
+  protected readonly exampleLink = 'http://127.0.0.1:3003/example';
+
   private readonly hotKeyTimeoutMs = 1000;
 
   private readonly gamepadService = inject(GamepadService);
@@ -131,12 +135,21 @@ export class LearnComponent implements OnInit, OnDestroy {
         case checkHotKey(HotKeysEnum.LearnAgain, key):
           this.answerCard(EasyFactorEnum.Again);
           break;
+
         case checkHotKey(HotKeysEnum.SetEasy, key):
           this.answerCard(EasyFactorEnum.Easy);
           break;
 
         case checkHotKey(HotKeysEnum.RestoreLastCard, key):
           this.restoreLastCard();
+          break;
+
+        case checkHotKey(HotKeysEnum.GoToListening, key):
+          window.location.href = this.listeningLink;
+          break;
+
+        case checkHotKey(HotKeysEnum.GoToExample, key):
+          window.location.href = this.exampleLink;
           break;
 
         case checkHotKey(HotKeysEnum.GoHome, key):

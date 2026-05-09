@@ -5,6 +5,8 @@ export enum HotKeysEnum {
   RestoreLastCard = 'RestoreLastCard',
   SetEasy = 'SetEasy',
   ShowExtraInfo = 'ShowExtraInfo',
+  GoToExample = 'GoToExample',
+  GoToListening = 'GoToListening',
 }
 
 export const hotKeys: Record<HotKeysEnum, string[]> = {
@@ -14,6 +16,8 @@ export const hotKeys: Record<HotKeysEnum, string[]> = {
   [HotKeysEnum.RestoreLastCard]: ['z', 'я'],
   [HotKeysEnum.SetEasy]: ['3'],
   [HotKeysEnum.ShowExtraInfo]: [' '],
+  [HotKeysEnum.GoToExample]: ['e', 'у'],
+  [HotKeysEnum.GoToListening]: ['l', 'д'],
 };
 
 export function checkHotKey(action: HotKeysEnum, keyChar: string): boolean {
